@@ -8,9 +8,6 @@ import AllInboxIcon from '@mui/icons-material/AllInbox';
 
 const Widgets = ({ type }) => {
   let data;
-  //temporary data
-  const amount = 100;
-  const diff = 20;
 
   switch (type) {
     case 'user':

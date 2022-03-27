@@ -67,7 +67,7 @@ const ListTable = () => {
 
   return (
     <TableContainer component={Paper} className='table-main'>
-      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+      <Table sx={{ minWidth: 650 }} aria-label='simple table' stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell className='table-cell'>Tracking ID</TableCell>

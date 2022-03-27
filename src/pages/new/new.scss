@@ -1,0 +1,77 @@
+.newPage-main {
+  width: 100%;
+  display: flex;
+
+  .newPage-container {
+    flex: 6;
+
+    .newPage-top, .newPage-bottom {
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      padding: 10px;
+      margin: 20px;
+      display: flex;
+    }
+
+    .top-title{
+      color: lightgray;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .bottom-left {
+      flex:1;
+      text-align: center;
+
+      .icon-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .bottom-right{
+      flex: 2;
+
+      .form-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: space-around;
+
+        .form-input {
+          width: 40%;
+
+          label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .file-icon{
+              cursor: pointer;
+            }
+          }
+
+          input {
+            width: 100%;
+            padding: 5px;
+            border: none;
+            border-bottom: 1px solid gray;
+          }
+        }
+
+        .btn-register {
+          width: 150px;
+          padding: 10px;
+          border: none;
+          background-color: cadetblue;
+          color: white;
+          font-weight: 500;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
