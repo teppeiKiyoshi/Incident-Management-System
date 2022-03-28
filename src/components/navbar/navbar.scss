@@ -27,6 +27,11 @@
           &::placeholder {
             color: white;
           }
+          &::focus {
+            background-color: yellow;
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+          }
         }
 
         .search-icon {
@@ -36,29 +41,6 @@
 
       .navbar-icons {
         color: #ffffff;
-      }
-    }
-
-    .navbar-search {
-      display: flex;
-      align-items: center;
-      color: black;
-      padding: 3px;
-      cursor: pointer;
-      transition: 2s;
-
-      .search-input {
-        border: none;
-        outline: none;
-        background-color: transparent;
-
-        &::placeholder {
-          font-size: 12px;
-        }
-      }
-
-      .search-icon {
-        color: black;
       }
     }
 

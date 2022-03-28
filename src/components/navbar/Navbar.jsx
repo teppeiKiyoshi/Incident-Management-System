@@ -1,5 +1,6 @@
 import './navbar.scss'
 import {React, useState} from 'react';
+import Search from '../search/Search';
 //MUI Icons
 import SearchIcon from '@mui/icons-material/Search';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -26,8 +27,7 @@ const Navbar = () => {
     <nav className='navbar-main'>
       <div className={ navbar ? 'navbar-wrapper active' : 'navbar-wrapper'}>
         <div className="navbar-search">
-          <input type="text" placeholder='Search...' className='search-input'/>
-          <SearchIcon className='search-icon'/>
+          <Search />
         </div>
         <div className="navbar-menu">
           <div className="menu-item">
