@@ -1,6 +1,7 @@
 .list-main {
   display: flex;
-  width: 100%;
+  width: calc(100% - 230px);
+  margin-left: 230px;
 
   .list-wrapper {
     flex: 6;

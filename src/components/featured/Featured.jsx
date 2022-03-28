@@ -20,7 +20,7 @@ const Featured = () => {
           <CircularProgressbar value={70} text='70%' strokeWidth={4} />
         </div>
         <p className='cpb-title'>Total Queries Answered Today</p>
-        <p className='cpb-amount'>$420</p>
+        <p className='cpb-amount'>30</p>
         <p className='cpb-desc'>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum,
           labore?

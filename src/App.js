@@ -7,7 +7,6 @@ import Login from './pages/login/Login';
 import List from './pages/list/List';
 import Single from './pages/single/Single';
 import New from './pages/new/New';
-
 //for dark mode
 import './mode/darkMode.scss';
 import { useContext } from 'react';

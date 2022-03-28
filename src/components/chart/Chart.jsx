@@ -30,9 +30,9 @@ const Chart = ({aspect}) => {
               <stop offset='95%' stopColor='#8884d8' stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey='name' stroke='gray' className='chart-xAxis'/>
+          <XAxis dataKey='name' stroke='gray'/>
           <YAxis />
-          <CartesianGrid strokeDasharray='3 3' className='chart-grid'/>
+          <CartesianGrid strokeDasharray='3 3'/>
           <Tooltip />
           <Area
             type='monotone'

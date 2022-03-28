@@ -1,6 +1,7 @@
 .singlePage-main {
   display: flex;
-  width: 100%;
+  width: calc(100% - 230px);
+  margin-left: 230px;
 
   .singlePage-container {
     flex: 6;

@@ -1,8 +1,13 @@
 .sidebar-main {
-  flex:1;
+  width: 230px;
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 100vh;
   background-color: white;
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden;
 
   .sidebar-top {
     height: 50px;
@@ -13,7 +18,7 @@
     .sidebar-logo {
       font-size: 20px;
       font-weight: bold;
-      color: #aa7af0;
+      color: #637381;
     }
   }
 
@@ -23,17 +28,22 @@
   }
 
   .sidebar-center {
-    padding-left: 10px;
-
     ul {
       list-style: none;
       margin: 10px 0;
       padding: 0;
-      
+
+      .sidebar {
+        &.active {
+          background-color: rgba(137, 61, 255, 0.2);
+          border-right: 3px solid rgb(137, 61, 255);
+        }
+      }
+
       li {
         display: flex;
         align-items: center;
-        padding: 5px;
+        padding: 10px 20px;
         cursor: pointer;
         color: #1f1f1f;
 
@@ -44,14 +54,23 @@
         .sidebar-icons {
           font-size: 18px;
           margin-left: 5px;
-          color: #893dff;
+          color: #637381;
+
+          &.active{
+            color: rgb(137, 61, 255);
+          }
         }
 
-        span {
+        .sidebar-name {
           font-size: 16px;
           font-weight: 400;
           color: #888;
           margin-left: 10px;
+
+          &.active{
+            font-weight: 500;
+            color: rgb(137, 61, 255);
+          }
         }
       }
     }
@@ -69,11 +88,11 @@
       border: 1px solid #7451f8;
       cursor: pointer;
       margin: 5px;
-    
-      &:nth-child(1){
+
+      &:nth-child(1) {
         background-color: whitesmoke;
       }
-      &:nth-child(2){
+      &:nth-child(2) {
         background-color: #333;
       }
     }
