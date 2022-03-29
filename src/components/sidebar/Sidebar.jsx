@@ -1,4 +1,5 @@
 import './sidebar.scss';
+import Time from './Time';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -7,12 +8,8 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Link } from 'react-router-dom';
-//for dark mode
-import { useContext } from 'react';
-import { DarkModeContext } from '../../context/darkModeContext';
 
 const Sidebar = () => {
-  const { dispatch } = useContext(DarkModeContext);
 
   function handleActive(){
     console.log('clicked');
@@ -25,7 +22,12 @@ const Sidebar = () => {
           <span className='sidebar-logo active'>Incident Project</span>
         </Link>
       </div>
-      <hr />
+      <div className="sidebar-header">
+        <div className="header-wrapper">
+        <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80" alt="avatar" className='sidebar-avatar' />
+          <span className="header-name">Eman Martin</span>
+        </div>
+      </div>
       <div className='sidebar-center'>
         <ul>
           <Link to='/' style={{ textDecoration: 'none' }}>
@@ -74,15 +76,10 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-      <div className='sidebar-bottom'>
-        <div
-          className='colorOption'
-          onClick={() => dispatch({ type: 'LIGHT' })}
-        ></div>
-        <div
-          className='colorOption'
-          onClick={() => dispatch({ type: 'DARK' })}
-        ></div>
+      <div className="sidebar-bottom">
+        <div className="time-container">
+            <Time />
+        </div>
       </div>
     </div>
   );
