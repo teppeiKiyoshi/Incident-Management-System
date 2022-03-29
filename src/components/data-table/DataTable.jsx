@@ -1,8 +1,9 @@
 import {React, useState} from 'react';
 import './data-table.scss';
-import Button from '@mui/material/Button';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Tooltip from '@mui/material/Tooltip';
+import IconButton from '@mui/material/IconButton';
 import { DataGrid } from '@mui/x-data-grid';
 import { userColumns, userRows } from '../../data-table-db';
 import { Link } from 'react-router-dom';
@@ -12,8 +13,9 @@ const DataTable = () => {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
-    setData(data.filter(item => item.id !== id));
-  }
+    setData(data.filter((item) => item.id !== id));
+  };
+
   const actionColumn = [{
     field: 'Action',
     headerame: 'Action',
@@ -22,9 +24,17 @@ const DataTable = () => {
       return (
         <div className="action-cell">
           <Link to='/users/test' style={{textDecoration: 'none'}}>
-          <Button variant="outlined" className='btn-edit' size='small' style={{textTransform: 'capitalize'}} startIcon={<RemoveRedEyeIcon />}>View</Button>
+          <Tooltip  title="View User's Profile" arrow>
+            <IconButton >
+                <RemoveRedEyeIcon style={{textTransform: 'capitalize'}} className='list-btn'/>
+              </IconButton>
+          </Tooltip>
           </Link>
-          <Button variant="outlined" className='btn-delete' color="error" size='small' style={{textTransform: 'capitalize'}} startIcon={<DeleteIcon />} onClick={()=>handleDelete(params.row.id)}>Delete</Button>
+          <Tooltip  title="Delete User" arrow>
+            <IconButton onClick={() => handleDelete(params.row.id)}>
+                <DeleteIcon  style={{textTransform: 'capitalize'}} className='list-btn'/>
+              </IconButton>
+          </Tooltip>
         </div>
       )
     }

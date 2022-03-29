@@ -51,11 +51,12 @@
   }
 
   .data-table{
+    color: gray;
     .data-grid{
       color: gray;
       border: none;
 
-      .btn-edit, .btn-delete, .cell-status{
+      .list-btn, .cell-status{
         color: gray;
         border: none;
       }
