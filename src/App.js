@@ -12,6 +12,7 @@ import EvaluatorGrid from './pages/evaluator/EvaluatorGrid';
 import './mode/darkMode.scss';
 import { useContext } from 'react';
 import {DarkModeContext} from './context/darkModeContext';
+import Forums from './pages/forums/Forums';
 
 function App() {
   const {darkMode} = useContext(DarkModeContext);
@@ -39,7 +40,7 @@ function App() {
               />
             </Route>
             <Route path='forums'>
-              <Route index element={<List />} />
+              <Route index element={<Forums />} />
               <Route path=':forumId' element={<Single />} />
               <Route
                 path='new'
