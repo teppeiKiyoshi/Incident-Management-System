@@ -8,6 +8,8 @@ import List from './pages/list/List';
 import Single from './pages/single/Single';
 import New from './pages/new/New';
 import EvaluatorGrid from './pages/evaluator/EvaluatorGrid';
+import Logs from './pages/userlogs/Logs'
+import Settings from './pages/settings/Settings';
 //for dark mode
 import './mode/darkMode.scss';
 import { useContext } from 'react';
@@ -46,6 +48,12 @@ function App() {
                 path='new'
                 element={<New inputs={productInputs} title='Add New Report' />}
               />
+            </Route>
+            <Route path='logs'>
+              <Route index element={<Logs />} />
+            </Route>
+            <Route path='settings'>
+              <Route index element={<Settings />} />
             </Route>
           </Route>
         </Routes>

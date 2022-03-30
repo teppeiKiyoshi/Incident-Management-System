@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   function handleActive() {
-    console.log('clicked');
+    console.log(window.location.url)
   }
 
   return (
@@ -68,19 +68,23 @@ const Sidebar = () => {
               </li>
             </div>
           </Link>
-          <div onClick={handleActive} className='sidebar-log'>
-            <li>
-              <PsychologyIcon className='sidebar-icons' />
-              <span className='sidebar-name'>Logs</span>
-            </li>
-          </div>
+          <Link to='/logs' style={{ textDecoration: 'none' }}>
+            <div onClick={handleActive} className='sidebar-log'>
+              <li>
+                <PsychologyIcon className='sidebar-icons' />
+                <span className='sidebar-name'>Logs</span>
+              </li>
+            </div>
+          </Link>
           <p className='title'>TOOLS</p>
+          <Link to='/settings'>
           <div onClick={handleActive} className='sidebar-setting'>
             <li>
               <SettingsIcon className='sidebar-icons' />
               <span className='sidebar-name'>Settings</span>
             </li>
           </div>
+          </Link>
           <div className='sidebar-logout'>
             <li>
               <ExitToAppIcon className='sidebar-icons' />
