@@ -10,6 +10,9 @@ const List = () => {
       <Sidebar/>
       <div className="list-wrapper">
         <Navbar/>
+        <div className="list-header">
+          <h2 className="list-title">List of Students</h2>
+        </div>
         <DataTable/>
       </div>
     </div>

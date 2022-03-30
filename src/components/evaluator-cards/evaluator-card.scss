@@ -1,0 +1,88 @@
+.evalcard-main {
+  width: 350px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 20px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
+
+  .card-header {
+    width: 100%;
+    position: relative;
+    background: purple;
+    width: 350px;
+    height: 80px;
+    border-radius: 10px 10px 0px 0px;
+  }
+
+  .avatar-wrapper {
+    position: absolute;
+    top: 13%;
+    left: 40%;
+
+    .card-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid white;
+    }
+  }
+
+  .card-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 50px;
+    
+    .card-name {
+      width: 100%;
+      text-align: center;
+      line-height: 1.4;
+
+      h3{
+        font-size: 20px;
+        font-weight: 600;
+      } 
+
+      h4 {
+        font-weight: 400;
+      }
+
+      .divider {
+        width: 80%;
+        height: 1px;
+        display: flex;
+        align-items: center;
+        background: #999;
+        margin: 10px auto;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .card-bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 5px auto;
+    border-radius: 0px 0px 10px 10px;
+
+    .card-action {
+      width: 80%;
+      padding: 5px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      .action-btn {
+        color: #999;
+      }
+    }
+  }
+}

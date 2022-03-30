@@ -51,19 +51,23 @@ const Sidebar = () => {
               </li>
             </div>
           </Link>
-          <div onClick={handleActive} className='sidebar-evaluator'>
-            <li>
-              <PersonAddIcon className='sidebar-icons' />
-              <span className='sidebar-name'>Add Evaluators</span>
-            </li>
-          </div>
+          <Link to='/evaluators' style={{ textDecoration: 'none' }}>
+            <div onClick={handleActive} className='sidebar-evaluator'>
+              <li>
+                <PersonAddIcon className='sidebar-icons' />
+                <span className='sidebar-name'>Add Evaluators</span>
+              </li>
+            </div>
+          </Link>
           <p className='title'>SERVICES</p>
-          <div onClick={handleActive} className='sidebar-forum'>
-            <li>
-              <QuestionAnswerIcon className='sidebar-icons' />
-              <span className='sidebar-name'>Forums</span>
-            </li>
-          </div>
+          <Link to='/forums' style={{ textDecoration: 'none' }}>
+            <div onClick={handleActive} className='sidebar-forum'>
+              <li>
+                <QuestionAnswerIcon className='sidebar-icons' />
+                <span className='sidebar-name'>Forums</span>
+              </li>
+            </div>
+          </Link>
           <div onClick={handleActive} className='sidebar-log'>
             <li>
               <PsychologyIcon className='sidebar-icons' />

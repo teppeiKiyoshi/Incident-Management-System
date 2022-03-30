@@ -1,6 +1,8 @@
 .data-table{
+  width: calc(100% - 100px);
   height: 640px;
   padding: 20px;
+  margin: auto;
 
   .datacell-img {
     display: flex;
