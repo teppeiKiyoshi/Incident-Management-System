@@ -44,11 +44,23 @@
     ul{
       li{
         &:hover{
-          background-color: #333;
+          background-color: rgba(137, 61, 255, 0.2);
         }
         .sidebar-icons{
           color: #999;
+
+          .sidebar-name {
+            &:hover {
+              color: rgb(137, 61, 255);
+            }
+          }
         }
+      }
+    }
+
+    .sidebar-bottom {
+      .greetings{
+        color: #999;
       }
     }
   }

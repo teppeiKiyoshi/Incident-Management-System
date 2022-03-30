@@ -10,11 +10,10 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
-
-  function handleActive(){
+  function handleActive() {
     console.log('clicked');
   }
-  
+
   return (
     <div className='sidebar-main'>
       <div className='sidebar-top'>
@@ -22,63 +21,73 @@ const Sidebar = () => {
           <span className='sidebar-logo active'>Incident Project</span>
         </Link>
       </div>
-      <div className="sidebar-header">
-        <div className="header-wrapper">
-        <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80" alt="avatar" className='sidebar-avatar' />
-          <span className="header-name">Eman Martin</span>
+      <div className='sidebar-header'>
+        <div className='header-wrapper'>
+          <img
+            src='https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80'
+            alt='avatar'
+            className='sidebar-avatar'
+          />
+          <span className='header-name'>Eman Martin</span>
         </div>
       </div>
       <div className='sidebar-center'>
         <ul>
+          <p className='title'>MAIN</p>
           <Link to='/' style={{ textDecoration: 'none' }}>
-            <div onClick={handleActive} className='sidebar active'>
+            <div onClick={handleActive} className='sidebar-dashboard active'>
               <li>
                 <DashboardIcon className='sidebar-icons active' />
                 <span className='sidebar-name active'>Dashboard</span>
               </li>
             </div>
           </Link>
+          <p className='title'>PEOPLE</p>
           <Link to='/users' style={{ textDecoration: 'none' }}>
-            <div onClick={handleActive} className='sidebar'>
+            <div onClick={handleActive} className='sidebar-user'>
               <li>
                 <PeopleIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Users</span>
               </li>
             </div>
           </Link>
-          <div onClick={handleActive} className='sidebar'>
+          <div onClick={handleActive} className='sidebar-evaluator'>
             <li>
               <PersonAddIcon className='sidebar-icons' />
               <span className='sidebar-name'>Add Evaluators</span>
             </li>
           </div>
-          <div onClick={handleActive} className='sidebar'>
+          <p className='title'>SERVICES</p>
+          <div onClick={handleActive} className='sidebar-forum'>
             <li>
               <QuestionAnswerIcon className='sidebar-icons' />
               <span className='sidebar-name'>Forums</span>
             </li>
           </div>
-          <div onClick={handleActive} className='sidebar'>
+          <div onClick={handleActive} className='sidebar-log'>
             <li>
               <PsychologyIcon className='sidebar-icons' />
               <span className='sidebar-name'>Logs</span>
             </li>
           </div>
-          <div onClick={handleActive} className='sidebar'>
+          <p className='title'>TOOLS</p>
+          <div onClick={handleActive} className='sidebar-setting'>
             <li>
               <SettingsIcon className='sidebar-icons' />
               <span className='sidebar-name'>Settings</span>
             </li>
           </div>
-          <li>
-            <ExitToAppIcon className='sidebar-icons' />
-            <span className='sidebar-name'>Logout</span>
-          </li>
+          <div className='sidebar-logout'>
+            <li>
+              <ExitToAppIcon className='sidebar-icons' />
+              <span className='sidebar-name'>Logout</span>
+            </li>
+          </div>
         </ul>
       </div>
-      <div className="sidebar-bottom">
-        <div className="time-container">
-            <Time />
+      <div className='sidebar-bottom'>
+        <div className='time-container'>
+          <Time />
         </div>
       </div>
     </div>

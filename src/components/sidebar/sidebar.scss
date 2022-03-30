@@ -35,18 +35,19 @@
       justify-content: space-evenly;
       width: calc(100% - 20px);
       height: 50px;
-      margin: 10px;
+      margin: 10px 15px;
       padding: 10px;
       border-radius: 12px;
       background-color: rgba(145, 158, 171, 0.12);
 
       .sidebar-avatar {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
       }
 
       .header-name {
+        font-size: 16px;
         color: black;
       }
     }
@@ -58,7 +59,18 @@
       margin: 10px 0;
       padding: 0;
 
-      .sidebar {
+      .title {
+        font-size: 10px;
+        font-weight: bold;
+        color: rgb(99, 115, 129);
+        margin: 15px 0px 0px 15px;
+      }
+
+      .sidebar-dashboard, .sidebar-user,
+      .sidebar-setting, .sidebar-evaluator,
+      .sidebar-forum, .sidebar-forum,
+      .sidebar-logout {
+        margin: 5px 0;
         &.active {
           background-color: rgba(137, 61, 255, 0.2);
           border-right: 3px solid rgb(137, 61, 255);
@@ -79,7 +91,7 @@
         .sidebar-icons {
           font-size: 18px;
           margin-left: 5px;
-          color: #637381;
+          color: rgb(99, 115, 129);
 
           &.active{
             color: rgb(137, 61, 255);
@@ -87,7 +99,7 @@
         }
 
         .sidebar-name {
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 400;
           color: #888;
           margin-left: 10px;
@@ -107,13 +119,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 100px;
     
     .time-container {
       text-align: center;
-      font-size: 28px;
+      font-size: 34px;
       font-weight: bold;
       color: gray;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
+    
+      .greetings{
+        width: 100%;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        color: rgb(99, 115, 129);
+      }
+      
+      .current-time {
+        text-shadow: -3px 2px 2px lightgray;
+      }
     }
   }
 

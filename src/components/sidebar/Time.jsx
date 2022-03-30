@@ -8,20 +8,16 @@ const Time = () => {
   const [currentTime, setCurrentTime] = useState(time);
   const [isAMPM, setIsAMPM] = useState('');
 
-  const updateGreeting = () => {
+  useEffect(()=>{
     let greeting = '';
     if (hrs < 12)
-        greeting = 'Good Morning';
+        greeting = 'Good Morning!';
     else if (hrs >= 12 && hrs <= 17)
-        greeting = 'Good Afternoon';
+        greeting = 'Good Afternoon!';
     else if (hrs >= 17 && hrs <= 24)
-        greeting = 'Good Evening';
+        greeting = 'Good Evening!';
     setIsAMPM(greeting);
-  };
-
-  useEffect(()=>{
-    updateGreeting();
-  });
+}, [hrs]);
 
   const updateTime = () => {
     time = new Date().toLocaleTimeString();
@@ -32,9 +28,8 @@ const Time = () => {
 
   return (
     <div>
-      <span className='greetings'>{isAMPM}</span>
-      <br/>
-      {currentTime}
+      <p className='greetings'>{isAMPM}</p>
+      <p className='current-time'>{currentTime}</p>
     </div>
   );
 };
