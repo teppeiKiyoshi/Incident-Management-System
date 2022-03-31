@@ -3,6 +3,7 @@ import './evalGrid.scss'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import EvaluatorCard from '../../components/evaluator-cards/EvaluatorCard'
+import SortEvaluator from '../../components/dropdown/SortEvaluator'
 //MUI dependencies
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -19,6 +20,9 @@ const EvaluatorGrid = () => {
             <Button startIcon={<AddIcon/>} variant='contained' className='evalreg-btn'>Register</Button>
           </div>
         </div>
+        <div className="evalgrid-functions">
+            <SortEvaluator />
+          </div>
         <div className="card-container">
           <EvaluatorCard/>
           <EvaluatorCard/>

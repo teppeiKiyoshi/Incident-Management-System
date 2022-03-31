@@ -77,7 +77,7 @@ const Sidebar = () => {
             </div>
           </Link>
           <p className='title'>TOOLS</p>
-          <Link to='/settings'>
+          <Link to='/settings' style={{ textDecoration: 'none' }}>
           <div onClick={handleActive} className='sidebar-setting'>
             <li>
               <SettingsIcon className='sidebar-icons' />

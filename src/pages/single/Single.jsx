@@ -43,7 +43,7 @@ const Single = () => {
           </div>
         </div>
         <div className='single-bottom'>
-          <h1 className='left-title'>User Student Logs</h1>
+          <h1 className='left-title'>Recent Student Logs</h1>
           <ListTable/>
         </div>
       </div>

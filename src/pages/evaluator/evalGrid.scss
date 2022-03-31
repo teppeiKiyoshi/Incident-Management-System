@@ -31,12 +31,17 @@
         }
       }
     }
-    
+    .evalgrid-functions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
   }
 
   .card-container {
     width: 90%;
-    margin: 60px auto;
+    height: 100%;
+    margin: 5px auto 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
