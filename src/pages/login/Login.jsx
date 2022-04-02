@@ -15,6 +15,11 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
 
+  const route_Homepage = () => {
+    let path = '/dashboard';
+    navigate(path);
+  }
+
   const routeChange = () =>{ 
     let path = '/signup'; 
     navigate(path);
@@ -78,7 +83,7 @@ const Login = () => {
             </FormControl>
             <small className='forgot-pass'>Forgot password?</small>
             <p className='to-signup' onClick={routeChange}>Don't have an account yet?</p>
-            <button className='login-btn'>Sign In</button>
+            <button className='login-btn' onClick={route_Homepage}>Sign In</button>
           </form>
         </div>
         <div className='img-wrapper'>

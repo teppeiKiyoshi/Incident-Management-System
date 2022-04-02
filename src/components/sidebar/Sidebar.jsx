@@ -7,9 +7,16 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const route_Mainpage = () => {
+    let path = '/';
+    navigate(path);
+  }
+
   function handleActive() {
     console.log(window.location.url)
   }
@@ -17,7 +24,7 @@ const Sidebar = () => {
   return (
     <div className='sidebar-main'>
       <div className='sidebar-top'>
-        <Link to='/' style={{ textDecoration: 'none' }}>
+        <Link to='/dashboard' style={{ textDecoration: 'none' }}>
           <span className='sidebar-logo active'>Incident Project</span>
         </Link>
       </div>
@@ -34,11 +41,11 @@ const Sidebar = () => {
       <div className='sidebar-center'>
         <ul>
           <p className='title'>MAIN</p>
-          <Link to='/' style={{ textDecoration: 'none' }}>
-            <div onClick={handleActive} className='sidebar-dashboard active'>
+          <Link to='/dashboard' style={{ textDecoration: 'none' }}>
+            <div onClick={handleActive} className='sidebar-dashboard'>
               <li>
-                <DashboardIcon className='sidebar-icons active' />
-                <span className='sidebar-name active'>Dashboard</span>
+                <DashboardIcon className='sidebar-icons' />
+                <span className='sidebar-name'>Dashboard</span>
               </li>
             </div>
           </Link>
@@ -85,14 +92,12 @@ const Sidebar = () => {
             </li>
           </div>
           </Link>
-          <Link to='/logout' style={{ textDecoration: 'none' }}>
-          <div className='sidebar-logout'>
+          <div className='sidebar-logout'onClick={route_Mainpage}>
             <li>
               <ExitToAppIcon className='sidebar-icons' />
-              <span className='sidebar-name'>Logout</span>
+              <span className='sidebar-name' onClick={route_Mainpage}>Logout</span>
             </li>
           </div>
-          </Link>
         </ul>
       </div>
       <div className='sidebar-bottom'>

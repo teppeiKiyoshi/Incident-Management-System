@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { userInputs, productInputs } from './form-db';
 
 //pages and componentes imported
+import MainPage from './pages/landing-page/index';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import List from './pages/list/List';
@@ -10,12 +11,13 @@ import New from './pages/new/New';
 import EvaluatorGrid from './pages/evaluator/EvaluatorGrid';
 import Logs from './pages/userlogs/Logs'
 import Settings from './pages/settings/Settings';
+import Forums from './pages/forums/Forums';
+import Signup from './pages/register/Signup';
 //for dark mode
 import './mode/darkMode.scss';
 import { useContext } from 'react';
 import {DarkModeContext} from './context/darkModeContext';
-import Forums from './pages/forums/Forums';
-import Signup from './pages/register/Signup';
+
 
 function App() {
   const {darkMode} = useContext(DarkModeContext);
@@ -24,7 +26,8 @@ function App() {
       <Router>
         <Routes>
           <Route path='/'>
-            <Route index element={<Home />} />
+            <Route index element={<MainPage />} />
+            <Route path='dashboard' element={<Home />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
             <Route path='users'>

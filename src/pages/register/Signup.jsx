@@ -118,7 +118,7 @@ const Signup = () => {
                 variant='outlined'
                 required  
               >
-                <InputLabel htmlFor='outlined-adornment-password'>
+                <InputLabel htmlFor='password'>
                   Password
                 </InputLabel>
                 <OutlinedInput
@@ -151,11 +151,11 @@ const Signup = () => {
                 variant='outlined'
                 required 
               >
-                <InputLabel htmlFor='outlined-adornment-password'>
+                <InputLabel htmlFor='confirm-password'>
                   Confirm Password
                 </InputLabel>
                 <OutlinedInput
-                  id='signup_password'
+                  id='confirm_password'
                   type={values.showPassword ? 'text' : 'password'}
                   value={values.password}
                   onChange={handleChange('password')}
@@ -182,7 +182,7 @@ const Signup = () => {
             <p className='to-signin' onClick={routeChange}>
               Already have an account?
             </p>
-            <button className='signup-btn'>Sign In</button>
+            <button className='signup-btn' onClick={routeChange}>Sign In</button>
           </form>
         </div>
         <div className='img-wrapper'>
