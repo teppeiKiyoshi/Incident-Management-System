@@ -59,6 +59,7 @@ export default function FreeSoloCreateOption() {
       renderOption={(props, option) => <li {...props}>{option.title}</li>}
       sx={{ width: 300, fontSize: 14, mt: 4}}
       size='small'
+      color='secondary'
       freeSolo
       renderInput={(params) => (
         <TextField {...params} label="Find a student here" />

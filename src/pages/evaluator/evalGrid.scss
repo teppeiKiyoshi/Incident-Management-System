@@ -2,7 +2,7 @@
   display: flex;
   width: calc(100% - 230px);
   margin-left: 230px;
-  height: 100vh;
+  height: 100%;
 
   .evalgrid-wrapper{
     flex: 6;
@@ -41,10 +41,10 @@
   .card-container {
     width: 90%;
     height: 100%;
-    margin: 5px auto 60px;
+    margin: 5px auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;    
   }
 }

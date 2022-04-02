@@ -85,12 +85,14 @@ const Sidebar = () => {
             </li>
           </div>
           </Link>
+          <Link to='/logout' style={{ textDecoration: 'none' }}>
           <div className='sidebar-logout'>
             <li>
               <ExitToAppIcon className='sidebar-icons' />
               <span className='sidebar-name'>Logout</span>
             </li>
           </div>
+          </Link>
         </ul>
       </div>
       <div className='sidebar-bottom'>

@@ -15,6 +15,7 @@ import './mode/darkMode.scss';
 import { useContext } from 'react';
 import {DarkModeContext} from './context/darkModeContext';
 import Forums from './pages/forums/Forums';
+import Signup from './pages/register/Signup';
 
 function App() {
   const {darkMode} = useContext(DarkModeContext);
@@ -25,6 +26,7 @@ function App() {
           <Route path='/'>
             <Route index element={<Home />} />
             <Route path='login' element={<Login />} />
+            <Route path='signup' element={<Signup />} />
             <Route path='users'>
               <Route index element={<List />} />
               <Route path=':userId' element={<Single />} />
@@ -55,6 +57,7 @@ function App() {
             <Route path='settings'>
               <Route index element={<Settings />} />
             </Route>
+            <Route path='logout'/>
           </Route>
         </Routes>
       </Router>
