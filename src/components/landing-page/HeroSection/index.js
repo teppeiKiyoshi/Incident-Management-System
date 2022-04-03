@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import Video from '../../../videos/video.mp4';
+// import Video from '../../../videos/video.mp4';
+import Video from '../../../images/svg-1.svg'
 import { Button } from '../ButtonElement';
 import {
   HeroContainer,
@@ -29,7 +30,7 @@ const HeroSection = () => {
   return (
     <HeroContainer id='home'>
       <HeroBg>
-        <VideoBg autoPlay loop muted playsInline src={Video} type='video/mp4' />
+        <VideoBg autoPlay loop muted playsInline src={Video} />
       </HeroBg>
       <HeroContent>
         <HeroH1>Incident Management Made Easy</HeroH1>
