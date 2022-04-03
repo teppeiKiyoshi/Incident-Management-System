@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { userInputs, productInputs } from './form-db';
+import { userInputs } from './form-db';
 
 //pages and componentes imported
 import MainPage from './pages/landing-page/index';
@@ -17,6 +17,7 @@ import Signup from './pages/register/Signup';
 import './mode/darkMode.scss';
 import { useContext } from 'react';
 import {DarkModeContext} from './context/darkModeContext';
+import SingleView from './pages/forums/singleView/SingleView';
 
 
 function App() {
@@ -48,11 +49,7 @@ function App() {
             </Route>
             <Route path='forums'>
               <Route index element={<Forums />} />
-              <Route path=':forumId' element={<Single />} />
-              <Route
-                path='new'
-                element={<New inputs={productInputs} title='Add New Report' />}
-              />
+              <Route path=':forumId' element={<SingleView />} />
             </Route>
             <Route path='logs'>
               <Route index element={<Logs />} />

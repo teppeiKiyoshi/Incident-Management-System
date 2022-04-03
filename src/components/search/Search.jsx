@@ -7,14 +7,15 @@ import MoonLoader from 'react-spinners/MoonLoader';
 
 const SearchBarContainer = styled(motion.div)`
   position: absolute;
-  top: 15px;
-  left: 25px;
+  top: 17px;
+  left: 30px;
   display: flex;
   flex-direction: column;
   width: 34em;
-  height: 2.8em;
+  height: 2.5em;
   background-color: white;
   border-radius: 6px;
+  // box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
   box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
   overflow: hidden;
   z-index: 11;

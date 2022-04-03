@@ -1,0 +1,14 @@
+.singleForum-main{
+  display: flex;
+  width: calc(100% - 230px);
+  margin-left: 230px;
+
+  .singleForum-container{
+    flex: 6;
+
+    .singleForum-header {
+      display: flex;
+      margin: 20px;
+    }
+  }
+}
