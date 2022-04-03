@@ -6,7 +6,7 @@ export const FooterContainer = styled.footer`
 `
 
 export const FooterWrap = styled.div`
-  padding: 48px 24px;
+  padding: 48px 24px 15px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,4 +109,9 @@ export const SocialIcons = styled.div`
 export const SocialIconLink = styled.a`
   color: #fff;
   font-size: 24px;
+
+  &:hover{
+    color: #893dff;
+    transition: 0.3s ease-out;
+  }
 `

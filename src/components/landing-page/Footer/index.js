@@ -61,9 +61,9 @@ const Footer = () => {
         </FooterLinksContainer>
         <SocialMedia>
           <SocialMediaWrap>
-            <SocialLogo to='/' onClick={toggleHome}>fileIT!</SocialLogo>
+            <SocialLogo to='/' onClick={toggleHome}>FilinGO</SocialLogo>
             <WebsiteRights>
-              fileIT! &copy; 2022 All Rights Reserved.
+              FilinGO &copy; 2022 All Rights Reserved.
             </WebsiteRights>
             <SocialIcons>
               <SocialIconLink
