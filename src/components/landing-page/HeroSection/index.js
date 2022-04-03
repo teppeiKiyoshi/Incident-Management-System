@@ -1,5 +1,8 @@
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+// it shall have this import below but github does not accomodate it
+// due to a large file size, thus, shall be imported manually 
+// when imported, add a property on VideoBG - type='video/mp4'
 // import Video from '../../../videos/video.mp4';
 import Video from '../../../images/svg-1.svg'
 import { Button } from '../ButtonElement';
