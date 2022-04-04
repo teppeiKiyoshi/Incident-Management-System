@@ -29,33 +29,33 @@ const Footer = () => {
           <FooterLinksWrapper>
             <FooterLinkItems>
               <FooterLinkTitle>About Us</FooterLinkTitle>
-              <FooterLink to='/signin'>How it Works?</FooterLink>
-              <FooterLink to='/signin'>Testimonials</FooterLink>
-              <FooterLink to='/signin'>Terms of Service</FooterLink>
-              <FooterLink to='/signin'>Privacy & Agreement</FooterLink>
+              <FooterLink to='/login'>How it Works?</FooterLink>
+              <FooterLink to='/login'>Testimonials</FooterLink>
+              <FooterLink to='/login'>Terms of Service</FooterLink>
+              <FooterLink to='/login'>Privacy & Agreement</FooterLink>
             </FooterLinkItems>
             <FooterLinkItems>
               <FooterLinkTitle>Contact Us</FooterLinkTitle>
-              <FooterLink to='/signin'>Contact</FooterLink>
-              <FooterLink to='/signin'>Support</FooterLink>
-              <FooterLink to='/signin'>Promotions</FooterLink>
-              <FooterLink to='/signin'>Sponsorship</FooterLink>
+              <FooterLink to='/login'>Contact</FooterLink>
+              <FooterLink to='/login'>Support</FooterLink>
+              <FooterLink to='/login'>Promotions</FooterLink>
+              <FooterLink to='/login'>Sponsorship</FooterLink>
             </FooterLinkItems>
           </FooterLinksWrapper>
           <FooterLinksWrapper>
             <FooterLinkItems>
               <FooterLinkTitle>Social Media</FooterLinkTitle>
-              <FooterLink to='/signin'>Instagram</FooterLink>
-              <FooterLink to='/signin'>Facebook</FooterLink>
-              <FooterLink to='/signin'>Youtube</FooterLink>
-              <FooterLink to='/signin'>Twitter</FooterLink>
+              <FooterLink to='/login'>Instagram</FooterLink>
+              <FooterLink to='/login'>Facebook</FooterLink>
+              <FooterLink to='/login'>Youtube</FooterLink>
+              <FooterLink to='/login'>Twitter</FooterLink>
             </FooterLinkItems>
             <FooterLinkItems>
               <FooterLinkTitle>Programmers</FooterLinkTitle>
-              <FooterLink to='/signin'>FrontEnd Engineer</FooterLink>
-              <FooterLink to='/signin'>Emanuelle O. Martin</FooterLink>
-              <FooterLink to='/signin'>Backend Engineer</FooterLink>
-              <FooterLink to='/signin'>Dwain B. Magracia</FooterLink>
+              <FooterLink to='/login'>FrontEnd Engineer</FooterLink>
+              <FooterLink to='/login'>Emanuelle O. Martin</FooterLink>
+              <FooterLink to='/login'>Backend Engineer</FooterLink>
+              <FooterLink to='/login'>Dwain B. Magracia</FooterLink>
             </FooterLinkItems>
           </FooterLinksWrapper>
         </FooterLinksContainer>

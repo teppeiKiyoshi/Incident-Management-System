@@ -13,7 +13,9 @@ import {
   NavLinks,
   NavBtn,
   NavBtnLink,
+  LogoBg,
 } from './NavbarElements';
+import heroLogo from '../../../images/logos/txt-logo.png'
 
 const Navbar = ({ toggle }) => {
   const navigate = useNavigate();
@@ -47,7 +49,7 @@ const Navbar = ({ toggle }) => {
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
             <NavLogo to='/' onClick={toggleHome}>
-              FilinGO
+              <LogoBg src={heroLogo}/>
             </NavLogo>
             <MobileIcon onClick={toggle}>
               <FaBars />

@@ -8,6 +8,7 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { NavLink, useNavigate } from 'react-router-dom';
+import sidebarLogo from '../../images/logos/logoTxt.png'; 
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -15,21 +16,26 @@ const Sidebar = () => {
   const route_Mainpage = () => {
     let path = '/';
     navigate(path);
-  }
+  };
 
-  const navLinkStyles = ({isActive}) => {
+  const route_toDashboard = () => {
+    let path = '/dashboard';
+    navigate(path);
+  };
+
+  const navLinkStyles = ({ isActive }) => {
     return {
       background: isActive ? 'black' : 'pink',
       textDecoration: 'none',
-    }
-  }
+    };
+  };
 
   return (
     <div className='sidebar-main'>
       <div className='sidebar-top'>
-        <NavLink to='/dashboard'>
-          <span className='sidebar-logo active'>Incident Project</span>
-        </NavLink>
+        <span className='sidebar-logo' onClick={route_toDashboard}>
+          <img src={sidebarLogo} alt='Filingo' className='img-logo'/>
+        </span>
       </div>
       <div className='sidebar-header'>
         <div className='header-wrapper'>
@@ -45,7 +51,7 @@ const Sidebar = () => {
         <ul>
           <p className='title'>MAIN</p>
           <NavLink to='/dashboard' style={navLinkStyles}>
-            <div className='sidebar-dashboard' >
+            <div className='sidebar-dashboard'>
               <li>
                 <DashboardIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Dashboard</span>
@@ -88,17 +94,19 @@ const Sidebar = () => {
           </NavLink>
           <p className='title'>TOOLS</p>
           <NavLink to='/settings' style={navLinkStyles}>
-          <div className='sidebar-setting'>
-            <li>
-              <SettingsIcon className='sidebar-icons' />
-              <span className='sidebar-name'>Settings</span>
-            </li>
-          </div>
+            <div className='sidebar-setting'>
+              <li>
+                <SettingsIcon className='sidebar-icons' />
+                <span className='sidebar-name'>Settings</span>
+              </li>
+            </div>
           </NavLink>
-          <div className='sidebar-logout'onClick={route_Mainpage}>
+          <div className='sidebar-logout' onClick={route_Mainpage}>
             <li>
               <ExitToAppIcon className='sidebar-icons' />
-              <span className='sidebar-name' onClick={route_Mainpage}>Logout</span>
+              <span className='sidebar-name' onClick={route_Mainpage}>
+                Logout
+              </span>
             </li>
           </div>
         </ul>

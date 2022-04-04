@@ -41,6 +41,12 @@ export const NavLogo = styled(LinkR)`
   text-decoration: none;
 `;
 
+export const LogoBg = styled.img`
+  width: auto;
+  height: 80px;
+
+`
+
 export const MobileIcon = styled.div`
   display: none;
   @media screen and (max-width: 768px) {
@@ -60,6 +66,7 @@ export const NavMenu = styled.ul`
   align-items: center;
   list-style: none;
   text-align: center;
+  margin-right: 50px;
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -74,6 +81,7 @@ export const NavLinks = styled(LinkS)`
   color: #fff;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   text-decoration: none;
   padding: 0 1rem;
   height: 100%;
