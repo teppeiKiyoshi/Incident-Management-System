@@ -22,7 +22,7 @@
     }
   }
 
-  .sidebar-header{
+  .sidebar-header {
     height: 80px;
     display: flex;
     align-items: center;
@@ -66,15 +66,36 @@
         margin: 15px 0px 0px 15px;
       }
 
-      .sidebar-dashboard, .sidebar-user,
-      .sidebar-setting, .sidebar-evaluator,
-      .sidebar-forum, .sidebar-forum,
+      a {
+        &.active {
+          .sidebar-dashboard,
+          .sidebar-user,
+          .sidebar-setting,
+          .sidebar-evaluator,
+          .sidebar-forum,
+          .sidebar-forum,
+          .sidebar-logout {
+            background-color: rgba(137, 61, 255, 0.2);
+            border-right: 3px solid rgb(137, 61, 255);
+          }
+          .sidebar-icons {
+            color: #893dff;
+          }
+          .sidebar-name {
+            font-weight: 500;
+            color: rgb(137, 61, 255);
+          }
+        }
+      }
+
+      .sidebar-dashboard,
+      .sidebar-user,
+      .sidebar-setting,
+      .sidebar-evaluator,
+      .sidebar-forum,
+      .sidebar-forum,
       .sidebar-logout {
         margin: 5px 0;
-        &.active {
-          background-color: rgba(137, 61, 255, 0.2);
-          border-right: 3px solid rgb(137, 61, 255);
-        }
       }
 
       li {
@@ -92,10 +113,6 @@
           font-size: 18px;
           margin-left: 5px;
           color: rgb(99, 115, 129);
-
-          &.active{
-            color: rgb(137, 61, 255);
-          }
         }
 
         .sidebar-name {
@@ -103,12 +120,6 @@
           font-weight: 400;
           color: #888;
           margin-left: 10px;
-
-          &.active{
-            font-weight: 500;
-            color: rgb(137, 61, 255);
-            background: black;
-          }
         }
       }
     }
@@ -121,25 +132,24 @@
     align-items: center;
     justify-content: center;
     margin-top: 100px;
-    
+
     .time-container {
       text-align: center;
       font-size: 34px;
       font-weight: 500;
       color: gray;
-    
-      .greetings{
+
+      .greetings {
         width: 100%;
         font-weight: 600;
         font-size: 14px;
         letter-spacing: 0.5px;
         color: rgb(99, 115, 129);
       }
-      
+
       .current-time {
         text-shadow: -3px 2px 2px lightgray;
       }
     }
   }
-
 }

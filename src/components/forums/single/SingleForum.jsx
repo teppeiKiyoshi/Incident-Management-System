@@ -51,8 +51,7 @@ const SingleForum = () => {
                   <h3 className='comment-title'>
                     Comments <span className='comment-count'>(10)</span>{' '}
                   </h3>
-                  { !open && <MdKeyboardArrowDown className='btn-icon' onClick={showComment}/>}
-                  { open && <MdKeyboardArrowUp className='btn-icon' onClick={showComment}/>}
+                  { !open ? <MdKeyboardArrowDown className='btn-icon' onClick={showComment}/> : <MdKeyboardArrowUp className='btn-icon' onClick={showComment}/>}
                 </div>
                 { open && <div className='footer-container'>
                   <ItemComments />

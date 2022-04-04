@@ -13,7 +13,7 @@
       display: flex;
       align-items: flex-start;
       flex-wrap: wrap;
-      margin-left: 20px;
+      margin-left: 25px;
 
       .left-header {
         display: flex;
@@ -206,7 +206,8 @@
                 outline: none;
                 color: white;
                 background: #893dff;
-                font-size: 15px;
+                font-size: 14px;
+                letter-spacing: 0.5px;
                 cursor: pointer;
                 margin-top: 8px;
 
@@ -226,7 +227,7 @@
       display: flex;
       flex-direction: column;
       margin-top: 20px;
-      margin-left: 25px;
+      margin-left: 35px;
 
       .right-title {
         font-size: 20px;
@@ -234,8 +235,8 @@
       }
 
       .divider {
-        margin: 10px auto;
-        width: 100%;
+        margin: 10px 0px;
+        width: 90%;
         height: 1px;
         background-color: gray;
       }
@@ -250,21 +251,21 @@
         }
 
         .evaluator { 
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 300;
           margin-right: 10px;
           padding: 3px 5px 10px;
         }
 
         .created-date {
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 300;
           margin-right: 10px;
           padding: 3px 5px 10px;
         }
 
         .update-date {
-          font-size: 16px;
+          font-size: 14px;
           width: 100%;
           font-weight: 300;
           padding: 3px 5px 10px;

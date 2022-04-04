@@ -7,7 +7,7 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -17,16 +17,19 @@ const Sidebar = () => {
     navigate(path);
   }
 
-  function handleActive() {
-    console.log(window.location.url)
+  const navLinkStyles = ({isActive}) => {
+    return {
+      background: isActive ? 'black' : 'pink',
+      textDecoration: 'none',
+    }
   }
 
   return (
     <div className='sidebar-main'>
       <div className='sidebar-top'>
-        <Link to='/dashboard' style={{ textDecoration: 'none' }}>
+        <NavLink to='/dashboard'>
           <span className='sidebar-logo active'>Incident Project</span>
-        </Link>
+        </NavLink>
       </div>
       <div className='sidebar-header'>
         <div className='header-wrapper'>
@@ -41,57 +44,57 @@ const Sidebar = () => {
       <div className='sidebar-center'>
         <ul>
           <p className='title'>MAIN</p>
-          <Link to='/dashboard' style={{ textDecoration: 'none' }}>
-            <div onClick={handleActive} className='sidebar-dashboard'>
+          <NavLink to='/dashboard' style={navLinkStyles}>
+            <div className='sidebar-dashboard' >
               <li>
                 <DashboardIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Dashboard</span>
               </li>
             </div>
-          </Link>
+          </NavLink>
           <p className='title'>PEOPLE</p>
-          <Link to='/users' style={{ textDecoration: 'none' }}>
-            <div onClick={handleActive} className='sidebar-user'>
+          <NavLink to='/users' style={navLinkStyles}>
+            <div className='sidebar-user'>
               <li>
                 <PeopleIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Users</span>
               </li>
             </div>
-          </Link>
-          <Link to='/evaluators' style={{ textDecoration: 'none' }}>
-            <div onClick={handleActive} className='sidebar-evaluator'>
+          </NavLink>
+          <NavLink to='/evaluators' style={navLinkStyles}>
+            <div className='sidebar-evaluator'>
               <li>
                 <PersonAddIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Add Evaluators</span>
               </li>
             </div>
-          </Link>
+          </NavLink>
           <p className='title'>SERVICES</p>
-          <Link to='/forums' style={{ textDecoration: 'none' }}>
-            <div onClick={handleActive} className='sidebar-forum'>
+          <NavLink to='/forums' style={navLinkStyles}>
+            <div className='sidebar-forum'>
               <li>
                 <QuestionAnswerIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Forums</span>
               </li>
             </div>
-          </Link>
-          <Link to='/logs' style={{ textDecoration: 'none' }}>
-            <div onClick={handleActive} className='sidebar-log'>
+          </NavLink>
+          <NavLink to='/logs' style={navLinkStyles}>
+            <div className='sidebar-log'>
               <li>
                 <PsychologyIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Logs</span>
               </li>
             </div>
-          </Link>
+          </NavLink>
           <p className='title'>TOOLS</p>
-          <Link to='/settings' style={{ textDecoration: 'none' }}>
-          <div onClick={handleActive} className='sidebar-setting'>
+          <NavLink to='/settings' style={navLinkStyles}>
+          <div className='sidebar-setting'>
             <li>
               <SettingsIcon className='sidebar-icons' />
               <span className='sidebar-name'>Settings</span>
             </li>
           </div>
-          </Link>
+          </NavLink>
           <div className='sidebar-logout'onClick={route_Mainpage}>
             <li>
               <ExitToAppIcon className='sidebar-icons' />

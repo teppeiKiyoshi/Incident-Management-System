@@ -1,13 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ForumsTable = () => {
+  const navigate = useNavigate();
+  const to_singlePage = () => {
+    let path = '/forums/id';
+    navigate(path);
+  }
   return (
     <>
       
       <div className='grid-main'>
         <div className='grid-items'>
           <span className='report-type'>Incomplete Grades</span>
-          <h3 className='title'>
+          <h3 className='title' onClick={to_singlePage} >
             What is device encryption, and should I use it?
           </h3>
           <span>
