@@ -72,7 +72,7 @@ const ListTable = () => {
           <TableRow>
             <TableCell className='table-cell'>Tracking ID</TableCell>
             <TableCell className='table-cell'>Student ID</TableCell>
-            <TableCell className='table-cell'>Customer</TableCell>
+            <TableCell className='table-cell'>Student</TableCell>
             <TableCell className='table-cell'>Date</TableCell>
             <TableCell className='table-cell'>Incident Type</TableCell>
             <TableCell className='table-cell'>Evaluator</TableCell>
