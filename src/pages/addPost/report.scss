@@ -1,0 +1,30 @@
+.stud-report__main {
+  width: calc(100% - 260px);
+  margin-left: 260px;
+  display: flex;
+
+  .stud-report__container {
+    flex: 6;
+
+    .evalgrid-header {
+      display: flex;
+      align-items: center;
+
+      .evalgrid-title {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 55px 0px 55px;
+
+        .title {
+          font-size: 26px;
+          font-weight: 600;
+        }
+      }
+    }
+    .student-report__process{
+      width: 100%;
+    }
+  }
+}

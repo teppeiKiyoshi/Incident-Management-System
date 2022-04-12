@@ -1,4 +1,5 @@
 import {React ,useState} from 'react';
+import {useNavigate } from 'react-router-dom';
 import './singleF.scss';
 import AddComment from '../modal/AddComment';
 import ItemComments from '../comment-items/ItemComments';
@@ -6,6 +7,12 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 const SingleForum = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const routeChange = () => {
+    let path = '/forums/add-post';
+    navigate(path);
+  }
 
   const showComment = () => {
     setOpen(!open);
@@ -59,6 +66,7 @@ const SingleForum = () => {
                 </div>}
                 <div className="btn-container">
                   <AddComment />
+                  <button onClick={routeChange}>Add Post</button>
                 </div>
               </div>
             </div>

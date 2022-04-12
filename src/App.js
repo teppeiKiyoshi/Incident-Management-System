@@ -18,6 +18,7 @@ import './mode/darkMode.scss';
 import { useContext } from 'react';
 import {DarkModeContext} from './context/darkModeContext';
 import SingleView from './pages/forums/singleView/SingleView';
+import Report from './pages/addPost/Report';
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
             <Route path='forums'>
               <Route index element={<Forums />} />
               <Route path=':forumId' element={<SingleView />} />
+              <Route path='add-post' element={<Report/>} />
             </Route>
             <Route path='logs'>
               <Route index element={<Logs />} />
