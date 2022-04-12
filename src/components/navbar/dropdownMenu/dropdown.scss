@@ -1,0 +1,130 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --bg: #fff;
+  --text-color: #333;
+  --nav-size: 80px;
+  --border: 1px solid #999;
+  --border-radius: 8px;
+  --speed: 500ms;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* <li> */
+.nav-item {
+  width: calc(var(--nav-size) * 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon Button */
+.icon-button {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(137, 61, 255, 0.4);
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
+  box-shadow: 2px 2px 8px 1px rgba(201,201,201,0.47);
+  border-radius: 50%;
+  padding: 5px;
+  margin: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+.icon-button svg {
+  fill: #893dff;
+  width: 15px;
+  height: 15px;
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: absolute;
+  top: 60px;
+  width: 250px;
+  transform: translateX(-45%);
+  background-color: white;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
+  box-shadow: 0 0 8px 3px rgba(201,201,201,0.47);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow: hidden;
+  transition: height var(--speed) ease;
+  z-index: 10;
+}
+
+.menu {
+  width: 100%;
+}
+
+.dropdown-item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius);
+  transition: background var(--speed);
+  padding: 0.5rem;
+}
+
+.dropdown-item .icon-button {
+  margin-right: 12px;
+}
+
+.dropdown-item .icon-button:hover {
+  filter: none;
+}
+
+.dropdown-item:hover {
+  background-color: #ece8ff;
+}
+
+.icon-right {
+  margin-left: auto;
+}
+
+/* CSSTransition classes  */
+.menu-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+.menu-primary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+.menu-primary-exit {
+  position: absolute;
+}
+.menu-primary-exit-active {
+  transform: translateX(-110%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-enter {
+  transform: translateX(110%);
+}
+.menu-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all var(--speed) ease;
+}
+
+.menu-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all var(--speed) ease;
+}

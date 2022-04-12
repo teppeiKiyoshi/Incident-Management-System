@@ -1,6 +1,7 @@
 import './navbar.scss'
 import {React, useState} from 'react';
 import Search from '../search/Search';
+import DropDown from './dropdownMenu/DropdownMenu';
 //MUI Icons
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
@@ -41,7 +42,7 @@ const Navbar = () => {
             <div className="notif-counter">2</div>
           </div>
           <div className="menu-item">
-            <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80" alt="avatar" className='navbar-avatar' />
+            <DropDown />
           </div>
         </div>
       </div>

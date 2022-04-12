@@ -23,6 +23,18 @@
     .navbar-search {
       border-color: gray;
     }
+
+    .dropdown {
+      background: #1d1d1d;
+
+      .dropdown-item {
+        color: rgb(155, 155, 155);
+
+        &:hover {
+          background-color: rgba(137, 61, 255, 0.2);
+        }
+      }
+    }
   }
 
   .sidebar-main{

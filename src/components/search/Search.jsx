@@ -10,7 +10,7 @@ import TVShow from './itemView/index';
 
 const SearchBarContainer = styled(motion.div)`
   position: absolute;
-  top: 17px;
+  top: 22px;
   left: 30px;
   display: flex;
   flex-direction: column;
@@ -94,6 +94,7 @@ const SearchContent = styled.div`
   padding: 1em;
   overflow-y: auto;
   overflow-x: hidden;
+  cursor: pointer;
 `;
 
 const WarningMessage = styled.span`
@@ -224,7 +225,7 @@ const Search = (props) => {
             )}
           </AnimatePresence>
         </SearchInputContainer>
-        {!isExpanded && <LineSeparator />}
+        {isExpanded && <LineSeparator />}
         {isExpanded && (<SearchContent> 
           {isLoading && (
             <LoadingWrapper>
