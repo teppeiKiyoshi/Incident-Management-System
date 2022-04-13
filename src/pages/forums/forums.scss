@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
+
 .forums-main {
   display: flex;
   width: calc(100% - 230px);
@@ -51,10 +53,11 @@
           font-weight: 400;
           padding-bottom: 5px;
           padding-left: 20px;
-          color: #893dff;
+          color: #aa7af0;
         }
 
         p {
+          font-family: 'Inter', sans-serif;
           font-size: 16px;
           font-weight: 400;
           line-height: 1.7;

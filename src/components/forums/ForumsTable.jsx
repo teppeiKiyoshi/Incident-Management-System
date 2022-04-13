@@ -21,7 +21,7 @@ const ForumsTable = () => {
             LightJack05
           </span>
           <p>
-            Technical Difficulty: What is device encryption?Device encryption is
+            Technical Difficulty: What is device encryption? Device encryption is
             a feature that exists in Windows 10 & 11. It is available on PCs
             that are connected to the internet and signed into a Microsoft
             Account. Your device needs to have a TPM and Secure Boot
