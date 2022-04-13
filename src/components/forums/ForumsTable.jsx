@@ -7,9 +7,9 @@ const ForumsTable = () => {
     let path = '/forums/id';
     navigate(path);
   }
+
   return (
     <>
-      
       <div className='grid-main'>
         <div className='grid-items'>
           <span className='report-type'>Incomplete Grades</span>

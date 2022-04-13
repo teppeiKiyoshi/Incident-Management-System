@@ -84,9 +84,17 @@ const SingleForum = () => {
                 <h5 className='tag-title'>Applies to:</h5>
                 <div className='tags'>
                   <span className='tag-item'>Incomplete Grades</span>
-                  <span className='tag-item'>Irregular Student</span>
-                  <span className='tag-item'>Incomplete Subject</span>
                 </div>
+              </div>
+            </div>
+            <div className="case-status">
+              <h4 className="case-title">Mark As:</h4>
+              <div className="case-content">
+                <select name="case" id="case" className="case-option">
+                <option value="" disabled selected hidden>Select Status</option>
+                  <option value="Solved">Solved</option>
+                  <option value="Unsolved">Unsolved</option>
+                </select>
               </div>
             </div>
           </div>
