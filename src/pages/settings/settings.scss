@@ -4,4 +4,10 @@
   margin-left: 230px;
   height: 100vh;
 
+  .setting-container {
+    flex: 6;
+    .setting-content {
+      margin-top: 20px;
+    }
+  }
 }

@@ -1,0 +1,112 @@
+.accSettings-wrapper {
+  width: 100%;
+  height: 100vh;
+
+  .accSettings-header {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #aa7af0;
+
+    .accSettings-title {
+      font-size: 32px;
+      font-weight: 600;
+      margin-left: 80px;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: -15px;
+    }
+  }
+  //left content here
+  .accSettings-content__wrapper {
+    width: 80%;
+    height: 550px;
+    margin: -30px auto 0;
+    display: flex;
+    box-shadow: 0 0 5px 2px #999;
+
+    .accSettings-content__left {
+      width: 250px;
+      height: 100%;
+      background-color: #fff;
+      border-right: 1px solid lightgrey;
+
+      .accSettings-left__displayPic {
+        width: 100%;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+
+        .accSettings-left_picture {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .accSettings-left__userName {
+          font-size: 18px;
+          font-weight: 500;
+          margin-top: 20px;
+        }
+      }
+      //sidebar left items
+      .accSettings-left__functions {
+        width: 100%;
+        height: 300px;
+
+        .accSettings-left__item {
+          display: flex;
+          align-items: center;
+
+          .left-list {
+            list-style: none;
+            width: 100%;
+
+            .list-item {
+              width: 100%;
+              cursor: pointer;
+
+              &:hover {
+                background-color: beige;
+                color: #893dff;
+              }
+              &.active {
+                color: #893dff;
+              }
+            }
+            .left-list__item {
+              margin: 20px 30px;
+              font-size: 16px;
+              font-weight: 400;
+              padding: 10px;
+
+              &:hover {
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
+    //right content here
+    .accSettings-content__right {
+      width: 833px;
+      background-color: #fff;
+
+      .accSettings-right__contents {
+        width: 100%;
+        margin: 20px 30px;
+      }
+    }
+  }
+}

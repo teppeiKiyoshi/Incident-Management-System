@@ -6,7 +6,7 @@ import { useClickOutside } from 'react-click-outside-hook';
 import MoonLoader from 'react-spinners/MoonLoader';
 import axios from 'axios';
 import useDebounce from './searchHook/Debouncing';
-import TVShow from './itemView/index';
+import TVShow from './itemView/index';  
 
 const SearchBarContainer = styled(motion.div)`
   position: absolute;
@@ -44,14 +44,12 @@ const SearchInput = styled.input`
   border-radius: 6px;
   background-color: transparent;
   padding-bottom: 5px;
-
   &:focus {
     outline: none;
     &::placeholder {
       opacity: 0;
     }
   }
-
   &::placeholder {
     color: #bebebe;
     transition: all 0.4s ease-in-out;
@@ -72,7 +70,6 @@ const CloseIcon = styled(motion.span)`
   vertical-align: middle;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
-
   &:hover {
     color: #dfdfdf;
   }
@@ -190,7 +187,6 @@ const Search = (props) => {
   };
 
   useDebounce(searchQuery, 500, searchShow);
-
   return (
     <>
       <SearchBarContainer

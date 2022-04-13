@@ -22,6 +22,10 @@
 
     .navbar-search {
       border-color: gray;
+
+      .SearchInputContainer {
+        background-color: red;
+      }
     }
 
     .dropdown {
