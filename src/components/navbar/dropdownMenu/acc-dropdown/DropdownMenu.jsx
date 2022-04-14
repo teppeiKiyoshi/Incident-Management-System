@@ -1,16 +1,16 @@
 import './dropdown.scss';
-//SVG ICONS
-import { ReactComponent as CogIcon } from '../../../icons/cog.svg';
-import { ReactComponent as ChevronIcon } from '../../../icons/chevron.svg';
-import { ReactComponent as ArrowIcon } from '../../../icons/arrow.svg';
-import { ReactComponent as Email } from '../../../icons/email.svg';
-import { ReactComponent as Password } from '../../../icons/password.svg';
-import { ReactComponent as Deactivate } from '../../../icons/deactivate.svg';
-import { ReactComponent as Logout } from '../../../icons/logout.svg';
-import { ReactComponent as Profile } from '../../../icons/profile.svg';
-import { ReactComponent as AccSettings } from '../../../icons/acc-settings.svg';
+//SVG ICONS;
+import { ReactComponent as ChevronIcon } from '../../../../icons/chevron.svg';
+import { ReactComponent as ArrowIcon } from '../../../../icons/arrow.svg';
+import { ReactComponent as Email } from '../../../../icons/email.svg';
+import { ReactComponent as Password } from '../../../../icons/password.svg';
+import { ReactComponent as Deactivate } from '../../../../icons/deactivate.svg';
+import { ReactComponent as Logout } from '../../../../icons/logout.svg';
+import { ReactComponent as Profile } from '../../../../icons/profile.svg';
+import { ReactComponent as AccSettings } from '../../../../icons/acc-settings.svg';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
+import {useNavigate} from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group';
 
 function DropDown() {
@@ -34,7 +34,7 @@ function NavItem(props) {
 
   return (
     <li className='nav-item'>
-      <a href='#' className='icon-button' onClick={() => setOpen(!open)}>
+      <a className='icon-button' onClick={() => setOpen(!open)}>
         {props.icon}
       </a>
 
@@ -47,6 +47,12 @@ function DropdownMenu() {
   const [activeMenu, setActiveMenu] = useState('main');
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
+  const changeRoute = () => {
+    let path = '/settings';
+    navigate(path);
+  }
 
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
@@ -60,7 +66,6 @@ function DropdownMenu() {
   function DropdownItem(props) {
     return (
       <a
-        href='#'
         className='dropdown-item'
         onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
       >
@@ -84,15 +89,12 @@ function DropdownMenu() {
           <DropdownItem leftIcon={<Profile />} rightIcon={<ChevronIcon />}>
             My Profile
           </DropdownItem>
-          <DropdownItem leftIcon={<CogIcon />} rightIcon={<ChevronIcon />}>
-            Settings
-          </DropdownItem>
           <DropdownItem
             leftIcon={<AccSettings />}
             rightIcon={<ChevronIcon />}
             goToMenu='settings'
           >
-            Account Settings
+            Settings
           </DropdownItem>
           <DropdownItem leftIcon={<Logout />} rightIcon={<ChevronIcon />}>
             Logout
@@ -112,9 +114,12 @@ function DropdownMenu() {
             {' '}
             <h3 style={{fontWeight: '600'}}>Account Settings</h3>{' '}
           </DropdownItem>
-          <DropdownItem leftIcon={<Email />}>Change Email</DropdownItem>
-          <DropdownItem leftIcon={<Password />}>Change Password</DropdownItem>
-          <DropdownItem leftIcon={<Deactivate />}>
+          <DropdownItem 
+            onClick={changeRoute} leftIcon={<Email />}>Change Email</DropdownItem>
+          <DropdownItem 
+            onClick={changeRoute} leftIcon={<Password />}>Change Password</DropdownItem>
+          <DropdownItem 
+            onClick={changeRoute} leftIcon={<Deactivate />}>
             Deactivate Account
           </DropdownItem>
         </div>

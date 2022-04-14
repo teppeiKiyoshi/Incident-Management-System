@@ -1,0 +1,139 @@
+.notifs-main {
+  width: 380px;
+  position: absolute;
+  top: 50px;
+  right: -10px;
+  background-color: #fff;
+  z-index: 999;
+
+  .notifs-container {
+    width: 100%;
+    height: 350px;
+    background-color: #fff;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 7px;
+    box-shadow: 0 0 10px 2px rgba(153, 153, 153, 0.4);
+    z-index: 99;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      border-radius: 5px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: rgba(170, 122, 240, 0.7);
+      border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      &:hover {
+        background: rgba(170, 122, 240, 0.9);
+      }
+    }
+
+    .notifs-header {
+      width: 100%;
+      margin: 5px;
+      margin-top: 8px;
+
+      .header-title {
+        font-size: 22px;
+        font-weight: bold;
+        padding: 10px 0px 10px 20px;
+      }
+    }
+
+    .notifs-filter {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      margin-left: 20px;
+
+      .all-btn,
+      .unread-btn {
+        border: none;
+        outline: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: transparent;
+        margin: 2px 5px;
+        transition: 0.2s ease-out;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #f7f7f7;
+          color: #893dff;
+        }
+      }
+    }
+
+    .notifs-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      .notifs-item {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 5px 20px;
+
+        &:after {
+          display: block;
+          clear: both;
+          content: '';
+          position: relative;
+          left: 0;
+          bottom: 0;
+          max-width: 380px;
+          height: 1px;
+          width: 85%; /* or 100px */
+          border-bottom: 0.5px solid rgba(153, 153, 153, 0.3);
+          margin: 0 auto;
+          padding: 4px 0px;
+        }
+
+        .icon {
+          width: 55px;
+
+          .notifs-icon {
+            border-radius: 50%;
+            background-color: cadetblue;
+          }
+        }
+
+        .details {
+          width: 220px;
+
+          .notifs-details {
+            width: 100%;
+            height: auto;
+            text-align: justify;
+            font-size: 12px;
+          }
+        }
+
+        .status {
+          .notifs-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #893dff;
+          }
+        }
+      }
+    }
+  }
+}
