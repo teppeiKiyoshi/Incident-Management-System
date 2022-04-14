@@ -4,13 +4,13 @@
   margin-left: 230px;
   height: 100%;
 
-  .evalgrid-wrapper{
+  .evalgrid-wrapper {
     flex: 6;
 
-    .evalgrid-header{
+    .evalgrid-header {
       display: flex;
       align-items: center;
-      
+
       .evalgrid-title {
         width: 100%;
         display: flex;
@@ -27,7 +27,6 @@
           background-color: #893dff;
           text-transform: capitalize;
           box-shadow: rgb(137 61 255 / 34%) 0px 8px 16px 0px;
-          
         }
       }
     }
@@ -35,6 +34,54 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+
+      .modal {
+        z-index: 999;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: fixed;
+      }
+      .overlay {
+        background: rgba(49, 49, 49, 0.8);
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: fixed;
+      }
+      .modal-content {
+        position: absolute;
+        z-index: 999;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 1.4;
+        background: #f1f1f1;
+        padding: 14px 28px;
+        border-radius: 3px;
+        width: 600px;
+        height: 400px;
+
+        .content-title {
+          padding: 20px;
+        }
+      }
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px 10px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+        font-size: 22px;
+      }
     }
   }
 
@@ -44,6 +91,6 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;
   }
 }
