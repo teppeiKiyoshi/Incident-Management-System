@@ -24,7 +24,7 @@ const Home = () => {
           <Chart aspect={2.5/1}/>
         </div>
         <div className="list-container">
-          <div className="list-title">Latest Transaction</div>
+          <div className="list-title">Latest Filed Reports</div>
           <ListTable />
         </div>
       </div>
