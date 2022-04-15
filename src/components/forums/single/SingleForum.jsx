@@ -7,7 +7,8 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 const SingleForum = () => {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+  const [isAssigned, setIsAssigned] = useState(false);
+  const navigate = useNavigate(); 
 
   const routeChange = () => {
     let path = '/forums/add-post';
@@ -76,7 +77,7 @@ const SingleForum = () => {
           <h3 className='right-title'>Forum Article Info</h3>
           <div className='divider'></div>
           <div className='right-info'>
-            <p className="evaluator">Evaluated by Dwain Magracia</p>
+            <p className="evaluator">{ isAssigned ? `Evaluated by Dwain Magracia` : 'No Evaluator Assigned Yet  ' }</p>
             <p className='created-date'>Created on February 26, 2022</p>
             <p className='update-date'>Last Updated: April 02, 2022</p>
             <div className='info-tags'>

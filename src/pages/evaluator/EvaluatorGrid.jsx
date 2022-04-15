@@ -4,6 +4,7 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
 import EvaluatorCard from '../../components/evaluator-cards/EvaluatorCard';
 import SortEvaluator from '../../components/dropdown/SortEvaluator';
+import { AiOutlineClose } from 'react-icons/ai';
 //MUI dependencies
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -16,10 +17,10 @@ const EvaluatorGrid = () => {
     setModal(!modal);
   };
 
-  if(modal) {
-    document.body.classList.add('active-modal')
+  if (modal) {
+    document.body.classList.add('active-modal');
   } else {
-    document.body.classList.remove('active-modal')
+    document.body.classList.remove('active-modal');
   }
 
   return (
@@ -46,15 +47,43 @@ const EvaluatorGrid = () => {
               <div onClick={toggleModal} className='overlay'></div>
               <div className='modal-content'>
                 <h2 className='content-title'>Register an Evaluator</h2>
-                <TextField required variant='outlined' label='Last Name'/>
-                <TextField required variant='outlined' label='First Name'/>
-                <TextField variant='outlined' label='M.I.' sx={{ width: '60px'}}/>
-                <TextField required fullWidth variant='outlined' label='Email'/>
-                <TextField required fullWidth variant='outlined' label='Password'/>
-                <button className="btn_cancel">Cancel</button>
-                <button className="btn_submit">Register</button>
+                <TextField required variant='outlined' label='Last Name' sx={{ width: '220px', m: 2 }} />
+                <TextField required variant='outlined' label='First Name' sx={{ width: '220px', m: 2}}/>
+                <TextField
+                  variant='outlined'
+                  label='M.I.'
+                  sx={{ width: '60px', m: 2 }}
+                />
+                <TextField
+                  required
+                  variant='outlined'
+                  label='Email'
+                  sx={{m: 2, width: '350px'}}
+                />
+                <TextField
+                  required
+                  variant='outlined'
+                  label='Contact Number'
+                  sx={{m: 2, width: '180px'}}
+                />
+                <TextField
+                  required
+                  variant='outlined'
+                  label='Password'
+                  sx={{m: 2, width: '265px'}}
+                />
+                <TextField
+                  required
+                  variant='outlined'
+                  label='Confirm Password'
+                  sx={{m: 2, width: '265px'}}
+                />
+                <div className='btn-container'>
+                  <button className='btn_cancel'>Cancel</button>
+                  <button className='btn_submit'>Register</button>
+                </div>
                 <button className='close-modal' onClick={toggleModal}>
-                  X
+                  <AiOutlineClose />
                 </button>
               </div>
             </div>

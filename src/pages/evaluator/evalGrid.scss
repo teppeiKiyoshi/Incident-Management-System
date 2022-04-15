@@ -64,12 +64,44 @@
         line-height: 1.4;
         background: #f1f1f1;
         padding: 14px 28px;
-        border-radius: 3px;
+        border-radius: 8px;
         width: 600px;
         height: 400px;
 
         .content-title {
           padding: 20px;
+          font-weight: 500;
+        }
+
+        .btn-container {
+          width: 100%;
+          margin: 10px auto;
+          display: flex;
+          justify-content: flex-end;
+
+          .btn_submit {
+            outline: none;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 3px;
+            color: white;
+            background-color: #893dff;
+            cursor: pointer;
+          }
+
+          .btn_cancel {
+            outline: none;
+            border: none;
+            padding: 6px 12px;
+            background-color: transparent;
+            color: #aa7af0;
+            cursor: pointer;
+
+            &:hover {
+              color: crimson;
+              font-weight: 500;
+            }
+          }
         }
       }
       .close-modal {
