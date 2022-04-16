@@ -6,5 +6,24 @@
 
   .log-container {
     flex: 6;
+
+    .log-content-header {
+      margin: 30px 50px 10px;
+
+      .content-title {
+        font-weight: 500;
+        font-size: 24px;
+        color: #333;
+      }
+    }
+
+    .log-content {
+      margin: 30px auto;
+      width: 90%;
+      background-color: #E7EBF0;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.7);
+  box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.7);
+    }
+
   }
 }
