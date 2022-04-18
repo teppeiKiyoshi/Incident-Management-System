@@ -12,7 +12,6 @@ const Report = () => {
         <Navbar/>
         <div className="stud-report__header">
           <div className="stud-report__title">
-            <h2 className="title">Add a Report Here</h2>
           </div>
         </div>
         <div className="student-report__process">

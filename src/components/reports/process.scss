@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@400;600;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap');
+
+.process-main {
+  width: 100%;
+
+  .process-container {
+    width: 100%;
+    margin-top: 20px;
+
+    .process-header {
+      width: 100%;
+      display: flex;
+
+      .header-content {
+        width: 60%;
+        height: 200px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        margin: 20px 30px;
+        margin-left: 160px;
+
+        .header-title {
+          font-size: 38px;
+          font-weight: 800;
+          font-family: 'Martel', sans-serif;
+        }
+
+        .sub-title {
+          font-size: 15px;
+          font-weight: 400;
+          color: #999;
+          letter-spacing: 0.5px;
+        }
+      }
+
+      .header-image {
+        width: 40%;
+
+        .img-header {
+          width: 250px;
+          height: 250px;
+        }
+      }
+    }
+    //process BODY start here
+    .process-body {
+      width: 80%;
+      margin: 20px auto;
+      margin-left: 180px;
+      margin-right: 180px;
+
+      //step one styling
+      .process-one {
+        width: 100%;
+        display: flex;
+        margin: 20px auto;
+
+        .body-header {
+          display: flex;
+          align-items: center;
+
+          .icon {
+            width: 30px;
+            height: 30px;
+            background-color: #aa7af0;
+            border-radius: 50%;
+            margin-right: 20px;
+            box-shadow: 4px 2px 8px 0px rgba(0, 0, 0, 0.3);
+
+            .icon-title {
+              width: 30px;
+              height: 30px;
+              display: flex;
+              text-align: center;
+              align-items: center;
+              justify-content: center;
+              font-size: 14px;
+              color: #fff;
+              font-weight: 500;
+            }
+          }
+
+          .body-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            margin-right: 20px;
+            font-family: 'Inter', sans-serif;
+          }
+        }
+      }
+
+      .process-two {
+        width: 100%;
+        display: flex;
+        margin: 20px auto;
+
+        .body-header {
+          display: flex;
+          align-items: center;
+          .icon {
+            width: 30px;
+            height: 30px;
+            background-color: #aa7af0;
+            border-radius: 50%;
+            margin-right: 20px;
+            box-shadow: 4px 2px 8px 0px rgba(0, 0, 0, 0.3);
+
+            .icon-title {
+              width: 30px;
+              height: 30px;
+              display: flex;
+              text-align: center;
+              align-items: center;
+              justify-content: center;
+              font-size: 14px;
+              color: #fff;
+              font-weight: 500;
+            }
+          }
+          .body-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            margin-right: 20px;
+            font-family: 'Inter', sans-serif;
+          }
+        }
+      }
+
+      .process-three {
+        width: 100%;
+        display: flex;
+        margin: 20px auto;
+
+        .body-header {
+          display: flex;
+          align-items: center;
+
+          .icon {
+            width: 30px;
+            height: 30px;
+            background-color: #aa7af0;
+            border-radius: 50%;
+            margin-right: 20px;
+            box-shadow: 4px 2px 8px 0px rgba(0, 0, 0, 0.3);
+
+            .icon-title {
+              width: 30px;
+              height: 30px;
+              display: flex;
+              text-align: center;
+              align-items: center;
+              justify-content: center;
+              font-size: 14px;
+              color: #fff;
+              font-weight: 500;
+            }
+          }
+
+          .body-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            margin-right: 20px;
+            font-family: 'Inter', sans-serif;
+          }
+        }
+      }
+    }
+  }
+}
