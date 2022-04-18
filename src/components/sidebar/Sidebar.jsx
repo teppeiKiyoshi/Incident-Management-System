@@ -88,7 +88,7 @@ const Sidebar = () => {
             <div className='sidebar-log'>
               <li>
                 <PsychologyIcon className='sidebar-icons' />
-                <span className='sidebar-name'>Logs</span>
+                <span className='sidebar-name'>FaQs</span>
               </li>
             </div>
           </NavLink>
