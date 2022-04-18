@@ -16,11 +16,11 @@ const ForumsTable = () => {
           <h3 className='title' onClick={to_singlePage} >
             What is device encryption, and should I use it?
           </h3>
-          <span>
+          <span className='sub-title'>
             Last comment 4 hours 54 minutes ago | Created February 26, 2022 by
             LightJack05
           </span>
-          <p>
+          <p className='report-detail'>
             Technical Difficulty: What is device encryption? Device encryption is
             a feature that exists in Windows 10 & 11. It is available on PCs
             that are connected to the internet and signed into a Microsoft

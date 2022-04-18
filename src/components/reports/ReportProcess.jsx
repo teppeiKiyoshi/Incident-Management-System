@@ -98,132 +98,130 @@ const ReportProcess = () => {
           </div>
         </div>
         <div className='process-body'>
-          <div className='process-one'>
-            <div className='body-header'>
-              <div className='icon'>
-                <p className='icon-title'>1</p>
-              </div>
-              <h3 className='body-title'>
-                Please choose an incident to report
-              </h3>
-            </div>
-            <div className='process-types'>
-              <FormControl>
-                <RadioGroup
-                  row
-                  aria-labelledby='demo-row-radio-buttons-group-label'
-                  name='row-radio-buttons-group'
-                  value={value}
-                  onChange={handleChange}
-                >
-                  <FormControlLabel
-                    value='remainingBalance'
-                    control={
-                      <Radio
-                        sx={{
-                          '&.Mui-checked': {
-                            color: '#893dff',
-                          },
-                        }}
-                      />
-                    }
-                    label='Remaining Balance'
-                  />
-                  <FormControlLabel
-                    value='failedSubj'
-                    control={
-                      <Radio
-                        sx={{
-                          '&.Mui-checked': {
-                            color: '#893dff',
-                          },
-                        }}
-                      />
-                    }
-                    label='Failed Subject'
-                  />
-                  <FormControlLabel
-                    value='addSubj'
-                    control={
-                      <Radio
-                        sx={{
-                          '&.Mui-checked': {
-                            color: '#893dff',
-                          },
-                        }}
-                      />
-                    }
-                    label='Adding Subject'
-                  />
-                  <FormControlLabel
-                    value='changeSubj'
-                    control={
-                      <Radio
-                        sx={{
-                          '&.Mui-checked': {
-                            color: '#893dff',
-                          },
-                        }}
-                      />
-                    }
-                    label='Changing Subject'
-                  />
-                  <FormControlLabel
-                    value='incSubj'
-                    control={
-                      <Radio
-                        sx={{
-                          '&.Mui-checked': {
-                            color: '#893dff',
-                          },
-                        }}
-                      />
-                    }
-                    label='Subjects with INC'
-                  />
-                  <FormControlLabel
-                    value='prevSem'
-                    control={
-                      <Radio
-                        sx={{
-                          '&.Mui-checked': {
-                            color: '#893dff',
-                          },
-                        }}
-                      />
-                    }
-                    label='Unavailable Subjects from Previous Semester'
-                  />
-                  <FormControlLabel
-                    value='currSem'
-                    control={
-                      <Radio
-                        sx={{
-                          '&.Mui-checked': {
-                            color: '#893dff',
-                          },
-                        }}
-                      />
-                    }
-                    label='Unavailable Subjects on Current Semester'
-                  />
-                  <FormControlLabel
-                    value='others'
-                    control={
-                      <Radio
-                        sx={{
-                          '&.Mui-checked': {
-                            color: '#893dff',
-                          },
-                        }}
-                      />
-                    }
-                    label='Others'
-                  />
-                </RadioGroup>
-              </FormControl>
-            </div>
+        <div className='process-one'>
+        <div className='body-header'>
+          <div className='icon'>
+            <p className='icon-title'>1</p>
           </div>
+          <h3 className='body-title'>Please choose an incident to report</h3>
+        </div>
+        <div className='process-types'>
+          <FormControl>
+            <RadioGroup
+              row
+              aria-labelledby='demo-row-radio-buttons-group-label'
+              name='row-radio-buttons-group'
+              value={value}
+              onChange={handleChange}
+            >
+              <FormControlLabel
+                value='remainingBalance'
+                control={
+                  <Radio
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#893dff',
+                      },
+                    }}
+                  />
+                }
+                label='Remaining Balance'
+              />
+              <FormControlLabel
+                value='failedSubj'
+                control={
+                  <Radio
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#893dff',
+                      },
+                    }}
+                  />
+                }
+                label='Failed Subject'
+              />
+              <FormControlLabel
+                value='addSubj'
+                control={
+                  <Radio
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#893dff',
+                      },
+                    }}
+                  />
+                }
+                label='Adding Subject'
+              />
+              <FormControlLabel
+                value='changeSubj'
+                control={
+                  <Radio
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#893dff',
+                      },
+                    }}
+                  />
+                }
+                label='Changing Subject'
+              />
+              <FormControlLabel
+                value='incSubj'
+                control={
+                  <Radio
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#893dff',
+                      },
+                    }}
+                  />
+                }
+                label='Subjects with INC'
+              />
+              <FormControlLabel
+                value='prevSem'
+                control={
+                  <Radio
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#893dff',
+                      },
+                    }}
+                  />
+                }
+                label='Unavailable Subjects from Previous Semester'
+              />
+              <FormControlLabel
+                value='currSem'
+                control={
+                  <Radio
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#893dff',
+                      },
+                    }}
+                  />
+                }
+                label='Unavailable Subjects on Current Semester'
+              />
+              <FormControlLabel
+                value='others'
+                control={
+                  <Radio
+                    sx={{
+                      '&.Mui-checked': {
+                        color: '#893dff',
+                      },
+                    }}
+                  />
+                }
+                label='Others'
+              />
+            </RadioGroup>
+          </FormControl>
+        </div>
+      </div>
           <div className='process-two'>
             <div className='body-header'>
               <div className='icon'>
