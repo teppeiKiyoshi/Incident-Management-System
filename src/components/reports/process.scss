@@ -57,9 +57,11 @@
       .process-one {
         width: 100%;
         display: flex;
+        flex-wrap: wrap;
         margin: 20px auto;
 
         .body-header {
+          width: 100%;
           display: flex;
           align-items: center;
 
@@ -92,16 +94,24 @@
             font-family: 'Inter', sans-serif;
           }
         }
+        .process-types {
+          display: flex;
+          width: 100%;
+          margin: 20px 40px 5px;
+        }
       }
 
       .process-two {
         width: 100%;
         display: flex;
         margin: 20px auto;
+        flex-wrap: wrap;
 
         .body-header {
+          width: 100%;
           display: flex;
           align-items: center;
+
           .icon {
             width: 30px;
             height: 30px;
@@ -128,6 +138,26 @@
             color: #333;
             margin-right: 20px;
             font-family: 'Inter', sans-serif;
+          }
+        }
+        .process-form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          margin: 20px 40px 5px;
+
+          .report-main {
+            width: 80%;
+            margin: 10px 0px 15px;
+          }
+          .report-description {
+            width: 80%;
+            margin: 10px 0px 15px;
+          }
+          .btn-upload {
+            width: 80%;
+            margin: 5px 0px 0px;
+            
           }
         }
       }
