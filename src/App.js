@@ -9,7 +9,7 @@ import List from './pages/list/List';
 import Single from './pages/single/Single';
 import New from './pages/new/New';
 import EvaluatorGrid from './pages/evaluator/EvaluatorGrid';
-import Logs from './pages/userlogs/Logs'
+import Faqs from './pages/faqs/Faqs'
 import Settings from './pages/settings/Settings';
 import Forums from './pages/forums/Forums';
 import Signup from './pages/register/Signup';
@@ -53,8 +53,8 @@ function App() {
               <Route path=':forumId' element={<SingleView />} />
               <Route path='add-post' element={<Report/>} />
             </Route>
-            <Route path='logs'>
-              <Route index element={<Logs />} />
+            <Route path='faqs'>
+              <Route index element={<Faqs />} />
             </Route>
             <Route path='settings'>
               <Route index element={<Settings />} />

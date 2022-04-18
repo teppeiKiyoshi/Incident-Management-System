@@ -84,7 +84,7 @@ const Sidebar = () => {
               </li>
             </div>
           </NavLink>
-          <NavLink to='/logs' style={navLinkStyles}>
+          <NavLink to='/faqs' style={navLinkStyles}>
             <div className='sidebar-log'>
               <li>
                 <PsychologyIcon className='sidebar-icons' />

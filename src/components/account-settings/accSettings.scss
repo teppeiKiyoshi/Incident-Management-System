@@ -23,7 +23,7 @@
   //left content here
   .accSettings-content__wrapper {
     width: 80%;
-    height: 620px;
+    height: 680px;
     margin: -30px auto 0;
     margin-bottom: 100px;
     display: flex;
@@ -151,6 +151,25 @@
             }
             &.input-pass{
               margin-left: -25px;
+            }
+
+            .deact-btn {
+              outline: none;
+              border: none;
+              background-color: transparent;
+              color: crimson;
+              font-family: 'Poppins';
+              margin-left: -565px;
+              padding: 7px 18px;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: 0.2s ease-in;
+
+              &:hover {
+                background-color: crimson;
+                color: white;
+                font-weight: 500;
+              }
             }
           }
         }

@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Faqs from '../../components/faqs/Faqs';
-import './logs.scss';
+import './faqs.scss';
 
 const Logs = () => {
   return (

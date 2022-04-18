@@ -36,13 +36,11 @@ const AccountSettings = () => {
               </div>
               <div className='accSettings-left__input-item-wrapper'>
                 <TextField
-                  required
                   variant='outlined'
                   label='Last Name'
                   sx={{ width: '280px' }}
                 />
                 <TextField
-                  required
                   variant='outlined'
                   label='First Name'
                   sx={{ width: '280px' }}
@@ -56,14 +54,18 @@ const AccountSettings = () => {
             </div>
             <div className='accSettings-left__details-item'>
               <div className='accSettings-left__details-item-wrapper'>
-                <p className='details-item__title'>Email</p>
+                <p className='details-item__title'>Contact Information</p>
               </div>
-              <div className='accSettings-left__input-item-wrapper input-email'>
+              <div className='accSettings-left__input-item-wrapper'>
                 <TextField
-                  required
                   variant='outlined'
                   label='Email Address'
                   sx={{ width: '400px' }}
+                />
+                <TextField
+                  variant='outlined'
+                  label='Phone Number'
+                  sx={{ width: '260px' }}
                 />
               </div>
             </div>
@@ -73,25 +75,21 @@ const AccountSettings = () => {
               </div>
               <div className='accSettings-left__input-item-wrapper'>
                 <TextField
-                  required
                   variant='outlined'
                   label='Student Number'
                   sx={{ width: '200px' }}
                 />
                 <TextField
-                  required
                   variant='outlined'
                   label='College'
                   sx={{ width: '180px' }}
                 />
                 <TextField
-                  required
                   variant='outlined'
                   label='Year Level'
                   sx={{ width: '120px' }}
                 />
                 <TextField
-                  required
                   variant='outlined'
                   label='Section'
                   sx={{ width: '100px' }}
@@ -102,19 +100,30 @@ const AccountSettings = () => {
               <div className='accSettings-left__details-item-wrapper'>
                 <p className='details-item__title'>Password</p>
               </div>
-              <div className='accSettings-left__input-item-wrapper input-pass'>
+              <div className='accSettings-left__input-item-wrapper'>
                 <TextField
-                  required
                   variant='outlined'
                   label='Old Password'
-                  sx={{ width: '280px' }}
+                  sx={{ width: '210px' }}
                 />
                 <TextField
-                  required
                   variant='outlined'
                   label='New Password'
-                  sx={{ width: '280px' }}
+                  sx={{ width: '210px' }}
                 />
+                <TextField
+                  variant='outlined'
+                  label='Confirm Password'
+                  sx={{ width: '210px' }}
+                />
+              </div>
+            </div>
+            <div className='accSettings-left__details-item'>
+              <div className='accSettings-left__details-item-wrapper'>
+                <p className='details-item__title'>Deactivate Account</p>
+              </div>
+              <div className='accSettings-left__input-item-wrapper'>
+                <button className="deact-btn">Deactivate</button>
               </div>
             </div>
           </div>
