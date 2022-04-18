@@ -11,10 +11,16 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import LinkOutlinedIcon from '@mui/icons-material/LinkOutlined';
-import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 const ReportProcess = () => {
   const [value, setValue] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -62,6 +68,18 @@ const ReportProcess = () => {
       },
     },
   });
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
     <div className='process-main'>
@@ -236,7 +254,12 @@ const ReportProcess = () => {
                 />
               </div>
               <div className='btn-upload'>
-                <Button variant='contained'  color='secondary' component='label' startIcon={<LinkOutlinedIcon/>}>
+                <Button
+                  variant='outlined'
+                  color='secondary'
+                  component='label'
+                  startIcon={<LinkOutlinedIcon />}
+                >
                   Upload File
                   <input type='file' hidden />
                 </Button>
@@ -250,9 +273,31 @@ const ReportProcess = () => {
               </div>
               <h3 className='body-title'>Review and Submit</h3>
             </div>
+            <div className='process-review'>
+              <Button
+                variant='contained'
+                color='secondary'
+                component='label'
+                startIcon={<AssignmentTurnedInOutlinedIcon />}
+                onClick={handleOpen}
+              >
+                Submit
+              </Button>
+            </div>
           </div>
         </div>
       </div>
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={style}>
+          <Typography id='modal-modal-title' variant='h5' component='h2'>
+            Review your Report
+          </Typography>
+          <Typography id='modal-modal-description' variant='p' component='p' sx={{ mt: 1}}>
+            Please review your report before submitting.
+          </Typography>
+          <Button variant='text' color='secondary' onClick={handleClose} sx={{ fontSize: '16px', mt: 2, alignItems: 'right'}}>Okay</Button>
+        </Box>
+      </Modal>
     </div>
   );
 };
