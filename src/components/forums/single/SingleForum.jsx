@@ -26,6 +26,9 @@ const SingleForum = () => {
               <h3 className='header-name'>Emanuelle Martin</h3>
               <small className='sub-heading'>Article Author</small>
             </div>
+            <div className="assign-content">
+              { !isAssigned && <button className="assign-btn" onClick={()=> setIsAssigned(true)}>+ Join</button>}
+            </div>
           </div>
           <div className='left-body'>
             <div className='body-wrapper'>
@@ -83,13 +86,7 @@ const SingleForum = () => {
             </div>
             <div className="case-status">
               <h4 className="case-title">Mark As:</h4>
-              <div className="case-content">
-                <select name="case" id="case" className="case-option">
-                <option value="" disabled selected hidden>Select Status</option>
-                  <option value="Solved">Solved</option>
-                  <option value="Unsolved">Unsolved</option>
-                </select>
-              </div>
+                <button className="unresolvable-btn">Unresolvable</button>
             </div>
           </div>
         </div>
