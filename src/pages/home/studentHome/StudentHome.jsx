@@ -2,6 +2,9 @@ import React from 'react';
 import './studHome.scss';
 import Sidebar from '../../../components/sidebar/Sidebar';
 import Navbar from '../../../components/navbar/Navbar';
+import History from './sub-components/stud-history/History';
+import Left from './sub-components/latest-notifs/Left';
+import Right from './sub-components/latest-report/Right';
 //pic
 import headerImage from '../../../images/studHome/bannerImage.svg';
 
@@ -21,11 +24,22 @@ const StudentHome = () => {
                 <p className='greetings'>Hi, Emanuelle Martin</p>
                 <h2 className='welcome'>Welcome to FilinGO!</h2>
                 <p className='sub-heading'>
-                  creating and filing reports made easy!
+                  creating and filing reports made easy
                 </p>
               </div>
             </div>
           </div>
+          <div className='content-body'>
+            <div className='right-body'>
+              <Right/>
+            </div>
+            <div className='left-body'>
+              <Left/>
+            </div>
+          </div>
+        </div>
+        <div className='content-footer'>
+          <History />
         </div>
       </div>
     </div>
