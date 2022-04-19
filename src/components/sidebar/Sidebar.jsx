@@ -82,7 +82,7 @@ const Sidebar = () => {
                 <QuestionAnswerIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Forums</span>
               </li>
-            </div>
+            </div>  
           </NavLink>
           <NavLink to='/faqs' style={navLinkStyles}>
             <div className='sidebar-log'>

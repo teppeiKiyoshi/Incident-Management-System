@@ -132,12 +132,14 @@
   }
 
   .sidebar-bottom {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
     height: 80px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
 
     .time-container {
       text-align: center;
