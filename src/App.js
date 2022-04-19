@@ -13,6 +13,7 @@ import Faqs from './pages/faqs/Faqs'
 import Settings from './pages/settings/Settings';
 import Forums from './pages/forums/Forums';
 import Signup from './pages/register/Signup';
+import StudentHome from './pages/home/studentHome/StudentHome';
 //for dark mode
 import './mode/darkMode.scss';
 import { useContext } from 'react';
@@ -29,7 +30,7 @@ function App() {
         <Routes>
           <Route path='/'>
             <Route index element={<MainPage />} />
-            <Route path='dashboard' element={<Home />} />
+            <Route path='dashboard' element={<StudentHome />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
             <Route path='users'>

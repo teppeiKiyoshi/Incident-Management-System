@@ -12,7 +12,7 @@ const Featured = () => {
   return (
     <div className='featured-main'>
       <div className='ft-top'>
-        <h1 className='top-title'>Total Revenue</h1>
+        <h1 className='top-title'>Query Data</h1>
         <MoreVertIcon fontSize='small' />
       </div>
       <div className='ft-bottom'>

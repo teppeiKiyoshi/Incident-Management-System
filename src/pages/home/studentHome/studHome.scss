@@ -1,0 +1,64 @@
+.student-main {
+  display: flex;
+  width: calc(100% - 230px);
+
+  .student-container {
+    flex:6;
+    margin-left: 230px;
+
+    .student-content {
+      width: 80%;
+      margin: 10px 40px;
+
+      .content-header {
+        width: 100%;
+        margin: 20px 10px;
+
+        .header-wrapper {
+          width: 1270px;
+          height: 240px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background-color: #893dff;
+          border-radius: 15px;
+          box-shadow: rgb(137 61 255 / 34%) 0px 8px 16px 0px;
+
+          .banner-wrapper {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            .banner-img {
+              width: 200px;
+              height: 200px;
+              margin-right: 20px;
+            }
+          }
+
+          .header-content {
+            width: 70%;
+            color: white;
+
+            .greetings {
+              font-size: 16px;
+              font-weight: 300;
+            }
+
+            .welcome {
+              font-size: 30px;
+              font-weight: 600;
+              text-shadow: 1px 1px 1px #111;
+            }
+
+            .sub-heading {
+              font-size: 14px;
+              font-weight: 300;
+            }
+          }
+        }
+      }
+    }
+  }
+}

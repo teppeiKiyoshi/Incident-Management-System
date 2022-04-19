@@ -104,15 +104,31 @@
         margin: 5px 0;
       }
 
-      li {
+      .sidebar-item {
         display: flex;
         align-items: center;
         padding: 10px 20px;
         cursor: pointer;
         color: #1f1f1f;
 
+        &.collapsible {
+          width: 100%;
+          flex-wrap: wrap;
+        }
+
         &:hover {
           background-color: #ece8ff;
+        }
+
+        .collapse__menu {
+          display: flex;
+          flex-direction: column;
+          padding: 2px 20px;
+
+          .collapse__sublink {
+            color: #999;
+            font-size: 14px;
+          }
         }
 
         .sidebar-icons {

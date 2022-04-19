@@ -1,4 +1,5 @@
 import './sidebar.scss';
+import React, { useState } from 'react';
 import Time from './Time';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
@@ -8,9 +9,10 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { NavLink, useNavigate } from 'react-router-dom';
-import sidebarLogo from '../../images/logos/logoTxt.png'; 
+import sidebarLogo from '../../images/logos/logoTxt.png';
 
 const Sidebar = () => {
+  const [subMenuOpen, setSubMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const route_Mainpage = () => {
@@ -34,7 +36,7 @@ const Sidebar = () => {
     <div className='sidebar-main'>
       <div className='sidebar-top'>
         <span className='sidebar-logo' onClick={route_toDashboard}>
-          <img src={sidebarLogo} alt='Filingo' className='img-logo'/>
+          <img src={sidebarLogo} alt='Filingo' className='img-logo' />
         </span>
       </div>
       <div className='sidebar-header'>
@@ -52,7 +54,7 @@ const Sidebar = () => {
           <p className='title'>MAIN</p>
           <NavLink to='/dashboard' style={navLinkStyles}>
             <div className='sidebar-dashboard'>
-              <li>
+              <li className='sidebar-item'>
                 <DashboardIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Dashboard</span>
               </li>
@@ -61,7 +63,7 @@ const Sidebar = () => {
           <p className='title'>PEOPLE</p>
           <NavLink to='/users' style={navLinkStyles}>
             <div className='sidebar-user'>
-              <li>
+              <li className='sidebar-item'>
                 <PeopleIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Users</span>
               </li>
@@ -69,7 +71,7 @@ const Sidebar = () => {
           </NavLink>
           <NavLink to='/evaluators' style={navLinkStyles}>
             <div className='sidebar-evaluator'>
-              <li>
+              <li className='sidebar-item'>
                 <PersonAddIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Evaluators</span>
               </li>
@@ -78,15 +80,26 @@ const Sidebar = () => {
           <p className='title'>SERVICES</p>
           <NavLink to='/forums' style={navLinkStyles}>
             <div className='sidebar-forum'>
-              <li>
+              <span
+                className='sidebar-item collapsible'
+                onClick={() => setSubMenuOpen(!subMenuOpen)}
+              >
                 <QuestionAnswerIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Forums</span>
-              </li>
-            </div>  
+
+                {subMenuOpen && (
+                  <ul class='collapse__menu'>
+                    <li class='collapse__sublink'>Completed</li>
+                    <li class='collapse__sublink'>Assigned</li>
+                    <li class='collapse__sublink'>Unresolvable</li>
+                  </ul>
+                )}
+              </span>
+            </div>
           </NavLink>
           <NavLink to='/faqs' style={navLinkStyles}>
             <div className='sidebar-log'>
-              <li>
+              <li className='sidebar-item'>
                 <PsychologyIcon className='sidebar-icons' />
                 <span className='sidebar-name'>FaQs</span>
               </li>
@@ -95,14 +108,14 @@ const Sidebar = () => {
           <p className='title'>TOOLS</p>
           <NavLink to='/settings' style={navLinkStyles}>
             <div className='sidebar-setting'>
-              <li>
+              <li className='sidebar-item'>
                 <SettingsIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Settings</span>
               </li>
             </div>
           </NavLink>
           <div className='sidebar-logout' onClick={route_Mainpage}>
-            <li>
+            <li className='sidebar-item'>
               <ExitToAppIcon className='sidebar-icons' />
               <span className='sidebar-name' onClick={route_Mainpage}>
                 Logout

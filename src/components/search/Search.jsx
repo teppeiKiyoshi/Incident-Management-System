@@ -20,7 +20,7 @@ const SearchBarContainer = styled(motion.div)`
   border-radius: 6px;
   // box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
   box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
-  z-index: 11;
+  z-index: 999;
 `;
 
 const SearchInputContainer = styled.div`
@@ -92,6 +92,7 @@ const SearchContent = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   cursor: pointer;
+  background-color: white;
 `;
 
 const WarningMessage = styled.span`
