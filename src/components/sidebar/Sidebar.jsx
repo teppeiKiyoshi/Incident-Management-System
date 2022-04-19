@@ -71,7 +71,7 @@ const Sidebar = () => {
             <div className='sidebar-evaluator'>
               <li>
                 <PersonAddIcon className='sidebar-icons' />
-                <span className='sidebar-name'>Add Evaluators</span>
+                <span className='sidebar-name'>Evaluators</span>
               </li>
             </div>
           </NavLink>
