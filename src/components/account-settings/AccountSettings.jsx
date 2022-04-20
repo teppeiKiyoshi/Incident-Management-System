@@ -39,6 +39,7 @@ const AccountSettings = () => {
                   variant='outlined'
                   label='Last Name'
                   sx={{ width: '280px' }}
+                  className='text-field'
                 />
                 <TextField
                   variant='outlined'

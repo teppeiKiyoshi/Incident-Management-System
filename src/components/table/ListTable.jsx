@@ -21,7 +21,7 @@ const ListTable = () => {
       date: '31 March 2022',
       method: 'Remaining Balance',
       evaluator: 'Eman Martin',
-      status: 'Approved',
+      status: 'Processing',
     },
     {
       id: 2235235,

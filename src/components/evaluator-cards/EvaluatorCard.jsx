@@ -2,7 +2,7 @@ import React from 'react';
 import './evaluator-card.scss';
 //MUI
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -30,7 +30,7 @@ const EvaluatorCard = () => {
         </div>
         <div className='card-bottom'>
           <div className='card-action'>
-            <Tooltip title='View Evaluator' arrow>
+            <Tooltip title='View Evaluator&apos;s Activity' arrow>
               <IconButton>
                 <RemoveRedEyeOutlinedIcon
                   style={{ textTransform: 'capitalize' }}
@@ -38,9 +38,9 @@ const EvaluatorCard = () => {
                 />
               </IconButton>
             </Tooltip>
-            <Tooltip title='Delete User' arrow>
+            <Tooltip title='Delete Evaluator&apos;s Account' arrow>
               <IconButton>
-                <MessageOutlinedIcon style={{ textTransform: 'capitalize' }} className='action-btn'/>
+                <DeleteIcon style={{ textTransform: 'capitalize' }} className='action-btn'/>
               </IconButton>
             </Tooltip>
           </div>

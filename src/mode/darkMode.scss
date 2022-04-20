@@ -41,28 +41,28 @@
     }
   }
 
-  .sidebar-main{
+  .sidebar-main {
     background-color: #111;
     border-color: #333;
 
-    .sidebar-top{
-      .sidebar-logo{
+    .sidebar-top {
+      .sidebar-logo {
         color: #999;
       }
     }
 
-    .sidebar-header{
-        .header-name{
-          color: #999;
-        }
+    .sidebar-header {
+      .header-name {
+        color: #999;
+      }
     }
 
-    ul{
-      li{
-        &:hover{
+    ul {
+      li, .sidebar-items {
+        &:hover {
           background-color: rgba(137, 61, 255, 0.2);
         }
-        .sidebar-icons{
+        .sidebar-icons {
           color: #999;
 
           .sidebar-name {
@@ -71,23 +71,31 @@
             }
           }
         }
+
+        .collapse__sublink {
+          &:hover {
+            background-color: none;
+            color: black;
+          }
+        }
       }
     }
 
     .sidebar-bottom {
-      .greetings{
+      .greetings {
         color: #999;
       }
     }
   }
 
-  .data-table{
+  .data-table {
     color: gray;
-    .data-grid{
+    .data-grid {
       color: gray;
       border: none;
 
-      .list-btn, .cell-status{
+      .list-btn,
+      .cell-status {
         color: gray;
         border: none;
       }
@@ -97,5 +105,44 @@
     background-color: transparent;
     color: white;
     outline: none;
+  }
+
+  .log-main {
+    .content-title {
+      color: #999;
+    }
+  }
+
+  .student-main {
+    .content-footer {
+      .table {
+        background: #111;
+        color: rgb(155, 155, 155);
+
+        .tableCell {
+          background: #111;
+          color: rgb(155, 155, 155);
+        }
+      }
+    }
+  }
+
+  .log-content {
+    background-color: #999;
+
+    .accordion-main {
+      background: #333;
+      color: rgb(155, 155, 155);
+    }
+  }
+
+  .accSettings-wrapper {
+    .accSettings-content__left {
+      background-color: #1d1d1d;
+    }
+
+    .accSettings-left__cancel {
+      color: #999;
+    }
   }
 }

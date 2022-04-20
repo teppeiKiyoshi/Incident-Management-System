@@ -1,6 +1,9 @@
 import './sidebar.scss';
 import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+//components
 import Time from './Time';
+//icons and pictures
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
@@ -8,8 +11,8 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { NavLink, useNavigate } from 'react-router-dom';
 import sidebarLogo from '../../images/logos/logoTxt.png';
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 const Sidebar = () => {
   const [subMenuOpen, setSubMenuOpen] = useState(false);
@@ -27,10 +30,11 @@ const Sidebar = () => {
 
   const navLinkStyles = ({ isActive }) => {
     return {
-      background: isActive ? 'black' : 'pink',
       textDecoration: 'none',
     };
   };
+
+  const noPropagation = (e) => e.stopPropagation();
 
   return (
     <div className='sidebar-main'>
@@ -80,18 +84,45 @@ const Sidebar = () => {
           <p className='title'>SERVICES</p>
           <NavLink to='/forums' style={navLinkStyles}>
             <div className='sidebar-forum'>
-              <span
-                className='sidebar-item collapsible'
-                onClick={() => setSubMenuOpen(!subMenuOpen)}
-              >
+              <span className='sidebar-items collapsible'>
                 <QuestionAnswerIcon className='sidebar-icons' />
                 <span className='sidebar-name'>Forums</span>
+                <span
+                  className='close'
+                  onClick={() => setSubMenuOpen(!subMenuOpen)}
+                >
+                  {!subMenuOpen ? (
+                    <MdKeyboardArrowDown />
+                  ) : (
+                    <MdKeyboardArrowUp />
+                  )}
+                </span>
 
                 {subMenuOpen && (
-                  <ul class='collapse__menu'>
-                    <li class='collapse__sublink'>Completed</li>
-                    <li class='collapse__sublink'>Assigned</li>
-                    <li class='collapse__sublink'>Unresolvable</li>
+                  <ul className='collapse__menu'>
+                    <NavLink
+                      to='/forums/completed-reports'
+                      style={navLinkStyles}
+                      onClick={noPropagation}
+                    >
+                      <li className='collapse__sublink'>
+                        Completed
+                      </li>
+                    </NavLink>
+                    <NavLink
+                      to='/forums/assigned-reports'
+                      style={navLinkStyles}
+                      onClick={noPropagation}
+                    >
+                      <li className='collapse__sublink'>Assigned</li>
+                    </NavLink>
+                    <NavLink
+                      to='/forums/unresolved-reports'
+                      style={navLinkStyles}
+                      onClick={noPropagation}
+                    >
+                      <li className='collapse__sublink'>Unresolvable</li>
+                    </NavLink>
                   </ul>
                 )}
               </span>

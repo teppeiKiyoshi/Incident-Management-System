@@ -1,0 +1,14 @@
+.assigned-main {
+  width: calc(100% - 230px);
+  margin-left: 230px;
+
+  .assigned-container {
+    flex: 6;
+
+    .assigned-content {
+      .title {
+        margin: 20px 50px;
+      }
+    }
+  }
+}

@@ -17,6 +17,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -27,7 +28,7 @@ export default function ControlledAccordions() {
             How can I file an incident report?
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails >
           <Typography>
             Proceed to the Forums tab to file an incident report about your
             concern.
@@ -37,6 +38,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -57,6 +59,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel3'}
         onChange={handleChange('panel3')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -78,6 +81,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel4'}
         onChange={handleChange('panel4')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -99,6 +103,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel5'}
         onChange={handleChange('panel5')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -120,6 +125,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel6'}
         onChange={handleChange('panel6')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -139,6 +145,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel7'}
         onChange={handleChange('panel7')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -159,6 +166,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel8'}
         onChange={handleChange('panel8')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -178,6 +186,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel9'}
         onChange={handleChange('panel9')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -197,6 +206,7 @@ export default function ControlledAccordions() {
       <Accordion
         expanded={expanded === 'panel10'}
         onChange={handleChange('panel10')}
+        className='accordion-main'
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
