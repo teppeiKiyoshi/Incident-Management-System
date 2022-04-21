@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 // due to a large file size, thus, shall be imported manually on src/videos/video.mp4
 // when imported, add a property on VideoBG ---> type='video/mp4'
 // import Video from '../../../videos/video.mp4'; ---> this is the correct import
-import Video from '../../../images/svg-1.svg' // ---> remove after importing video
+import Video from '../../../images/svg-1.svg'  //---> remove after importing video
 import { Button } from '../ButtonElement';
 import {
   HeroContainer,

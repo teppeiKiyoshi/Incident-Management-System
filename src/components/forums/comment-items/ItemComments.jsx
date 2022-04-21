@@ -2,7 +2,7 @@ import React from 'react';
 
 const ItemComments = () => {
   return (
-    <div className='footer-content'>
+    <div className='footer-content-comment'>
       <div className='content-header'>
         <img
           src='https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80'

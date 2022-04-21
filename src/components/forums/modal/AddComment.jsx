@@ -52,7 +52,7 @@ export default function BasicModal() {
   return (
     <div>
       <Button onClick={handleOpen} className='btn-comment'>
-        Comment
+        Reply
       </Button>
       <Modal
         open={open}
@@ -62,7 +62,7 @@ export default function BasicModal() {
       >
         <Box sx={style}>
           <Typography variant='h5' sx={modalTitle}>
-            Post a comment
+            Post a reply
           </Typography>
           <Typography variant='h6' sx={modalSubheading}>
             What's on your mind?

@@ -58,7 +58,8 @@
     }
 
     ul {
-      li, .sidebar-items {
+      li,
+      .sidebar-items {
         &:hover {
           background-color: rgba(137, 61, 255, 0.2);
         }
@@ -143,6 +144,13 @@
 
     .accSettings-left__cancel {
       color: #999;
+    }
+  }
+  .single-main {
+    .footer-container {
+      .footer-content-comment {
+        background-color: #1d1d1d;
+      }
     }
   }
 }

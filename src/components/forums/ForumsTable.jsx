@@ -6,14 +6,17 @@ const ForumsTable = () => {
   const to_singlePage = () => {
     let path = '/forums/id';
     navigate(path);
-  }
+  };
 
   return (
     <>
       <div className='grid-main'>
         <div className='grid-items'>
-          <span className='report-type'>Incomplete Grades</span>
-          <h3 className='title' onClick={to_singlePage} >
+          <div className='tag-items'>
+            <span className='report-type inc'>Incomplete Grades</span>
+            <span className='report-type completed'>Completed</span>
+          </div>
+          <h3 className='title' onClick={to_singlePage}>
             What is device encryption, and should I use it?
           </h3>
           <span className='sub-title'>
@@ -21,8 +24,8 @@ const ForumsTable = () => {
             LightJack05
           </span>
           <p className='report-detail'>
-            Technical Difficulty: What is device encryption? Device encryption is
-            a feature that exists in Windows 10 & 11. It is available on PCs
+            Technical Difficulty: What is device encryption? Device encryption
+            is a feature that exists in Windows 10 & 11. It is available on PCs
             that are connected to the internet and signed into a Microsoft
             Account. Your device needs to have a TPM and Secure Boot
           </p>

@@ -1,10 +1,10 @@
 .home-main {
   display: flex;
   width: calc(100% - 230px);
+  margin-left: 230px;
 
   .home-container {
     flex: 6;
-    margin-left: 230px;
   }
 
   .widgets-container {

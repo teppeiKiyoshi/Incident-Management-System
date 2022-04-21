@@ -1,4 +1,4 @@
-import {React ,useState} from 'react';
+import { React, useState } from 'react';
 import './singleF.scss';
 import AddComment from '../modal/AddComment';
 import ItemComments from '../comment-items/ItemComments';
@@ -10,10 +10,9 @@ const SingleForum = () => {
 
   const showComment = () => {
     setOpen(!open);
-  }
+  };
   return (
     <div className='single-main'>
-      
       <div className='single-container'>
         <div className='single-left'>
           <div className='left-header'>
@@ -26,8 +25,15 @@ const SingleForum = () => {
               <h3 className='header-name'>Emanuelle Martin</h3>
               <small className='sub-heading'>Article Author</small>
             </div>
-            <div className="assign-content">
-              { !isAssigned && <button className="assign-btn" onClick={()=> setIsAssigned(true)}>+ Join</button>}
+            <div className='assign-content'>
+              {!isAssigned && (
+                <button
+                  className='assign-btn'
+                  onClick={() => setIsAssigned(true)}
+                >
+                  + Join
+                </button>
+              )}
             </div>
           </div>
           <div className='left-body'>
@@ -39,31 +45,61 @@ const SingleForum = () => {
               </div>
               <div className='body-content'>
                 <p className='report-content'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                <br/>
-                <br/>
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but
+                  also the leap into electronic typesetting, remaining
+                  essentially unchanged. It was popularised in the 1960s with
+                  the release of Letraset sheets containing Lorem Ipsum
+                  passages, and more recently with desktop publishing software
+                  like Aldus PageMaker including versions of Lorem Ipsum.
+                  <br />
+                  <br />
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                  The point of using Lorem Ipsum is that it has a more-or-less
+                  normal distribution of letters, as opposed to using 'Content
+                  here, content here', making it look like readable English.
+                  Many desktop publishing packages and web page editors now use
+                  Lorem Ipsum as their default model text, and a search for
+                  'lorem ipsum' will uncover many web sites still in their
+                  infancy. Various versions have evolved over the years,
+                  sometimes by accident, sometimes on purpose (injected humour
+                  and the like).
                 </p>
               </div>
-              <div className="helpful-wrapper">
-                <p className="help-title">Was this helpful?</p>
-                <small className="help-yes">Yes</small>
-                <small className="help-no">No</small>
+              <div className='helpful-wrapper'>
+                <p className='help-title'>Was this helpful?</p>
+                <small className='help-yes'>Yes</small>
+                <small className='help-no'>No</small>
               </div>
               <div className='body-footer'>
                 <div className='footer-header'>
                   <h3 className='comment-title'>
-                    Comments <span className='comment-count'>(10)</span>{' '}
+                    Replies <span className='comment-count'>(10)</span>{' '}
                   </h3>
-                  { !open ? <MdKeyboardArrowDown className='btn-icon' onClick={showComment}/> : <MdKeyboardArrowUp className='btn-icon' onClick={showComment}/>}
+                  {!open ? (
+                    <MdKeyboardArrowDown
+                      className='btn-icon'
+                      onClick={showComment}
+                    />
+                  ) : (
+                    <MdKeyboardArrowUp
+                      className='btn-icon'
+                      onClick={showComment}
+                    />
+                  )}
                 </div>
-                { open && <div className='footer-container'>
-                  <ItemComments />
-                  <ItemComments />
-                </div>}
-                <div className="btn-container">
+                {open && (
+                  <div className='footer-container'>
+                    <ItemComments />
+                    <ItemComments />
+                  </div>
+                )}
+                <div className='btn-container'>
                   <AddComment />
-                  
                 </div>
               </div>
             </div>
@@ -73,7 +109,11 @@ const SingleForum = () => {
           <h3 className='right-title'>Forum Article Info</h3>
           <div className='divider'></div>
           <div className='right-info'>
-            <p className="evaluator">{ isAssigned ? `Evaluated by Dwain Magracia` : 'No Evaluator Assigned Yet  ' }</p>
+            <p className='evaluator'>
+              {isAssigned
+                ? `Evaluated by Dwain Magracia`
+                : 'No Evaluator Assigned Yet  '}
+            </p>
             <p className='created-date'>Created on February 26, 2022</p>
             <p className='update-date'>Last Updated: April 02, 2022</p>
             <div className='info-tags'>
@@ -84,9 +124,9 @@ const SingleForum = () => {
                 </div>
               </div>
             </div>
-            <div className="case-status">
-              <h4 className="case-title">Mark As:</h4>
-                <button className="unresolvable-btn">Unresolvable</button>
+            <div className='case-status'>
+              <h4 className='case-title'>Mark As:</h4>
+              <button className='unresolvable-btn'>Unresolvable</button>
             </div>
           </div>
         </div>
