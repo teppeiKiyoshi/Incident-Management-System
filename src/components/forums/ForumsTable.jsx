@@ -13,6 +13,7 @@ const ForumsTable = () => {
       <div className='grid-main'>
         <div className='grid-items'>
           <div className='tag-items'>
+            {/* add report type tags then query whether they exist to specific forum post see forums scss for styling and class name  */}
             <span className='report-type inc'>Incomplete Grades</span>
             <span className='report-type completed'>Completed</span>
           </div>
