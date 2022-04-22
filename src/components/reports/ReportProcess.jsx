@@ -50,7 +50,7 @@ const ReportProcess = () => {
 
   const CssTextField = styled(TextField)({
     '& label.Mui-focused': {
-      color: '#333',
+      color: '#893dff',
       fontWeight: 'bold',
     },
     '& .MuiInput-underline:after': {
@@ -98,130 +98,132 @@ const ReportProcess = () => {
           </div>
         </div>
         <div className='process-body'>
-        <div className='process-one'>
-        <div className='body-header'>
-          <div className='icon'>
-            <p className='icon-title'>1</p>
+          <div className='process-one'>
+            <div className='body-header'>
+              <div className='icon'>
+                <p className='icon-title'>1</p>
+              </div>
+              <h3 className='body-title'>
+                Please choose an incident to report
+              </h3>
+            </div>
+            <div className='process-types'>
+              <FormControl>
+                <RadioGroup
+                  row
+                  aria-labelledby='demo-row-radio-buttons-group-label'
+                  name='row-radio-buttons-group'
+                  value={value}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel
+                    value='remainingBalance'
+                    control={
+                      <Radio
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#893dff',
+                          },
+                        }}
+                      />
+                    }
+                    label='Remaining Balance'
+                  />
+                  <FormControlLabel
+                    value='failedSubj'
+                    control={
+                      <Radio
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#893dff',
+                          },
+                        }}
+                      />
+                    }
+                    label='Failed Subject'
+                  />
+                  <FormControlLabel
+                    value='addSubj'
+                    control={
+                      <Radio
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#893dff',
+                          },
+                        }}
+                      />
+                    }
+                    label='Adding Subject'
+                  />
+                  <FormControlLabel
+                    value='changeSubj'
+                    control={
+                      <Radio
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#893dff',
+                          },
+                        }}
+                      />
+                    }
+                    label='Changing Subject'
+                  />
+                  <FormControlLabel
+                    value='incSubj'
+                    control={
+                      <Radio
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#893dff',
+                          },
+                        }}
+                      />
+                    }
+                    label='Subjects with INC'
+                  />
+                  <FormControlLabel
+                    value='prevSem'
+                    control={
+                      <Radio
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#893dff',
+                          },
+                        }}
+                      />
+                    }
+                    label='Unavailable Subjects from Previous Semester'
+                  />
+                  <FormControlLabel
+                    value='currSem'
+                    control={
+                      <Radio
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#893dff',
+                          },
+                        }}
+                      />
+                    }
+                    label='Unavailable Subjects on Current Semester'
+                  />
+                  <FormControlLabel
+                    value='others'
+                    control={
+                      <Radio
+                        sx={{
+                          '&.Mui-checked': {
+                            color: '#893dff',
+                          },
+                        }}
+                      />
+                    }
+                    label='Others'
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
           </div>
-          <h3 className='body-title'>Please choose an incident to report</h3>
-        </div>
-        <div className='process-types'>
-          <FormControl>
-            <RadioGroup
-              row
-              aria-labelledby='demo-row-radio-buttons-group-label'
-              name='row-radio-buttons-group'
-              value={value}
-              onChange={handleChange}
-            >
-              <FormControlLabel
-                value='remainingBalance'
-                control={
-                  <Radio
-                    sx={{
-                      '&.Mui-checked': {
-                        color: '#893dff',
-                      },
-                    }}
-                  />
-                }
-                label='Remaining Balance'
-              />
-              <FormControlLabel
-                value='failedSubj'
-                control={
-                  <Radio
-                    sx={{
-                      '&.Mui-checked': {
-                        color: '#893dff',
-                      },
-                    }}
-                  />
-                }
-                label='Failed Subject'
-              />
-              <FormControlLabel
-                value='addSubj'
-                control={
-                  <Radio
-                    sx={{
-                      '&.Mui-checked': {
-                        color: '#893dff',
-                      },
-                    }}
-                  />
-                }
-                label='Adding Subject'
-              />
-              <FormControlLabel
-                value='changeSubj'
-                control={
-                  <Radio
-                    sx={{
-                      '&.Mui-checked': {
-                        color: '#893dff',
-                      },
-                    }}
-                  />
-                }
-                label='Changing Subject'
-              />
-              <FormControlLabel
-                value='incSubj'
-                control={
-                  <Radio
-                    sx={{
-                      '&.Mui-checked': {
-                        color: '#893dff',
-                      },
-                    }}
-                  />
-                }
-                label='Subjects with INC'
-              />
-              <FormControlLabel
-                value='prevSem'
-                control={
-                  <Radio
-                    sx={{
-                      '&.Mui-checked': {
-                        color: '#893dff',
-                      },
-                    }}
-                  />
-                }
-                label='Unavailable Subjects from Previous Semester'
-              />
-              <FormControlLabel
-                value='currSem'
-                control={
-                  <Radio
-                    sx={{
-                      '&.Mui-checked': {
-                        color: '#893dff',
-                      },
-                    }}
-                  />
-                }
-                label='Unavailable Subjects on Current Semester'
-              />
-              <FormControlLabel
-                value='others'
-                control={
-                  <Radio
-                    sx={{
-                      '&.Mui-checked': {
-                        color: '#893dff',
-                      },
-                    }}
-                  />
-                }
-                label='Others'
-              />
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
           <div className='process-two'>
             <div className='body-header'>
               <div className='icon'>
@@ -237,11 +239,12 @@ const ReportProcess = () => {
                   label='Main Concern'
                   variant='outlined'
                   placeholder='Type in your main concern here as short as possible'
-                  color='secondary'
+                  className='text-field-report'
                 />
               </div>
               <div className='report-description'>
                 <CssTextField
+                  className='decription-text-field'
                   required
                   fullWidth
                   multiline
@@ -290,10 +293,22 @@ const ReportProcess = () => {
           <Typography id='modal-modal-title' variant='h5' component='h2'>
             Review your Report
           </Typography>
-          <Typography id='modal-modal-description' variant='p' component='p' sx={{ mt: 1}}>
+          <Typography
+            id='modal-modal-description'
+            variant='p'
+            component='p'
+            sx={{ mt: 1 }}
+          >
             Please review your report before submitting.
           </Typography>
-          <Button variant='text' color='secondary' onClick={handleClose} sx={{ fontSize: '16px', mt: 2, alignItems: 'right'}}>Okay</Button>
+          <Button
+            variant='text'
+            color='secondary'
+            onClick={handleClose}
+            sx={{ fontSize: '16px', mt: 2, alignItems: 'right' }}
+          >
+            Okay
+          </Button>
         </Box>
       </Modal>
     </div>

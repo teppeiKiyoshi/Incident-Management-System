@@ -11,16 +11,16 @@ import ItemView from './itemView/ItemView';
 const SearchBarContainer = styled(motion.div)`
   position: absolute;
   top: 23%;
-  left: 21%;
+  left: 19%;
   display: flex;
   flex-direction: column;
-  width: 25em;
+  width: 27em;
   height: 2em;
   background-color: white;
   border-radius: 6px;
   // box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
   //box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
-  box-shadow: rgb(137 61 255 / 20%) -4px 4px 16px 0px;
+  box-shadow: rgb(153 153 153/ 20%) -4px 4px 16px 0px;
   z-index: 1;
 `;
 
@@ -88,7 +88,7 @@ const LineSeparator = styled.span`
 const SearchContent = styled.div`
   height: 100%;
   width: 100%;
-  width: 365px;
+  width: 399px;
   display: flex;
   flex-direction: column;
   padding: 1em;

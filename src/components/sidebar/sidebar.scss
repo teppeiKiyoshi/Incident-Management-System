@@ -104,7 +104,8 @@
         margin: 5px 0;
       }
 
-      li, .sidebar-items {
+      li,
+      .sidebar-items {
         display: flex;
         align-items: center;
         padding: 10px 20px;
@@ -131,7 +132,7 @@
             font-size: 14px;
             cursor: pointer;
 
-            &:hover{
+            &:hover {
               color: black;
             }
 
@@ -157,6 +158,7 @@
         .close {
           margin-left: 90px;
           font-size: 16px;
+          color: #000;
         }
       }
     }

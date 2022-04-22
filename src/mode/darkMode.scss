@@ -64,8 +64,6 @@
           background-color: rgba(137, 61, 255, 0.2);
         }
         .sidebar-icons {
-          color: #999;
-
           .sidebar-name {
             &:hover {
               color: rgb(137, 61, 255);
@@ -73,10 +71,20 @@
           }
         }
 
+        .sidebar-name {
+          &:hover {
+            color: rgb(137, 61, 255);
+          }
+        }
+
+        .close {
+          color: #999;
+        }
+
         .collapse__sublink {
           &:hover {
-            background-color: none;
-            color: black;
+            background-color: transparent;
+            color: #aa7af0;
           }
         }
       }
@@ -155,16 +163,45 @@
   }
 
   .search-bar-container {
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.7);
+    box-shadow: -2px 4px 8px 1px rgba(201, 201, 201, 0.27);
     background-color: #333;
     color: #999;
-    
+
     .search-bar-content {
       background-color: #333;
       color: #999;
-
-      
     }
     .search-bar-content-item {
+      color: #999;
+    }
+  }
+
+  .process-main {
+    .body-header {
+      .body-title {
+        color: #fff;
+      }
+    }
+
+    .report-main {
+      color: #999;
+      .text-field-report {
+        color: #999;
+      }
+    }
+
+    .report-description {
+      color: #999;
+      .decription-text-field {
+        color: #999;
+      }
+    }
+  }
+
+  .search-wrapper {
+    .filter-dropdown {
+      background-color: #333;
       color: #999;
     }
   }

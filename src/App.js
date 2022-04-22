@@ -3,8 +3,8 @@ import { userInputs } from './form-db';
 
 //pages and componentes imported
 import MainPage from './pages/landing-page/index'; // -> index page
-import Home from './pages/home/Home'; //registrar - evaluator dashboard
 import StudentHome from './pages/home/studentHome/StudentHome'; //student-dashboard
+import Home from './pages/home/Home'; // -> index page of evaluator and registrar
 import Login from './pages/login/Login'; // -> student login
 import List from './pages/list/List'; 
 import Single from './pages/single/Single';
@@ -36,7 +36,7 @@ function App() {
         <Routes>
           <Route path='/'>
             <Route index element={<MainPage />} />
-            <Route path='dashboard' element={<StudentHome />} />
+            <Route path='dashboard' element={<Home />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
             <Route path='users'>

@@ -39,18 +39,18 @@ const Forums = () => {
           <div className="filter-forum">
             <select name="report" id="report" className='filter-dropdown'>
               <option value="">-Select to Filter your Search-</option>
-              <option value="Completed">Completed</option>
-              <option value="Assigned">Assigned</option>
-              <option value="Processing">Processing</option>
-              <option value="Unassigned">Unassigned</option>
-              <option value="Remaining Balance">Remaining Balance</option>
-              <option value="Subject with INC">Subject with INC</option>
-              <option value="Failed Subject">Failed Subject</option>
-              <option value="Add Subject">Add Subject</option>
-              <option value="Change Subject">Change Subject</option>
-              <option value="prev-sem">Unavailable Subj - Prev Sem</option>
-              <option value="curr-sem">Unavailble Subj - Curr Sem</option>
-              <option value="Other">Other</option>
+              <option value="Completed" className='filter-option'>Completed</option>
+              <option value="Assigned" className='filter-option'>Assigned</option>
+              <option value="Processing" className='filter-option'>Processing</option>
+              <option value="Unassigned" className='filter-option'>Unassigned</option>
+              <option value="Remaining Balance" className='filter-option'>Remaining Balance</option>
+              <option value="Subject with INC" className='filter-option'>Subject with INC</option>
+              <option value="Failed Subject" className='filter-option'>Failed Subject</option>
+              <option value="Add Subject" className='filter-option'>Add Subject</option>
+              <option value="Change Subject" className='filter-option'>Change Subject</option>
+              <option value="prev-sem" className='filter-option'>Unavailable Subj - Prev Sem</option>
+              <option value="curr-sem" className='filter-option'>Unavailble Subj - Curr Sem</option>
+              <option value="Other" className='filter-option'>Other</option>
             </select>
           </div>
         </div>
