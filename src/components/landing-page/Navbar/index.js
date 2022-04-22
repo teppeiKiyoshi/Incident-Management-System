@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import { FaBars } from 'react-icons/fa';
 import { IconContext } from 'react-icons/lib';
@@ -18,13 +17,6 @@ import {
 import heroLogo from '../../../images/logos/txt-logo.png'
 
 const Navbar = ({ toggle }) => {
-  const navigate = useNavigate();
-
-  const route_Signup = () => {
-    let path = '/signup';
-    navigate(path);
-  }
-
   const [scrollNav, setScrollNav] = useState(false);
 
   const changeNav = () => {
@@ -93,12 +85,12 @@ const Navbar = ({ toggle }) => {
               </NavItem>
               <NavItem>
                 <NavLinks
+                  to='signup'
                   smooth={true}
                   duration={500}
                   spy={true}
                   exact='true'
                   offset={-80}
-                  onClick={route_Signup}
                 >
                   Sign Up
                 </NavLinks>

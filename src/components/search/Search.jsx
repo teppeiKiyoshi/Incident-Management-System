@@ -6,13 +6,13 @@ import { useClickOutside } from 'react-click-outside-hook';
 import MoonLoader from 'react-spinners/MoonLoader';
 import axios from 'axios';
 import useDebounce from './searchHook/Debouncing';
-import TVShow from './itemView/index';  
+import TVShow from './itemView/index';
 
 const SearchBarContainer = styled(motion.div)`
   position: absolute;
   top: 22px;
   left: 30px;
-  display: flex;
+  display: darkMode ? 'none' : 'flex';
   flex-direction: column;
   width: 34em;
   height: 2.5em;
@@ -25,7 +25,7 @@ const SearchBarContainer = styled(motion.div)`
 
 const SearchInputContainer = styled.div`
   width: 100%;
-  min-height: 3em;
+  min-height: 2.8em;
   display: flex;
   align-items: center;
   position: relative;
@@ -101,7 +101,7 @@ const WarningMessage = styled.span`
   display: flex;
   align-self: center;
   justify-self: center;
-`
+`;
 
 const LoadingWrapper = styled.div`
   width: 100%;
@@ -135,7 +135,7 @@ const Search = (props) => {
 
   const handlechange = (e) => {
     e.preventDefault();
-    if(e.target.value.trim() === 0) {
+    if (e.target.value.trim() === 0) {
       setNoShow(false);
     }
     setSearchQuery(e.target.value);
@@ -178,8 +178,7 @@ const Search = (props) => {
 
     if (response) {
       console.log('Response ', response.data);
-      if(response.data && response.data.length === 0) 
-        setNoShow(true);
+      if (response.data && response.data.length === 0) setNoShow(true);
 
       setTvShow(response.data);
     }
@@ -195,9 +194,10 @@ const Search = (props) => {
         variants={containerVariants}
         transition={containerTransition}
         ref={parentRef}
+        className='search-bar-container'
       >
         <SearchInputContainer>
-          <SearchIcon>
+          <SearchIcon color='green'>
             <IoSearch />
           </SearchIcon>
           <SearchInput
@@ -223,21 +223,39 @@ const Search = (props) => {
           </AnimatePresence>
         </SearchInputContainer>
         {isExpanded && <LineSeparator />}
-        {isExpanded && (<SearchContent> 
-          {isLoading && (
-            <LoadingWrapper>
-              <MoonLoader loading color='#893dff' size={25} />
-            </LoadingWrapper>
-          )}
-          {!isLoading && isEmpty && !noShow && (<LoadingWrapper><WarningMessage>Start typing your queries...</WarningMessage></LoadingWrapper>)}
-          {!isLoading && noShow && (<LoadingWrapper><WarningMessage>No student matches your search...</WarningMessage></LoadingWrapper>)}
-          {!isLoading && !isEmpty && <>
-            {tvShow.map(({show})=> (
-              <TVShow key={show.id} thumbnailSrc={show.image && show.image.medium} name={show.name} />
-            ))
-            }
-          </>}
-        </SearchContent>)}
+        {isExpanded && (
+          <SearchContent className='search-bar-content'>
+            {isLoading && (
+              <LoadingWrapper>
+                <MoonLoader loading color='#893dff' size={25} />
+              </LoadingWrapper>
+            )}
+            {!isLoading && isEmpty && !noShow && (
+              <LoadingWrapper>
+                <WarningMessage>Start typing your queries...</WarningMessage>
+              </LoadingWrapper>
+            )}
+            {!isLoading && noShow && (
+              <LoadingWrapper>
+                <WarningMessage>
+                  No student matches your search...
+                </WarningMessage>
+              </LoadingWrapper>
+            )}
+            {!isLoading && !isEmpty && (
+              <>
+                {tvShow.map(({ show }) => (
+                  <TVShow
+                    key={show.id}
+                    thumbnailSrc={show.image && show.image.medium}
+                    name={show.name}
+                    
+                  />
+                ))}
+              </>
+            )}
+          </SearchContent>
+        )}
       </SearchBarContainer>
     </>
   );

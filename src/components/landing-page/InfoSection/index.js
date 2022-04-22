@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../ButtonElement';
 import {
   InfoContainer,
@@ -30,8 +31,15 @@ const InfoSection = ({
   primary,
   dark,
   dark2,
-  lightTextDesc
+  lightTextDesc,
 }) => {
+  const navigate = useNavigate();
+
+  const route_Signup = () => {
+    let path = '/signup';
+    navigate(path);
+  };
+
   return (
     <>
       <InfoContainer lightBg={lightBg} id={id}>
@@ -53,6 +61,7 @@ const InfoSection = ({
                     primary={primary ? 1 : 0}
                     dark={dark ? 1 : 0}
                     dark2={dark2 ? 1 : 0}
+                    onClick={route_Signup}
                   >
                     {buttonLabel}
                   </Button>

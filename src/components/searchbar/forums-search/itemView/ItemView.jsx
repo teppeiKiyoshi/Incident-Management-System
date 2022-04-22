@@ -35,7 +35,7 @@ const ItemView = (props) => {
       <Thumbnail>
         <img src={thumbnailSrc} alt={props.name} />
       </Thumbnail>
-      <ShowName>{name}</ShowName>
+      <ShowName className='search-bar-content-item'>{name}</ShowName>
     </TvShowContainer>
   );
 };

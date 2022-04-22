@@ -20,13 +20,13 @@ const SearchBarContainer = styled(motion.div)`
   border-radius: 6px;
   // box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
   //box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
-  box-shadow: rgb(137 61 255 / 20%) 0px 8px 16px 0px;
+  box-shadow: rgb(137 61 255 / 20%) -4px 4px 16px 0px;
   z-index: 1;
 `;
 
 const SearchInputContainer = styled.div`
   width: 100%;
-  min-height: 2.5em;
+  min-height: 2.7em;
   display: flex;
   align-items: center;
   position: relative;
@@ -199,6 +199,7 @@ const SearchForums = (props) => {
         variants={containerVariants}
         transition={containerTransition}
         ref={parentRef}
+        className='search-bar-container'
       >
         <SearchInputContainer>
           <SearchIcon>
@@ -227,7 +228,7 @@ const SearchForums = (props) => {
           </AnimatePresence>
         </SearchInputContainer>
         {isExpanded && <LineSeparator />}
-        {isExpanded && (<SearchContent> 
+        {isExpanded && (<SearchContent className='search-bar-content'> 
           {isLoading && (
             <LoadingWrapper>
               <MoonLoader loading color='#893dff' size={25} />
