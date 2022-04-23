@@ -106,7 +106,10 @@ const SingleForum = () => {
           </div>
         </div>
         <div className='single-right'>
+          <div className="right-header">
           <h3 className='right-title'>Forum Article Info</h3>
+          <button className="print-btn">Export</button>
+          </div>
           <div className='divider'></div>
           <div className='right-info'>
             <p className='evaluator'>

@@ -31,8 +31,8 @@ const Chart = ({aspect}) => {
             </linearGradient>
           </defs>
           <XAxis dataKey='name' stroke='gray'/>
-          <YAxis />
-          <CartesianGrid strokeDasharray='3 3'/>
+      
+          <CartesianGrid strokeDasharray='3 3' />
           <Tooltip />
           <Area
             type='monotone'

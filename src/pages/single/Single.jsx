@@ -11,7 +11,6 @@ const Single = () => {
         <Navbar />
         <div className='single-top'>
           <div className='single-left'>
-            <div className='edit-btn'>Edit</div>
             <h1 className='left-title'>Student Information</h1>
             <div className='item'>
               <img

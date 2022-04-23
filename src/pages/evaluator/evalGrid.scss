@@ -114,6 +114,28 @@
         cursor: pointer;
         font-size: 22px;
       }
+
+      .filter-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        .filter-eval {
+          width: 92%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin: 30px 10px 10px;
+
+          .filter-dropdown {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #e6e6e6;
+            background-color: transparent;
+            color: #999;
+          }
+        }
+      }
     }
   }
 
