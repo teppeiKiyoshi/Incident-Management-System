@@ -152,6 +152,7 @@ const regstaff = async (req, res) => {
       password: staff.password,
       position: staff.position,
     },
+    token: token,
   });
 };
 
