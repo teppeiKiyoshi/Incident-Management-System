@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 
 //------------ REGISTER USER CONTROLLER ------------//
 const register = async (req, res) => {
+  console.log(req.body);
   const {
     lastName,
     firstName,
@@ -16,6 +17,7 @@ const register = async (req, res) => {
     section,
     phoneNum,
     password,
+    confirmPassword,
   } = req.body;
 
   if (
@@ -27,21 +29,43 @@ const register = async (req, res) => {
     !yearLevel ||
     !section ||
     !phoneNum ||
-    !password
+    !password ||
+    !confirmPassword
   ) {
-    return res.json({ status: "error", msg: "Please provide all values" });
+    return res.json({
+      status: "error",
+      msg: "Please fill-up all of the required fields",
+    });
   }
 
   // VALIDATIONS
   const userAlreadyExists = await User.findOne({ email });
   const studNumAlreadyExists = await User.findOne({ studNum });
+  const passwordsDontMatch = password === confirmPassword ? false : true;
+  const passwordNotEightChars = password.length >= 8 ? false : true;
+  const emailNotValid = !validateEmail(email);
 
   if (userAlreadyExists) {
     return res.json({ status: "error", msg: "Email already in use" });
   }
 
+  if (emailNotValid) {
+    return res.json({ status: "error", msg: "Email entered is not valid" });
+  }
+
   if (studNumAlreadyExists) {
     return res.json({ status: "error", msg: "Student number already exists" });
+  }
+
+  if (passwordNotEightChars) {
+    return res.json({
+      status: "error",
+      msg: "Password must be at least 8 characters",
+    });
+  }
+
+  if (passwordsDontMatch) {
+    return res.json({ status: "error", msg: "Passwords don't match" });
   }
 
   //CREATE USER
@@ -157,3 +181,14 @@ const regstaff = async (req, res) => {
 };
 
 export { register, regstaff, login };
+
+// Extra Functions
+
+function validateEmail(emailAdress) {
+  let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (emailAdress.match(regexEmail)) {
+    return true;
+  } else {
+    return false;
+  }
+}

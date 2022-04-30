@@ -2,6 +2,13 @@ import React from "react";
 import "./signup.scss";
 import signupIcon from "../../images/signup_img.svg";
 
+// Axios IMPORT
+import axios from "axios";
+
+// react-toastify IMPORTS
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 //MUI
 import TextField from "@mui/material/TextField";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -16,21 +23,18 @@ import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
 
-  const routeChange = () => {
-    let path = "/login";
-    navigate(path);
-  };
+  // STATE VARIABLES
+
   const [values, setValues] = React.useState({});
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleChange = (event) => {
-    setValues((prev) => {
-      return {
-        ...prev,
-        [event.target.name]: event.target.value,
-      };
-    });
+  // ROUTE CHANGES
+
+  const routeChange = () => {
+    navigate("/login", { state: { reg: true } });
   };
+
+  // VALIDATION FUNCTIONS
 
   const lettersOnly = (key) => {
     if (key === 32) {
@@ -44,6 +48,27 @@ const Signup = () => {
 
   const numbersOnly = (key) => {
     return key >= 48 && key <= 57 ? false : true;
+  };
+
+  // EVENT FUNCTIONS
+
+  const handleClickShowPassword = () => {
+    setShowPassword((prev) => {
+      return !prev;
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleChange = (event) => {
+    setValues((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+      };
+    });
   };
 
   const handlePress = (event) => {
@@ -69,27 +94,39 @@ const Signup = () => {
     }
   };
 
-  const handleClickShowPassword = () => {
-    setShowPassword((prev) => {
-      return !prev;
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const submittedValues = { ...values };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/auth/register",
+        submittedValues
+      );
+
+      console.log(response.data);
+      if (response.data.msg) {
+        toast.error(response.data.msg);
+      } else {
+        routeChange();
+      }
+    } catch (err) {
+      toast.error(err);
+    }
   };
 
+  // RENDER
   return (
     <div className="signup-main">
       <div className="signup-container">
         <div className="signup-wrapper">
           <h1 className="signup-title">Sign Up</h1>
           <p className="sub-title">Let's get you started!</p>
-          <form className="signup-form">
+          <form className="signup-form" onSubmit={handleSubmit}>
             <div className="name_field">
               {/* LAST NAME */}
               <TextField
-                required
                 id="signup_lName"
                 name="lastName"
                 onChange={handleChange}
@@ -101,7 +138,6 @@ const Signup = () => {
 
               {/* FIRST NAME */}
               <TextField
-                required
                 id="signup_fName"
                 name="firstName"
                 onChange={handleChange}
@@ -128,7 +164,6 @@ const Signup = () => {
             <div className="secondRow_field">
               {/* EMAIL */}
               <TextField
-                required
                 id="signup_email"
                 name="email"
                 onChange={handleChange}
@@ -138,7 +173,6 @@ const Signup = () => {
 
               {/* STUDENT NUMBER */}
               <TextField
-                required
                 id="signup_sNumber"
                 name="studNum"
                 onChange={handleChange}
@@ -151,7 +185,6 @@ const Signup = () => {
             <div className="other-field">
               {/* YEAR LEVEL */}
               <TextField
-                required
                 id="signup_yearLvl"
                 name="yearLevel"
                 onChange={handleChange}
@@ -163,7 +196,6 @@ const Signup = () => {
 
               {/* SECTION */}
               <TextField
-                required
                 id="signup_section"
                 name="section"
                 onChange={handleChange}
@@ -192,7 +224,6 @@ const Signup = () => {
               <FormControl
                 sx={{ mt: 1, mb: 2, width: "35ch" }}
                 variant="outlined"
-                required
               >
                 <InputLabel htmlFor="password">Password</InputLabel>
                 <OutlinedInput
@@ -220,7 +251,6 @@ const Signup = () => {
               <FormControl
                 sx={{ mt: 1, mb: 2, width: "35ch" }}
                 variant="outlined"
-                required
               >
                 <InputLabel htmlFor="confirm-password">
                   Confirm Password
@@ -249,15 +279,25 @@ const Signup = () => {
             <p className="to-signin" onClick={routeChange}>
               Already have an account?
             </p>
-            <button className="signup-btn" onClick={routeChange}>
-              Sign In
-            </button>
+            <button className="signup-btn">Sign Up</button>
           </form>
         </div>
         <div className="img-wrapper">
           <img src={signupIcon} alt="" className="signup_img" />
         </div>
       </div>
+
+      {/* REACT-TOASTIFY CONTAINER */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnFocusLoss
+        closeOnClick
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

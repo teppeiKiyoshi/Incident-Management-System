@@ -25,3 +25,6 @@ yarn-error.log*
 
 # mp4 file for hero section
 *.mp4
+
+#extras
+/push-command.txt
