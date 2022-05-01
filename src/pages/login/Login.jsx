@@ -2,6 +2,9 @@ import React from "react";
 import "./forms.scss";
 import loginIcon from "../../images/login_img.svg";
 
+// Axios IMPORT
+import axios from "axios";
+
 // react-toastify IMPORTS
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -29,13 +32,8 @@ const Login = () => {
 
   // STATE VARIABLES
 
-  const [values, setValues] = React.useState({
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
-  });
+  const [values, setValues] = React.useState({});
+  const [showPassword, setShowPassword] = React.useState(false);
 
   // IF REGISTRATION SUCCESSFUL, ALERT AND CONFETTI
 
@@ -48,11 +46,6 @@ const Login = () => {
 
   // NAVIGATION FUNCTIONS
 
-  const route_Homepage = () => {
-    let path = "/dashboard";
-    navigate(path);
-  };
-
   const routeChange = () => {
     let path = "/signup";
     navigate(path);
@@ -60,19 +53,51 @@ const Login = () => {
 
   // EVENT FUNCTIONS
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = (event) => {
+    setValues((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.value,
+      };
+    });
   };
 
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
+    setShowPassword((prev) => {
+      return !prev;
     });
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const submittedValues = { ...values };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/auth/login",
+        submittedValues
+      );
+
+      if (response.data.msg) {
+        toast.error(response.data.msg);
+      } else {
+        const token = response.data.token;
+        const details = response.data.details;
+        console.log(details.position);
+        localStorage.setItem("token", token);
+        localStorage.setItem("details", JSON.stringify(details));
+
+        if (details.position == "student") navigate("/student-dashboard");
+        else navigate("/dashboard");
+      }
+    } catch (err) {
+      toast.error(err);
+    }
   };
 
   // RENDER
@@ -83,10 +108,18 @@ const Login = () => {
         <div className="login-wrapper">
           <h1 className="login-title">Sign In</h1>
           <p className="sub-title">Welcome back!</p>
-          <form className="login-form">
-            {/* email ipnut field */}
-            <TextField required id="login_email" label="Email" fullWidth />
-            {/* password input field */}
+          <form className="login-form" onSubmit={handleSubmit}>
+            {/* EMAIL */}
+            <TextField
+              required
+              id="login_email"
+              label="Email"
+              name="email"
+              onChange={handleChange}
+              fullWidth
+            />
+
+            {/* PASSWORD*/}
             <FormControl
               sx={{ mt: 2, mb: 1, width: "32ch" }}
               variant="outlined"
@@ -96,9 +129,9 @@ const Login = () => {
               </InputLabel>
               <OutlinedInput
                 id="login_password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
+                name="password"
+                type={showPassword ? "text" : "password"}
+                onChange={handleChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -107,7 +140,7 @@ const Login = () => {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -118,9 +151,7 @@ const Login = () => {
             <p className="to-signup" onClick={routeChange}>
               Don't have an account yet?
             </p>
-            <button className="login-btn" onClick={route_Homepage}>
-              Sign In
-            </button>
+            <button className="login-btn">Sign In</button>
           </form>
         </div>
         <div className="img-wrapper">

@@ -40,33 +40,29 @@ const register = async (req, res) => {
 
   // VALIDATIONS
   const userAlreadyExists = await User.findOne({ email });
+  const staffAlreadyExists = await Staff.findOne({ email });
   const studNumAlreadyExists = await User.findOne({ studNum });
   const passwordsDontMatch = password === confirmPassword ? false : true;
   const passwordNotEightChars = password.length >= 8 ? false : true;
   const emailNotValid = !validateEmail(email);
 
-  if (userAlreadyExists) {
+  if (userAlreadyExists || staffAlreadyExists)
     return res.json({ status: "error", msg: "Email already in use" });
-  }
 
-  if (emailNotValid) {
+  if (emailNotValid)
     return res.json({ status: "error", msg: "Email entered is not valid" });
-  }
 
-  if (studNumAlreadyExists) {
+  if (studNumAlreadyExists)
     return res.json({ status: "error", msg: "Student number already exists" });
-  }
 
-  if (passwordNotEightChars) {
+  if (passwordNotEightChars)
     return res.json({
       status: "error",
       msg: "Password must be at least 8 characters",
     });
-  }
 
-  if (passwordsDontMatch) {
+  if (passwordsDontMatch)
     return res.json({ status: "error", msg: "Passwords don't match" });
-  }
 
   //CREATE USER
   const user = await User.create({
@@ -100,26 +96,71 @@ const register = async (req, res) => {
 
 //------------ LOGIN CONTROLLER ------------//
 const login = async (req, res) => {
-  const user = await User.findOne({
-    email: req.body.email,
-  });
+  let user;
+  let position;
+
+  let studentNotFound = false;
+  let staffNotFound = false;
+
+  // Search user first, then staff
+  user = await User.findOne({ email: req.body.email });
+  if (user == null) studentNotFound = true;
+  else position = "student";
+
+  if (studentNotFound) {
+    user = await Staff.findOne({ email: req.body.email });
+    if (user == null) staffNotFound = true;
+    else position = user.position;
+  }
+
+  // If no user was found
+  if (studentNotFound && staffNotFound)
+    return res.json({ status: "error", msg: "There is no such account" });
 
   const isMatch = await bcrypt.compare(req.body.password, user.password);
 
   if (isMatch) {
     const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET);
 
-    const details = {
-      fullname: `${user.firstName} ${user.middleInitial}. ${user.lastName}`,
-      studNum: user.studNum,
-      yearLevel: user.yearLevel,
-      section: user.section,
-      phoneNum: user.phoneNum,
-    };
+    let details;
+    switch (position) {
+      case "student":
+        details = {
+          lastName: user.lastName,
+          firstName: user.firstName,
+          middleInitial: user.middleInitial,
+          fullname: `${user.firstName} ${user.middleInitial}. ${user.lastName}`,
+          email: user.email,
+          studNum: user.studNum,
+          yearLevel: user.yearLevel,
+          section: user.section,
+          phoneNum: user.phoneNum,
+          position: position,
+        };
+        break;
+      default:
+        details = {
+          lastName: user.lastName,
+          firstName: user.firstName,
+          middleInitial: user.middleInitial,
+          fullname: `${user.firstName} ${user.middleInitial}. ${user.lastName}`,
+          email: user.email,
+          contact: user.contact,
+          position: user.position,
+        };
+    }
 
-    return res.json({ status: "ok", details: details, token: token });
+    return res.json({
+      status: "ok",
+      details: details,
+      token: token,
+    });
   } else {
-    return res.json({ status: "error", user: false });
+    return res.json({
+      status: "error",
+      msg: "You entered an incorrect password",
+      user: false,
+    });
   }
 };
 

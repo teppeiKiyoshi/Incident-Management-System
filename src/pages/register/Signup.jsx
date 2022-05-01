@@ -31,7 +31,7 @@ const Signup = () => {
   // ROUTE CHANGES
 
   const routeChange = () => {
-    navigate("/login", { state: { reg: true } });
+    navigate("/login");
   };
 
   // VALIDATION FUNCTIONS
@@ -105,11 +105,10 @@ const Signup = () => {
         submittedValues
       );
 
-      console.log(response.data);
       if (response.data.msg) {
         toast.error(response.data.msg);
       } else {
-        routeChange();
+        navigate("/login", { state: { reg: true } });
       }
     } catch (err) {
       toast.error(err);

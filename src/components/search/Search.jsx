@@ -1,12 +1,12 @@
-import { React, useEffect, useState, useRef } from 'react';
-import styled from 'styled-components';
-import { IoSearch, IoClose } from 'react-icons/io5';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useClickOutside } from 'react-click-outside-hook';
-import MoonLoader from 'react-spinners/MoonLoader';
-import axios from 'axios';
-import useDebounce from './searchHook/Debouncing';
-import TVShow from './itemView/index';
+import { React, useEffect, useState, useRef } from "react";
+import styled from "styled-components";
+import { IoSearch, IoClose } from "react-icons/io5";
+import { AnimatePresence, motion } from "framer-motion";
+import { useClickOutside } from "react-click-outside-hook";
+import MoonLoader from "react-spinners/MoonLoader";
+import axios from "axios";
+import useDebounce from "./searchHook/Debouncing";
+import TVShow from "./itemView/index";
 
 const SearchBarContainer = styled(motion.div)`
   position: absolute;
@@ -113,20 +113,20 @@ const LoadingWrapper = styled.div`
 
 const containerVariants = {
   expanded: {
-    height: '20em',
+    height: "20em",
   },
   collapsed: {
-    height: '2.8em',
+    height: "2.8em",
   },
 };
 
-const containerTransition = { type: 'spring', damping: 22, stiffness: 150 };
+const containerTransition = { type: "spring", damping: 22, stiffness: 150 };
 // main function starts here
 const Search = (props) => {
   const [isExpanded, setExpanded] = useState(false);
   const [parentRef, isClickedOutside] = useClickOutside(false);
   const inputRef = useRef();
-  const [searchQuery, setSearchQuery] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [tvShow, setTvShow] = useState([]);
   const [noShow, setNoShow] = useState(false);
@@ -147,11 +147,11 @@ const Search = (props) => {
 
   const collapseContainer = () => {
     setExpanded(false);
-    setSearchQuery('');
+    setSearchQuery("");
     setIsLoading(false);
     setNoShow(false);
     setTvShow([]);
-    if (inputRef.current) inputRef.current.value = '';
+    if (inputRef.current) inputRef.current.value = "";
   };
 
   useEffect(() => {
@@ -166,18 +166,18 @@ const Search = (props) => {
   };
 
   const searchShow = async () => {
-    if (!searchQuery || searchQuery.trim() === '') return;
+    if (!searchQuery || searchQuery.trim() === "") return;
 
     setIsLoading(true);
     setNoShow(false);
 
     const URL = prepareSearchQuery(searchQuery);
     const response = await axios.get(URL).catch((err) => {
-      console.log('Error', err);
+      console.log("Error", err);
     });
 
     if (response) {
-      console.log('Response ', response.data);
+      console.log("Response ", response.data);
       if (response.data && response.data.length === 0) setNoShow(true);
 
       setTvShow(response.data);
@@ -190,18 +190,18 @@ const Search = (props) => {
   return (
     <>
       <SearchBarContainer
-        animate={isExpanded ? 'expanded' : 'collapsed'}
+        animate={isExpanded ? "expanded" : "collapsed"}
         variants={containerVariants}
         transition={containerTransition}
         ref={parentRef}
-        className='search-bar-container'
+        className="search-bar-container"
       >
         <SearchInputContainer>
-          <SearchIcon color='green'>
+          <SearchIcon color="green">
             <IoSearch />
           </SearchIcon>
           <SearchInput
-            placeholder='What are you looking for?'
+            placeholder="What are you looking for?"
             onFocus={expandContainer}
             ref={inputRef}
             value={searchQuery}
@@ -210,7 +210,7 @@ const Search = (props) => {
           <AnimatePresence>
             {isExpanded && (
               <CloseIcon
-                key='close-icon'
+                key="close-icon"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -224,10 +224,10 @@ const Search = (props) => {
         </SearchInputContainer>
         {isExpanded && <LineSeparator />}
         {isExpanded && (
-          <SearchContent className='search-bar-content'>
+          <SearchContent className="search-bar-content">
             {isLoading && (
               <LoadingWrapper>
-                <MoonLoader loading color='#893dff' size={25} />
+                <MoonLoader loading color="#893dff" size={25} />
               </LoadingWrapper>
             )}
             {!isLoading && isEmpty && !noShow && (
@@ -249,7 +249,6 @@ const Search = (props) => {
                     key={show.id}
                     thumbnailSrc={show.image && show.image.medium}
                     name={show.name}
-                    
                   />
                 ))}
               </>
