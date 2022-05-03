@@ -126,6 +126,7 @@ const login = async (req, res) => {
     switch (position) {
       case "student":
         details = {
+          id: user.id,
           lastName: user.lastName,
           firstName: user.firstName,
           middleInitial: user.middleInitial,
@@ -136,6 +137,7 @@ const login = async (req, res) => {
           section: user.section,
           phoneNum: user.phoneNum,
           position: position,
+          hasReport: user.hasReport,
         };
         break;
       default:
@@ -173,7 +175,7 @@ const regstaff = async (req, res) => {
     email,
     contact,
     password,
-    position,
+    confirmPassword,
   } = req.body;
 
   if (
@@ -182,7 +184,8 @@ const regstaff = async (req, res) => {
     !middleInitial ||
     !email ||
     !contact ||
-    !password
+    !password ||
+    !confirmPassword
   ) {
     return res.json({ status: "error", msg: "Please provide all values" });
   }
@@ -190,10 +193,29 @@ const regstaff = async (req, res) => {
   // VALIDATIONS
   const staffAlreadyExists = await Staff.findOne({ email });
   const userAlreadyExists = await User.findOne({ email });
+  const passwordsMatch = password === confirmPassword;
+  const emailNotValid = !validateEmail(email);
 
   if (staffAlreadyExists || userAlreadyExists) {
     return res.json({ status: "error", msg: "Email already in use" });
   }
+
+  if (emailNotValid) {
+    return res.json({ status: "error", msg: "Email entered is not valid" });
+  }
+
+  if (!passwordsMatch) {
+    return res.json({ status: "error", msg: "Passwords don't match" });
+  }
+
+  if (passwordsMatch && password.length < 8) {
+    return res.json({
+      status: "error",
+      msg: "Password must be at least 8 characters",
+    });
+  }
+
+  console.log(passwordsMatch, password.length < 8);
 
   //CREATE USER
   const staff = await Staff.create({
@@ -221,7 +243,21 @@ const regstaff = async (req, res) => {
   });
 };
 
-export { register, regstaff, login };
+//------------ GET ALL USERS ------------//
+
+const getStudents = async (req, res) => {
+  const students = await User.find({});
+  return res.json(students);
+};
+
+//------------ GET ALL EVALUATOR ------------//
+
+const getEvaluators = async (req, res) => {
+  const evaluators = await Staff.find({});
+  return res.json(evaluators);
+};
+
+export { register, regstaff, login, getStudents, getEvaluators };
 
 // Extra Functions
 

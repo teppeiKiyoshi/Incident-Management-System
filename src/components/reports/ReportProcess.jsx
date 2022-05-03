@@ -33,7 +33,7 @@ const ReportProcess = () => {
   const handleClose = () => setOpen(false);
 
   const handleChange = (event) => {
-    if (event.target.type == "radio") setValue(event.target.value);
+    if (event.target.type === "radio") setValue(event.target.value);
     setFormValues((prev) => {
       return {
         ...prev,
@@ -52,8 +52,8 @@ const ReportProcess = () => {
       !submittedValues.hasOwnProperty("incident") ||
       !submittedValues.hasOwnProperty("mainConcern") ||
       !submittedValues.hasOwnProperty("concernDescription") ||
-      submittedValues.mainConcern == "" ||
-      submittedValues.concernDescription == ""
+      submittedValues.mainConcern === "" ||
+      submittedValues.concernDescription === ""
     ) {
       toast.error("Fill up the required fields");
     } else {
@@ -62,17 +62,18 @@ const ReportProcess = () => {
   };
 
   const submitValues = async (event) => {
-    const submittedValues = { ...formValues };
+    const submittedValues = {
+      ...formValues,
+      reportedBy: JSON.parse(localStorage.getItem("details")).email,
+    };
 
     try {
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:5000/api/v1/report/add",
         submittedValues
       );
 
       navigate("/student-dashboard", { state: { form: true } });
-
-      //STOPPED HERE, PUT CONFETTI ON STUDENT DASHBOARD AFTER SUBMIT
     } catch (err) {
       toast.error(err);
     }

@@ -88,7 +88,7 @@ const Login = () => {
       } else {
         const token = response.data.token;
         const details = response.data.details;
-        console.log(details.position);
+
         localStorage.setItem("token", token);
         localStorage.setItem("details", JSON.stringify(details));
 

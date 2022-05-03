@@ -51,10 +51,6 @@ const Navbar = () => {
             {isNotifMenuOpen && <NotifMenu />}
           </div>
           <div className="menu-item">
-            <ChatBubbleOutlineOutlinedIcon className="navbar-icons" />
-            <div className="notif-counter">2</div>
-          </div>
-          <div className="menu-item">
             <DropDown />
           </div>
         </div>

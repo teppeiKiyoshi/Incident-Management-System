@@ -1,8 +1,10 @@
 import Report from "../models/Report.js";
+import User from "../models/User.js";
 
 //------------ Add Report ------------//
 const add = async (req, res) => {
-  const { incident, mainConcern, concernDescription, file } = req.body;
+  const { incident, mainConcern, concernDescription, file, reportedBy } =
+    req.body;
 
   if (!incident || !mainConcern || !concernDescription) {
     return res.json({
@@ -11,6 +13,16 @@ const add = async (req, res) => {
     });
   }
 
+  // Get logged in user
+  const email = reportedBy;
+  const user = await User.findOne({ email: email });
+
+  // Set user's "hasReport" to true
+  const update = await User.findOneAndUpdate(
+    { id: user.id },
+    { hasReport: true }
+  );
+
   // Create report to Database
   const report = await Report.create({
     incident,
@@ -18,7 +30,8 @@ const add = async (req, res) => {
     concernDescription,
     file,
     status: "pending",
-    assignedTo: "625a405198c2ae19089b3af9",
+    assignedTo: null, // SAMPLE STAFF ID
+    reportedBy: user.id,
   });
 
   res.json({

@@ -1,0 +1,14 @@
+-- Student View
+
+- In dashboard, display the name of the evaluator, not the ID
+- Upload files in report submission
+- Notifications
+
+// STOPPED AT DISPLAYING DETAILS ON STUDENT DASHBOARD
+
+
+
+
+// ALL TODOS
+- Student Notifications (If evaluator answered report)
+- Student Forums
