@@ -91,7 +91,7 @@ const EvaluatorGrid = () => {
       <div className="evalgrid-wrapper">
         <Navbar />
         {loading ? (
-          <LinearProgress />
+          <LinearProgress color="secondary" />
         ) : (
           <div>
             <div className="evalgrid-header">

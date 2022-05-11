@@ -1,26 +1,35 @@
-import './dropdown.scss';
+import "./dropdown.scss";
 //SVG ICONS;
-import { ReactComponent as ChevronIcon } from '../../../../icons/chevron.svg';
-import { ReactComponent as ArrowIcon } from '../../../../icons/arrow.svg';
-import { ReactComponent as Email } from '../../../../icons/email.svg';
-import { ReactComponent as Password } from '../../../../icons/password.svg';
-import { ReactComponent as Deactivate } from '../../../../icons/deactivate.svg';
-import { ReactComponent as Logout } from '../../../../icons/logout.svg';
-import { ReactComponent as Profile } from '../../../../icons/profile.svg';
-import { ReactComponent as AccSettings } from '../../../../icons/acc-settings.svg';
+import { ReactComponent as ChevronIcon } from "../../../../icons/chevron.svg";
+import { ReactComponent as ArrowIcon } from "../../../../icons/arrow.svg";
+import { ReactComponent as Email } from "../../../../icons/email.svg";
+import { ReactComponent as Password } from "../../../../icons/password.svg";
+import { ReactComponent as Deactivate } from "../../../../icons/deactivate.svg";
+import { ReactComponent as Logout } from "../../../../icons/logout.svg";
+import { ReactComponent as Profile } from "../../../../icons/profile.svg";
+import { ReactComponent as AccSettings } from "../../../../icons/acc-settings.svg";
 
-import React, { useState, useEffect, useRef} from 'react';
-import {useNavigate} from 'react-router-dom'
-import { CSSTransition } from 'react-transition-group';
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
+
+import defaultProfPic from "../../../../images/default-prof-pic.jpg";
 
 function DropDown() {
+  const [profilePic, setProfilePic] = useState();
+
+  useEffect(() => {
+    const profilePic = JSON.parse(localStorage.getItem("details")).profilePic;
+
+    setProfilePic(profilePic);
+  }, []);
   return (
     <NavItem
       icon={
         <img
-          src='https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80'
-          alt='avatar'
-          className='navbar-avatar'
+          src={profilePic === null ? defaultProfPic : profilePic}
+          alt="avatar"
+          className="navbar-avatar"
         />
       }
     >
@@ -33,8 +42,8 @@ function NavItem(props) {
   const [open, setOpen] = useState(false);
 
   return (
-    <li className='nav-item'>
-      <a className='icon-button' onClick={() => setOpen(!open)}>
+    <li className="nav-item">
+      <a className="icon-button" onClick={() => setOpen(!open)}>
         {props.icon}
       </a>
 
@@ -44,15 +53,15 @@ function NavItem(props) {
 }
 
 function DropdownMenu() {
-  const [activeMenu, setActiveMenu] = useState('main');
+  const [activeMenu, setActiveMenu] = useState("main");
   const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   const changeRoute = () => {
-    let path = '/settings';
+    let path = "/settings";
     navigate(path);
-  }
+  };
 
   useEffect(() => {
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
@@ -66,33 +75,33 @@ function DropdownMenu() {
   function DropdownItem(props) {
     return (
       <a
-        className='dropdown-item'
+        className="dropdown-item"
         onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
       >
-        <span className='icon-button'>{props.leftIcon}</span>
+        <span className="icon-button">{props.leftIcon}</span>
         {props.children}
-        <span className='icon-right'>{props.rightIcon}</span>
+        <span className="icon-right">{props.rightIcon}</span>
       </a>
     );
   }
 
   return (
-    <div className='dropdown' style={{ height: menuHeight }} ref={dropdownRef}>
+    <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
       <CSSTransition
-        in={activeMenu === 'main'}
+        in={activeMenu === "main"}
         timeout={500}
-        classNames='menu-primary'
+        classNames="menu-primary"
         unmountOnExit
         onEnter={calcHeight}
       >
-        <div className='menu'>
+        <div className="menu">
           <DropdownItem leftIcon={<Profile />} rightIcon={<ChevronIcon />}>
             My Profile
           </DropdownItem>
           <DropdownItem
             leftIcon={<AccSettings />}
             rightIcon={<ChevronIcon />}
-            goToMenu='settings'
+            goToMenu="settings"
           >
             Settings
           </DropdownItem>
@@ -103,23 +112,27 @@ function DropdownMenu() {
       </CSSTransition>
 
       <CSSTransition
-        in={activeMenu === 'settings'}
+        in={activeMenu === "settings"}
         timeout={500}
-        classNames='menu-secondary'
+        classNames="menu-secondary"
         unmountOnExit
         onEnter={calcHeight}
       >
-        <div className='menu'>
-          <DropdownItem goToMenu='main' leftIcon={<ArrowIcon style={{color: '#893dff'}}/>}>
-            {' '}
-            <h3 style={{fontWeight: '600'}}>Account Settings</h3>{' '}
+        <div className="menu">
+          <DropdownItem
+            goToMenu="main"
+            leftIcon={<ArrowIcon style={{ color: "#893dff" }} />}
+          >
+            {" "}
+            <h3 style={{ fontWeight: "600" }}>Account Settings</h3>{" "}
           </DropdownItem>
-          <DropdownItem 
-            onClick={changeRoute} leftIcon={<Email />}>Change Email</DropdownItem>
-          <DropdownItem 
-            onClick={changeRoute} leftIcon={<Password />}>Change Password</DropdownItem>
-          <DropdownItem 
-            onClick={changeRoute} leftIcon={<Deactivate />}>
+          <DropdownItem onClick={changeRoute} leftIcon={<Email />}>
+            Change Email
+          </DropdownItem>
+          <DropdownItem onClick={changeRoute} leftIcon={<Password />}>
+            Change Password
+          </DropdownItem>
+          <DropdownItem onClick={changeRoute} leftIcon={<Deactivate />}>
             Deactivate Account
           </DropdownItem>
         </div>

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./studHome.scss";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Navbar from "../../../components/navbar/Navbar";
@@ -9,7 +10,6 @@ import { LinearProgress } from "@mui/material";
 
 //pic
 import headerImage from "../../../images/studHome/bannerImage.svg";
-import { useNavigate, useLocation } from "react-router-dom";
 
 // react-toastify IMPORTS
 import { ToastContainer, toast } from "react-toastify";
@@ -30,11 +30,12 @@ const StudentHome = () => {
   const [userToken, setUserToken] = React.useState("");
   const [dashAllReports, setDashAllReports] = React.useState();
   const [dashLatestReport, setDashLatestReport] = React.useState();
+  const [dashLatestReply, setDashLatestReply] = React.useState();
   const [reportSuccess, setReportSuccess] = React.useState(
     location.state == null ? false : location.state.form
   );
 
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
 
   // SET LOGIN CREDENTIALS
   useEffect(() => {
@@ -65,9 +66,11 @@ const StudentHome = () => {
         "http://localhost:5000/api/v1/stats/get-student-dashboard",
         { userId: user.id }
       );
-
+      console.log(response.data);
       setDashLatestReport(response.data.latestReport);
       setDashAllReports(response.data.allReports);
+      setDashLatestReply(response.data.latestReply);
+      setLoading(false);
     } catch (err) {
       toast.error(err);
     }
@@ -88,44 +91,36 @@ const StudentHome = () => {
       <div className="student-container">
         <Navbar />
         {loading ? (
-          <div className="progress">
-            <LinearProgress />
-          </div>
+          <LinearProgress color="secondary" />
         ) : (
-          <div>
-            <div className="student-content">
-              <div className="content-header">
-                <div className="header-wrapper">
-                  <div className="banner-wrapper">
-                    <img
-                      src={headerImage}
-                      alt="Banner"
-                      className="banner-img"
-                    />
-                  </div>
-                  <div className="header-content">
-                    <p className="greetings">Hi, Emanuelle Martin</p>
-                    <h2 className="welcome">Welcome to FilinGO!</h2>
-                    <p className="sub-heading">
-                      creating and filing reports made easy
-                    </p>
-                  </div>
+          <div className="student-content">
+            <div className="content-header">
+              <div className="header-wrapper">
+                <div className="banner-wrapper">
+                  <img src={headerImage} alt="Banner" className="banner-img" />
                 </div>
-              </div>
-              <div className="content-body">
-                <div className="right-body">
-                  <Right details={dashLatestReport} />
-                </div>
-                <div className="left-body">
-                  <Left />
+                <div className="header-content">
+                  <p className="greetings">Hi, Emanuelle Martin</p>
+                  <h2 className="welcome">Welcome to FilinGO!</h2>
+                  <p className="sub-heading">
+                    creating and filing reports made easy
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="content-footer">
-              {dashAllReports && <History details={dashAllReports} />}
+            <div className="content-body">
+              <div className="right-body">
+                <Right details={dashLatestReport} />
+              </div>
+              <div className="left-body">
+                {dashLatestReply && <Left details={dashLatestReply} />}
+              </div>
             </div>
           </div>
         )}
+        <div className="content-footer">
+          {dashAllReports && <History details={dashAllReports} />}
+        </div>
       </div>
 
       {/* REACT-TOASTIFY CONTAINER */}

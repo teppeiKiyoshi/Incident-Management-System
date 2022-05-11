@@ -14,11 +14,17 @@ const ReportSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    file: {
-      type: String,
-    },
+    file: [
+      {
+        type: String,
+      },
+    ],
     status: {
       type: String,
+    },
+    unresolvable: {
+      type: Boolean,
+      default: false,
     },
     assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
@@ -27,6 +33,11 @@ const ReportSchema = new mongoose.Schema(
     reportedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+    helpful: {
+      type: Number,
+      min: 0,
+      default: 0,
     },
   },
   { timestamps: true }

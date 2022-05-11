@@ -16,6 +16,7 @@ import AssignmentTurnedInOutlinedIcon from "@mui/icons-material/AssignmentTurned
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { CircularProgress } from "@mui/material";
 
 // Axios
 import axios from "axios";
@@ -28,6 +29,7 @@ const ReportProcess = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({});
   const [value, setValue] = useState("");
+  const [submitLoading, setSubmitLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -42,11 +44,36 @@ const ReportProcess = () => {
     });
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files;
+    let files = [];
+
+    for (let i = 0; i < file.length; i++) {
+      getBase64(file[i]).then((data) => {
+        files.push(data);
+      });
+    }
+
+    setFormValues((prev) => {
+      return {
+        ...prev,
+        [event.target.name]: files,
+      };
+    });
+  };
+
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const submittedValues = { ...formValues };
-
-    console.log(submittedValues);
 
     if (
       !submittedValues.hasOwnProperty("incident") ||
@@ -62,6 +89,7 @@ const ReportProcess = () => {
   };
 
   const submitValues = async (event) => {
+    setSubmitLoading(true);
     const submittedValues = {
       ...formValues,
       reportedBy: JSON.parse(localStorage.getItem("details")).email,
@@ -73,13 +101,13 @@ const ReportProcess = () => {
         submittedValues
       );
 
+      setSubmitLoading(false);
       navigate("/student-dashboard", { state: { form: true } });
     } catch (err) {
       toast.error(err);
     }
+    setSubmitLoading(false);
   };
-
-  console.log(formValues);
 
   const handleDetails = () => {
     if (value === "remainingBalance") {
@@ -321,8 +349,15 @@ const ReportProcess = () => {
                   component="label"
                   startIcon={<LinkOutlinedIcon />}
                 >
-                  Upload File
-                  <input type="file" hidden />
+                  Upload Image
+                  <input
+                    name="file"
+                    type="file"
+                    accept="image/jpeg, image/jpg, image/gif, image/png"
+                    onChange={handleFileChange}
+                    multiple
+                    hidden
+                  />
                 </Button>
               </div>
             </div>
@@ -370,22 +405,29 @@ const ReportProcess = () => {
             <br />
             Description: {formValues.concernDescription}
           </Typography>
-          <Button
-            variant="text"
-            color="secondary"
-            onClick={handleClose}
-            sx={{ fontSize: "16px", mt: 2, alignItems: "right" }}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="text"
-            color="secondary"
-            onClick={submitValues}
-            sx={{ fontSize: "16px", mt: 2, alignItems: "right" }}
-          >
-            Submit
-          </Button>
+          <br />
+          {submitLoading ? (
+            <CircularProgress />
+          ) : (
+            <div>
+              <Button
+                variant="text"
+                color="secondary"
+                onClick={handleClose}
+                sx={{ fontSize: "16px", mt: 2, alignItems: "right" }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="text"
+                color="secondary"
+                onClick={submitValues}
+                sx={{ fontSize: "16px", mt: 2, alignItems: "right" }}
+              >
+                Submit
+              </Button>
+            </div>
+          )}
         </Box>
       </Modal>
 

@@ -57,6 +57,7 @@ function App() {
             </Route>
             <Route path="forums">
               <Route index element={<Forums />} />
+              <Route path="keyword/:keyword" element={<Forums />} />
               <Route path=":forumId" element={<SingleView />} />
               <Route path="add-post" element={<Report />} />
               <Route path="assigned-reports" element={<Assigned />} />

@@ -1,10 +1,14 @@
--- Student View
+- Search Autocomplete
+- Delete Students/Staff
+- Display Images
 
-- In dashboard, display the name of the evaluator, not the ID
-- Upload files in report submission
-- Notifications
+// ATM
+- Closing a Forum
 
-// STOPPED AT DISPLAYING DETAILS ON STUDENT DASHBOARD
+- Student Notifications (DONE)
+- Filter Forums (DONE)
+- Search (DONE)
+- Settings (DONE)
 
 
 

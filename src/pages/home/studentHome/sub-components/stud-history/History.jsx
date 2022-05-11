@@ -30,8 +30,7 @@ const ListTable = (props) => {
               <TableCell className="tableCell">{row._id}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.assignedTo}
+                  {row.assignedTo === null ? "None" : row.assignedTo}
                 </div>
               </TableCell>
               <TableCell className="tableCell">

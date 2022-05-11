@@ -13,18 +13,26 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import sidebarLogo from "../../images/logos/logoTxt.png";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { LocalSeeOutlined } from "@mui/icons-material";
+import defaultProfPic from "../../images/default-prof-pic.jpg";
 
 const Sidebar = () => {
   const [subMenuOpen, setSubMenuOpen] = useState(false);
   const [position, setPosition] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [profilePic, setProfilePic] = useState();
   const [dashboardLink, setDashboardLink] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     const position = JSON.parse(localStorage.getItem("details")).position;
+    const firstname = JSON.parse(localStorage.getItem("details")).firstName;
+    const lastname = JSON.parse(localStorage.getItem("details")).lastName;
+    const profilePic = JSON.parse(localStorage.getItem("details")).profilePic;
+    const fullname = firstname + " " + lastname;
 
     setPosition(position);
+    setFullname(fullname);
+    setProfilePic(profilePic);
 
     switch (position) {
       case "student":
@@ -71,11 +79,11 @@ const Sidebar = () => {
       <div className="sidebar-header">
         <div className="header-wrapper">
           <img
-            src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80"
+            src={profilePic === null ? defaultProfPic : profilePic}
             alt="avatar"
             className="sidebar-avatar"
           />
-          <span className="header-name">Eman Martin</span>
+          <span className="header-name">{fullname}</span>
         </div>
       </div>
       <div className="sidebar-center">

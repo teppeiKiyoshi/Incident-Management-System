@@ -48,6 +48,10 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please provide password"],
     minlength: 8,
   },
+  profilePic: {
+    type: String,
+    default: null,
+  },
   hasReport: {
     type: Boolean,
     default: false,

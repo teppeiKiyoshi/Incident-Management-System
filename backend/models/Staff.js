@@ -30,6 +30,10 @@ const StaffSchema = new mongoose.Schema({
   position: {
     type: String,
   },
+  profilePic: {
+    type: String,
+    default: null,
+  },
 });
 
 StaffSchema.pre("save", async function () {

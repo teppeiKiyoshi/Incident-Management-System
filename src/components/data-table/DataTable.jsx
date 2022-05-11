@@ -29,7 +29,6 @@ const DataTable = () => {
         );
 
         const students = response.data;
-
         const studentsMapped = students.map((student) => {
           return {
             id: student._id,
@@ -90,7 +89,7 @@ const DataTable = () => {
   return (
     <div className="data-table">
       {loading ? (
-        <LinearProgress />
+        <LinearProgress color="secondary" />
       ) : (
         <DataGrid
           className="data-grid"

@@ -7,6 +7,8 @@ import MoonLoader from "react-spinners/MoonLoader";
 import axios from "axios";
 import useDebounce from "./searchHook/Debouncing";
 import TVShow from "./itemView/index";
+import { useNavigate } from "react-router-dom";
+import { CatchingPokemonSharp } from "@mui/icons-material";
 
 const SearchBarContainer = styled(motion.div)`
   position: absolute;
@@ -123,6 +125,7 @@ const containerVariants = {
 const containerTransition = { type: "spring", damping: 22, stiffness: 150 };
 // main function starts here
 const Search = (props) => {
+  const navigate = useNavigate();
   const [isExpanded, setExpanded] = useState(false);
   const [parentRef, isClickedOutside] = useClickOutside(false);
   const inputRef = useRef();
@@ -186,9 +189,17 @@ const Search = (props) => {
     setIsLoading(false);
   };
 
+  const handleSubmit = async (e) => {
+    if (searchQuery === "") {
+      return false;
+    }
+    let path = `/forums/keyword/${searchQuery}`;
+    navigate(path);
+  };
+
   useDebounce(searchQuery, 500, searchShow);
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <SearchBarContainer
         animate={isExpanded ? "expanded" : "collapsed"}
         variants={containerVariants}
@@ -256,7 +267,7 @@ const Search = (props) => {
           </SearchContent>
         )}
       </SearchBarContainer>
-    </>
+    </form>
   );
 };
 

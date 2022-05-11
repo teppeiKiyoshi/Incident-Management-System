@@ -1,31 +1,73 @@
-import React from 'react';
+import React from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import DefaultProfilePic from "../../../../../images/default-prof-pic.jpg";
 
-const Left = () => {
+const Left = ({ details }) => {
+  const navigate = useNavigate();
+  const [createdAt, setCreatedAt] = useState();
+
+  useEffect(() => {
+    let date = new Date(details.createdAt);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes + " " + ampm;
+
+    setCreatedAt(
+      monthNames[date.getMonth()] + " " + date.getDate() + " / " + strTime
+    );
+  }, []);
+
+  const viewReport = () => {
+    navigate(`/forums/${details.commentedTo}`);
+  };
+
   return (
     <>
-      <div className='left-header'>
-        <h2 className='left-header-title'>Latest Notifications</h2>
-        <button className='route-btn'>View All</button>
+      <div className="left-header">
+        <h2 className="left-header-title">Latest Reply</h2>
+        <button className="route-btn" onClick={viewReport}>
+          View Report
+        </button>
       </div>
-      <div className='left-content'>
-        <div className='item-wrapper'>
-          <div className='img-wrapper'>
+      <div className="left-content">
+        <div className="item-wrapper">
+          <div className="img-wrapper">
             <img
-              src='https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80'
-              alt='avatar'
-              className='item-avatar'
+              src={
+                details.profilePic === null
+                  ? DefaultProfilePic
+                  : details.profilePic
+              }
+              alt="avatar"
+              className="item-avatar"
             />
           </div>
-          <div className='item-content'>
-            <p className='eval-name'>Eman Martin</p>
-            <p className='notif-details'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem,
-              veritatis? Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Rem, veritatis?
-            </p>
+          <div className="item-content">
+            <p className="eval-name">{details.evalFullname}</p>
+            <p className="notif-details">{details.comment}</p>
           </div>
-          <div className='item-detail'>
-            <p className='time'>09:32 AM</p>
+          <div className="item-detail">
+            <p className="time">{createdAt}</p>
           </div>
         </div>
       </div>

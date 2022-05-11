@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Right = (props) => {
+  const navigate = useNavigate();
+
   function titleCase(str) {
     return str
       .split(" ")
@@ -8,11 +11,17 @@ const Right = (props) => {
       .join(" ");
   }
 
+  const goToReport = () => {
+    navigate(`/forums/${props.details._id}`);
+  };
+
   return (
     <>
       <div className="right-header">
         <h2 className="right-header-title">Latest Report Details</h2>
-        <button className="route-btn">View Report</button>
+        <button className="route-btn" onClick={goToReport}>
+          View Report
+        </button>
       </div>
       <div className="right-content">
         <div className="right">

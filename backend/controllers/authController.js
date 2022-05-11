@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Staff from "../models/Staff.js";
+import Notification from "../models/Notifications.js";
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -123,6 +124,7 @@ const login = async (req, res) => {
     const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET);
 
     let details;
+
     switch (position) {
       case "student":
         details = {
@@ -138,10 +140,12 @@ const login = async (req, res) => {
           phoneNum: user.phoneNum,
           position: position,
           hasReport: user.hasReport,
+          profilePic: user.profilePic,
         };
         break;
       default:
         details = {
+          id: user.id,
           lastName: user.lastName,
           firstName: user.firstName,
           middleInitial: user.middleInitial,
@@ -149,6 +153,7 @@ const login = async (req, res) => {
           email: user.email,
           contact: user.contact,
           position: user.position,
+          profilePic: user.profilePic,
         };
     }
 
@@ -163,6 +168,123 @@ const login = async (req, res) => {
       msg: "You entered an incorrect password",
       user: false,
     });
+  }
+};
+
+function titleCase(str) {
+  return str
+    .split(" ")
+    .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
+//------------ UPDATE PROFILE CONTROLLER ------------//
+
+const updateProfile = async (req, res) => {
+  const details = { ...req.body };
+  details["firstName"] = titleCase(details.firstName);
+  details["lastName"] = titleCase(details.lastName);
+  details["middleInitial"] = titleCase(details.middleInitial);
+
+  // Validations
+  const emailNotValid = !validateEmail(details.findEmail);
+  const userAlreadyExists = await User.findOne({ email: details.email });
+  const staffAlreadyExists = await Staff.findOne({ email: details.email });
+
+  if (details.email !== details.findEmail) {
+    // Check if email is valid
+    if (emailNotValid)
+      return res.json({ status: "error", msg: "Email entered is not valid" });
+
+    // Check if email is already in database
+    if (userAlreadyExists || staffAlreadyExists)
+      return res.json({ status: "error", msg: "Email already in use" });
+  }
+
+  // Check if old password has input first, if no input, donn proceed to password validation
+  if (details.oldPassword) {
+    const user =
+      details.position !== "student"
+        ? await Staff.findOne({ email: details.findEmail })
+        : await User.findOne({ email: details.findEmail });
+
+    // Check if password old password is match
+    const isMatch = await bcrypt.compare(details.oldPassword, user.password);
+
+    if (isMatch) {
+      if (!details.newPassword || !details.confPassword) {
+        return res.json({
+          status: "error",
+          msg: "Password fields should be filled up",
+        });
+      }
+      // Check if password is new password is 8 chars and greater
+
+      if (details.newPassword.length < 8) {
+        return res.json({
+          status: "error",
+          msg: "Password should be at least 8 characters",
+        });
+      }
+
+      // Check if password matches conf password
+      if (details.newPassword !== details.confPassword) {
+        return res.json({
+          status: "error",
+          msg: "Passwords don't match!",
+        });
+      }
+
+      // Update password
+      const salt = await bcrypt.genSalt(10);
+      const password = await bcrypt.hash(details.newPassword, salt);
+      if (details.position !== "student") {
+        await Staff.findOneAndUpdate(
+          {
+            email: details.findEmail,
+          },
+          {
+            password: password,
+          }
+        );
+      } else {
+        await User.findOneAndUpdate(
+          {
+            email: details.findEmail,
+          },
+          {
+            password: password,
+          }
+        );
+      }
+    } else {
+      return res.json({
+        status: "error",
+        msg: "Old Password is invalid!",
+      });
+    }
+  }
+
+  try {
+    let updated;
+    if (details.position !== "student") {
+      updated = await Staff.findOneAndUpdate(
+        { email: details.findEmail },
+        details,
+        { new: true }
+      );
+    } else {
+      updated = await User.findOneAndUpdate(
+        { email: details.findEmail },
+        details,
+        { new: true }
+      );
+    }
+
+    return res.json({ status: "success", updated });
+  } catch (err) {
+    console.log(err);
+    return res.json({ status: "error" });
   }
 };
 
@@ -243,6 +365,13 @@ const regstaff = async (req, res) => {
   });
 };
 
+//------------ GET CURRENTLY LOGGED IN USER ------------//
+const getStudent = async (req, res) => {
+  const student = await User.findOne({ email: req.body.email });
+
+  return res.json(student);
+};
+
 //------------ GET ALL USERS ------------//
 
 const getStudents = async (req, res) => {
@@ -257,7 +386,38 @@ const getEvaluators = async (req, res) => {
   return res.json(evaluators);
 };
 
-export { register, regstaff, login, getStudents, getEvaluators };
+//------------ GET USER'S NOTIFICATIONS ------------//
+
+const getNotifications = async (req, res) => {
+  const notifiedTo = req.body.userId;
+  const notifications = await Notification.find({ notifiedTo });
+  const unseen = await Notification.countDocuments({ notifiedTo, seen: false });
+
+  return res.json({ notifications, unseen });
+};
+
+//------------ SEEN ALL USER'S NOTIFICATIONS ------------//
+
+const seenNotifications = async (req, res) => {
+  const notifiedTo = req.body.userId;
+  const notifications = await Notification.updateMany(
+    { notifiedTo },
+    { seen: true }
+  );
+  return res.json({ seen: true });
+};
+
+export {
+  register,
+  regstaff,
+  login,
+  updateProfile,
+  getStudents,
+  getStudent,
+  getEvaluators,
+  getNotifications,
+  seenNotifications,
+};
 
 // Extra Functions
 
