@@ -1,9 +1,11 @@
-// TODO
+// TODO (FOR DWAIN)
 - Delete Students
 - Generate Report
 - Notify Evaluator if student replied
 - If student closed the report, hasReport = false
+- Sidebar, Remove "Evaluators and Students" for Evaluators
 - Generate Report
+- Fix Logo
 
 
 // FRONT END TO FIX
