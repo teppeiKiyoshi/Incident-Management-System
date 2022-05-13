@@ -372,6 +372,13 @@ const getStudent = async (req, res) => {
   return res.json(student);
 };
 
+//------------ GET DETAILS OF USER ------------//
+const getStudentDetails = async (req, res) => {
+  const student = await User.findById(req.body.userId);
+
+  return res.json(student);
+};
+
 //------------ GET ALL USERS ------------//
 
 const getStudents = async (req, res) => {
@@ -407,6 +414,15 @@ const seenNotifications = async (req, res) => {
   return res.json({ seen: true });
 };
 
+//------------ DELETE EVALUATOR ------------//
+
+const deleteEvaluator = async (req, res) => {
+  const id = req.body.userId;
+  console.log(id);
+  await Staff.findByIdAndDelete(id);
+  return res.json({ deleted: true });
+};
+
 export {
   register,
   regstaff,
@@ -414,9 +430,11 @@ export {
   updateProfile,
   getStudents,
   getStudent,
+  getStudentDetails,
   getEvaluators,
   getNotifications,
   seenNotifications,
+  deleteEvaluator,
 };
 
 // Extra Functions

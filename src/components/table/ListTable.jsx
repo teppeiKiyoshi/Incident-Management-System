@@ -18,16 +18,17 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 //list table for dashboard
-const ListTable = () => {
+const ListTable = ({ id }) => {
   const [data, setData] = useState();
 
   const getLatestReports = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/report/get-latest-reports"
+        "http://localhost:5000/api/v1/report/get-user-reports",
+        { id }
       );
 
-      setData(response.data);
+      setData(response.data.reports);
     } catch (err) {
       toast.error(err);
     }
@@ -43,8 +44,6 @@ const ListTable = () => {
         <TableHead>
           <TableRow>
             <TableCell className="table-cell">Tracking ID</TableCell>
-            <TableCell className="table-cell">Student ID</TableCell>
-            <TableCell className="table-cell">Student</TableCell>
             <TableCell className="table-cell">Date</TableCell>
             <TableCell className="table-cell">Incident Type</TableCell>
             <TableCell className="table-cell">Evaluator</TableCell>
@@ -56,10 +55,6 @@ const ListTable = () => {
             data.map((item) => (
               <TableRow key={item._id}>
                 <TableCell className="table-cell">{item._id}</TableCell>
-                <TableCell className="table-cell">{item.studNum}</TableCell>
-                <TableCell className="table-cell">
-                  {item.reportedByName}
-                </TableCell>
                 <TableCell className="table-cell">{item.createdAt}</TableCell>
                 <TableCell className="table-cell">{item.incident}</TableCell>
                 <TableCell className="table-cell">

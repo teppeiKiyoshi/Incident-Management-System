@@ -48,6 +48,7 @@ const Forums = () => {
           setHasReport(has);
         } catch (err) {
           toast.error(err);
+          setCreateReportLoad(false);
         }
       }
     };

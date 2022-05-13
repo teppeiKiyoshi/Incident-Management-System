@@ -1,4 +1,5 @@
-import { React, useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./singleF.scss";
@@ -6,7 +7,6 @@ import AddComment from "../modal/AddComment";
 import ItemComments from "../comment-items/ItemComments";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { LinearProgress, CircularProgress } from "@mui/material";
-
 // Axios
 import axios from "axios";
 
@@ -25,13 +25,14 @@ const SingleForum = () => {
   const [comments, setComments] = useState();
   const [commentNumber, setCommentNumber] = useState(0);
 
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
   const [assignLoading, setAssignLoading] = useState(false);
   const [unresLoading, setUnresLoading] = useState(false);
 
   const userId = JSON.parse(localStorage.getItem("details")).id;
 
   const getForumDetails = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/report/get-report",
@@ -39,18 +40,18 @@ const SingleForum = () => {
       );
 
       setReportDetails(response.data);
-      setLoading(false);
       setEvaluatorName(response.data.evaluator);
       setAssignedTo(response.data.assignedTo);
 
       if (response.data.assignedTo !== null) setIsAssigned(true);
     } catch (err) {
       toast.error(err);
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   const getComments = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/report/get-comments",
@@ -65,17 +66,14 @@ const SingleForum = () => {
           return <ItemComments key={comment._id} details={comment} />;
         });
       });
-
-      setLoading(false);
     } catch (err) {
       toast.error(err);
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   //Effect - get report details
   useEffect(() => {
-    setLoading(true);
     getForumDetails();
     getComments();
   }, []);
@@ -138,17 +136,56 @@ const SingleForum = () => {
     }
   };
 
-  console.log(reportDetails);
-
   const showComment = () => {
     setOpen(!open);
   };
 
-  const joinButton = !isAssigned ? (
-    <button className="assign-btn" onClick={setEvaluator}>
-      + Join
-    </button>
-  ) : null;
+  const joinButton =
+    !isAssigned &&
+    JSON.parse(localStorage.getItem("details")).position !== "student" ? (
+      <button className="assign-btn" onClick={setEvaluator}>
+        + Join
+      </button>
+    ) : null;
+
+  const markAsHelpful = async () => {
+    // Status = completed
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/report/mark-as-helpful",
+        { id: reportDetails._id }
+      );
+      console.log(response.data);
+    } catch (err) {}
+  };
+
+  const formatDate = (dateStr) => {
+    let date = new Date(dateStr);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes + " " + ampm;
+
+    return monthNames[date.getMonth()] + " " + date.getDate() + " / " + strTime;
+  };
 
   return (
     <div className="single-main">
@@ -189,26 +226,36 @@ const SingleForum = () => {
                     {reportDetails && reportDetails.concernDescription}
                   </p>
                 </div>
-                {/*
-                  CONDITIONS
-                  SHOW IF
-                  POSITION IS STUDENT
-                  AND STUDENT IS THE AUTHOR
-                  AND FORUM HAS REPLIES
-                */}
+                <span>Attachments</span>
+                <div className="images-container">
+                  <div className="image-container">
+                    {reportDetails &&
+                      reportDetails.file.map((image) => {
+                        return (
+                          <div className="image">
+                            <img src={image} />
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+
                 {reportDetails &&
                 JSON.parse(localStorage.getItem("details")).position ===
                   "student" &&
                 reportDetails.reportedBy ===
-                  JSON.parse(localStorage.getItem("details"))._id &&
-                comments ? (
+                  JSON.parse(localStorage.getItem("details")).id &&
+                comments &&
+                reportDetails.status !== "completed" ? (
                   <div className="helpful-wrapper">
-                    <p className="help-title">Was this helpful?</p>
-                    <small className="help-yes">Yes</small>
-                    <small className="help-no">No</small>
+                    <p className="help-title">
+                      Was this helpful? if you think so,
+                    </p>
+                    <small className="help-yes" onClick={markAsHelpful}>
+                      Close the discussion
+                    </small>
                   </div>
                 ) : null}
-
                 <div className="body-footer">
                   <div className="footer-header">
                     <h3 className="comment-title">
@@ -229,7 +276,9 @@ const SingleForum = () => {
                   </div>
                   {open && <div className="footer-container">{comments}</div>}
                   <div className="btn-container">
-                    {assignedTo === userId ? (
+                    {reportDetails &&
+                    (assignedTo === userId ||
+                      reportDetails.reportedBy === userId) ? (
                       <AddComment forumId={forumId} func={getComments} />
                     ) : null}
                   </div>
@@ -250,10 +299,12 @@ const SingleForum = () => {
                   : "No evaluator assigned yet"}
               </p>
               <p className="created-date">
-                Created on {reportDetails && reportDetails.createdAt}
+                Created on{" "}
+                {reportDetails && formatDate(reportDetails.createdAt)}
               </p>
               <p className="update-date">
-                Last Updated: {reportDetails && reportDetails.updatedAt}
+                Last Updated:{" "}
+                {reportDetails && formatDate(reportDetails.updatedAt)}
               </p>
               <div className="info-tags">
                 <div className="tag-header">
@@ -266,21 +317,27 @@ const SingleForum = () => {
                 </div>
               </div>
               <div className="case-status">
-                {reportDetails && reportDetails.unresolvable ? (
-                  unresLoading ? (
+                {JSON.parse(localStorage.getItem("details")).position !==
+                "student" ? (
+                  reportDetails && reportDetails.unresolvable ? (
+                    unresLoading ? (
+                      <CircularProgress color="secondary" />
+                    ) : (
+                      <button
+                        className="unresolvable-btn"
+                        onClick={markAsUnres}
+                      >
+                        Unmark as Unresolvable
+                      </button>
+                    )
+                  ) : unresLoading ? (
                     <CircularProgress color="secondary" />
                   ) : (
                     <button className="unresolvable-btn" onClick={markAsUnres}>
-                      Unmark as Unresolvable
+                      Mark as Unresolvable
                     </button>
                   )
-                ) : unresLoading ? (
-                  <CircularProgress color="secondary" />
-                ) : (
-                  <button className="unresolvable-btn" onClick={markAsUnres}>
-                    Mark as Unresolvable
-                  </button>
-                )}
+                ) : null}
               </div>
             </div>
           </div>

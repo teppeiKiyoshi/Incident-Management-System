@@ -174,13 +174,17 @@ const Search = (props) => {
     setIsLoading(true);
     setNoShow(false);
 
-    const URL = prepareSearchQuery(searchQuery);
-    const response = await axios.get(URL).catch((err) => {
-      console.log("Error", err);
-    });
+    const URL = searchQuery;
+
+    const response = await axios
+      .post("http://localhost:5000/api/v1/report/reports-autocomplete", {
+        keyword: URL,
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      });
 
     if (response) {
-      console.log("Response ", response.data);
       if (response.data && response.data.length === 0) setNoShow(true);
 
       setTvShow(response.data);
@@ -255,11 +259,12 @@ const Search = (props) => {
             )}
             {!isLoading && !isEmpty && (
               <>
-                {tvShow.map(({ show }) => (
+                {tvShow.map((show) => (
                   <TVShow
                     key={show.id}
-                    thumbnailSrc={show.image && show.image.medium}
-                    name={show.name}
+                    concern={show.mainConcern}
+                    description={show.concernDescription}
+                    reportId={show._id}
                   />
                 ))}
               </>

@@ -10,6 +10,34 @@ const ForumsTable = (props) => {
     //STOPPED HERE GET ID AND PASS TO PARAMETERS
   };
 
+  const formatDate = (dateStr) => {
+    let date = new Date(dateStr);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes + " " + ampm;
+
+    return monthNames[date.getMonth()] + " " + date.getDate() + " / " + strTime;
+  };
+
   return (
     <>
       <div className="grid-main">
@@ -25,22 +53,22 @@ const ForumsTable = (props) => {
             {props.details.mainConcern}
           </h3>
           <span className="sub-title">
-            Last comment 4 hours 54 minutes ago | Created{" "}
-            {props.details.createdAt} by {props.details.reportedByName}
+            Created at {formatDate(props.details.createdAt)} by{" "}
+            {props.details.reportedByName}
           </span>
           <p className="report-detail">
             {props.details.concernDescription.slice(0, 255) + "..."}
           </p>
         </div>
         <div className="grid-function">
-          <div className="helpful">
+          {/* <div className="helpful">
             <p>{props.details.helpful}</p>
             <small>Helpful</small>
           </div>
           <div className="comments">
             <p>19</p>
             <small>Comments</small>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

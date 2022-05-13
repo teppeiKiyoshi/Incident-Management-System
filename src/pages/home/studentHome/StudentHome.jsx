@@ -110,7 +110,7 @@ const StudentHome = () => {
             </div>
             <div className="content-body">
               <div className="right-body">
-                <Right details={dashLatestReport} />
+                {dashLatestReport && <Right details={dashLatestReport} />}
               </div>
               <div className="left-body">
                 {dashLatestReply && <Left details={dashLatestReply} />}

@@ -5,15 +5,53 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import DefaultProfilePic from "../../images/default-prof-pic.jpg";
+
+//AXIOS
+import axios from "axios";
 
 const EvaluatorCard = (props) => {
+  let mouseIsDown = false;
+
+  const deleteEvaluator = (id) => {
+    mouseIsDown = true;
+
+    setTimeout(function () {
+      if (mouseIsDown) {
+        const userId = id;
+
+        const response = axios
+          .post("http://localhost:5000/api/v1/auth/delete-evaluator", {
+            userId,
+          })
+          .catch((err) => {
+            console.log("Error", err);
+          });
+
+        if (response) {
+          console.log(response);
+
+          props.getEvaluators();
+        }
+      }
+    }, 3000);
+  };
+
+  const resetDelete = () => {
+    mouseIsDown = false;
+  };
+
   return (
     <div className="evalcard-main">
       <div className="card-wrapper">
         <div className="card-header"></div>
         <div className="avatar-wrapper">
           <img
-            src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80"
+            src={
+              props.details.profilePic === null
+                ? DefaultProfilePic
+                : props.details.profilePic
+            }
             alt="avatar"
             className="card-avatar"
           />
@@ -24,22 +62,26 @@ const EvaluatorCard = (props) => {
             <h4>Senior Evaluator</h4>
             <small>{props.details.email}</small>
             <div className="divider"></div>
-            <p>Last Seen Active: 4h ago</p>
-            <p>Last Activity: Commented on Forums</p>
           </div>
         </div>
         <div className="card-bottom">
           <div className="card-action">
-            <Tooltip title="View Evaluator's Activity" arrow>
+            {/* <Tooltip title="View Evaluator's Activity" arrow>
               <IconButton>
                 <RemoveRedEyeOutlinedIcon
                   style={{ textTransform: "capitalize" }}
                   className="action-btn"
                 />
               </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete Evaluator's Account" arrow>
-              <IconButton>
+            </Tooltip> */}
+            <Tooltip
+              title="Hold button for 3 Seconds to delete Evaluator"
+              arrow
+            >
+              <IconButton
+                onMouseDown={() => deleteEvaluator(props.details._id)}
+                onMouseUp={resetDelete}
+              >
                 <DeleteIcon
                   style={{ textTransform: "capitalize" }}
                   className="action-btn"

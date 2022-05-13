@@ -62,6 +62,25 @@ const getReports = async (req, res) => {
   return res.json(reports);
 };
 
+const getUserReports = async (req, res) => {
+  const id = req.body.id;
+
+  const reports = await Report.find({ reportedBy: id }).lean();
+
+  for (let report of reports) {
+    const evaluator = await Staff.findById(report.assignedTo);
+
+    if (evaluator) {
+      const fullname = `${evaluator.firstName} ${evaluator.lastName}`;
+      report["assignedToName"] = fullname;
+    } else {
+      report["assignedToName"] = "None";
+    }
+  }
+
+  return res.json({ reports });
+};
+
 const getReportsByKeyword = async (req, res) => {
   // STOPPED HERE, DISPLAYING SEARCH RESULTS
   const request = req.body.keyword;
@@ -73,6 +92,30 @@ const getReportsByKeyword = async (req, res) => {
     });
 
     if (reports.length === 0) return res.json({ msg: "No Results" });
+
+    for (let report of reports) {
+      const reportedBy = await User.findOne({ reportedBy: report.reportedBy });
+      const name = `${reportedBy.firstName} ${reportedBy.lastName}`;
+
+      report["reportedByName"] = name;
+    }
+    return res.json(reports);
+  } catch (err) {
+    return res.json({ error: err });
+  }
+};
+
+const getReportsByKeywordAutocomplete = async (req, res) => {
+  // STOPPED HERE, DISPLAYING SEARCH RESULTS
+  const request = req.body.keyword;
+  const keyword = new RegExp(request, "i");
+
+  try {
+    let reports = await Report.find({
+      $or: [{ mainConcern: keyword }],
+    }).select("-file");
+
+    if (reports.length === 0) return res.json([]);
 
     for (let report of reports) {
       const reportedBy = await User.findOne({ reportedBy: report.reportedBy });
@@ -205,9 +248,17 @@ const getComments = async (req, res) => {
       .lean();
 
     for (let comment of comments) {
-      const commenter = await Staff.findOne({
-        commentedBy: comment.commentedBy,
+      let commenter;
+      commenter = await Staff.findOne({
+        _id: comment.commentedBy,
       });
+
+      if (!commenter) {
+        commenter = await User.findOne({
+          _id: comment.commentedBy,
+        });
+      }
+
       const commentedBy = `${commenter.firstName} ${commenter.lastName}`;
 
       comment["commentedBy"] = commentedBy;
@@ -222,7 +273,6 @@ const getComments = async (req, res) => {
 const addComment = async (req, res) => {
   // Insert to Database
   const { comment, file, commentedTo, commentedBy } = req.body;
-
   try {
     const commentCreate = await Comment.create({
       commentedBy: commentedBy,
@@ -248,15 +298,29 @@ const addComment = async (req, res) => {
   }
 };
 
+const markAsHelpful = async (req, res) => {
+  const id = req.body.id;
+
+  const update = await Report.findOneAndUpdate(
+    { _id: id },
+    { status: "completed" },
+    { new: true }
+  );
+  return res.json({ update });
+};
+
 export {
   add,
   getReports,
   getLatestReports,
   getFilteredReports,
   getReportsByKeyword,
+  getReportsByKeywordAutocomplete,
   getReport,
+  getUserReports,
   setEvaluator,
   markAsUnres,
   getComments,
   addComment,
+  markAsHelpful,
 };

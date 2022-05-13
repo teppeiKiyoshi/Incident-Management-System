@@ -1,18 +1,13 @@
-- Search Autocomplete
-- Delete Students/Staff
-- Display Images
-
-// ATM
-- Closing a Forum
-
-- Student Notifications (DONE)
-- Filter Forums (DONE)
-- Search (DONE)
-- Settings (DONE)
+// TODO
+- Delete Students
+- Generate Report
+- Notify Evaluator if student replied
+- If student closed the report, hasReport = false
+- Generate Report
 
 
-
-
-// ALL TODOS
-- Student Notifications (If evaluator answered report)
-- Student Forums
+// FRONT END TO FIX
+- Navbar: remove dropdown, redundant sa sidebar
+- Settings page: input fields have fixed size, not responsive
+- Sidebar: remove dropdown for forums, redundant sa filter ng forum page
+- Forums Single Page: change font back to poppins

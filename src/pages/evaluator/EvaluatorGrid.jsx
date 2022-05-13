@@ -177,7 +177,7 @@ const EvaluatorGrid = () => {
                   </div>
                 </form>
               )}
-              <div className="filter-wrapper">
+              {/* <div className="filter-wrapper">
                 <div className="filter-eval">
                   <select name="report" id="report" className="filter-dropdown">
                     <option value="">-Select to Filter your Search-</option>
@@ -189,12 +189,16 @@ const EvaluatorGrid = () => {
                     </option>
                   </select>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="card-container">
               {evaluatorList.map((evaluator) => {
                 return (
-                  <EvaluatorCard key={evaluator._id} details={evaluator} />
+                  <EvaluatorCard
+                    key={evaluator._id}
+                    details={evaluator}
+                    getEvaluators={getEvaluators}
+                  />
                 );
               })}
             </div>

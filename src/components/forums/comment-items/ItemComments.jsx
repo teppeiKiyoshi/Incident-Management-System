@@ -17,6 +17,19 @@ const ItemComments = (props) => {
       <div className="footer-body">
         <p className="comment-info">{props.details.comment}</p>
       </div>
+      {props.details.file.length !== 0 && (
+        <div className="comment-images-container">
+          <div className="comment-image-container">
+            {props.details.file.map((image) => {
+              return (
+                <div className="comment-image">
+                  <img src={image} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

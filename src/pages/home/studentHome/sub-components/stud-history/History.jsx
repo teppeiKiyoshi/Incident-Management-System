@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 const ListTable = (props) => {
   const rowsTry = [...props.details];
 
-  return (
+  return rowsTry.length ? (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }}>
         <TableHead>
@@ -45,6 +45,8 @@ const ListTable = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
+  ) : (
+    <div className="no-reports-yet">No Reports Yet</div>
   );
 };
 

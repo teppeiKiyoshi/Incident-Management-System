@@ -88,29 +88,54 @@ const getStats = async (req, res) => {
 };
 
 const getStudDash = async (req, res) => {
+  let latestReply;
   // Get latest report first
-  const latestReport = await Report.findOne({
+  let latestReport = await Report.findOne({
     reportedBy: req.body.userId,
   })
+    .select("-file")
     .sort({ created_at: -1 })
     .lean();
 
+  if (!latestReport) latestReport = null;
+  else {
+    latestReply = await Comment.findOne({
+      commentedTo: latestReport._id,
+    })
+      .sort({ createdAt: -1 })
+      .lean();
+  }
   // Get Latest Reply
-  const latestReply = await Comment.findOne({
-    commentedTo: latestReport._id,
-  })
-    .sort({ createdAt: -1 })
-    .lean();
 
-  // Get Details of Eval
-  const evaluator = await Staff.findById(latestReply.commentedBy);
-  latestReply["profilePic"] = evaluator.profilePic;
-  latestReply["evalFullname"] = `${evaluator.firstName} ${evaluator.lastName}`;
+  if (latestReply) {
+    // Get Details of Eval
+    let evaluator = await Staff.findById(latestReply.commentedBy);
+
+    if (evaluator === null) {
+      evaluator = await User.findById(latestReply.commentedBy);
+    }
+
+    if (evaluator !== null) {
+      latestReply["profilePic"] = evaluator.profilePic;
+      latestReply[
+        "evalFullname"
+      ] = `${evaluator.firstName} ${evaluator.lastName}`;
+    } else {
+      latestReply["profilePic"] = null;
+      latestReply["evalFullname"] = `Deleted Evaluator`;
+    }
+  } else {
+    latestReply = null;
+  }
 
   // Get all reports of user for table
-  const allReports = await Report.find({
+  let allReports = await Report.find({
     reportedBy: req.body.userId,
   }).lean();
+
+  if (!allReports) {
+    allReports = null;
+  }
 
   return res.json({ latestReport, allReports, latestReply });
 };

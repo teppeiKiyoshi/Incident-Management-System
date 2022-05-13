@@ -19,9 +19,11 @@ const Right = (props) => {
     <>
       <div className="right-header">
         <h2 className="right-header-title">Latest Report Details</h2>
-        <button className="route-btn" onClick={goToReport}>
-          View Report
-        </button>
+        {props.details && (
+          <button className="route-btn" onClick={goToReport}>
+            View Report
+          </button>
+        )}
       </div>
       <div className="right-content">
         <div className="right">

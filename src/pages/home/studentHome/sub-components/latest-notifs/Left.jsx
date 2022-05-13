@@ -49,28 +49,32 @@ const Left = ({ details }) => {
           View Report
         </button>
       </div>
-      <div className="left-content">
-        <div className="item-wrapper">
-          <div className="img-wrapper">
-            <img
-              src={
-                details.profilePic === null
-                  ? DefaultProfilePic
-                  : details.profilePic
-              }
-              alt="avatar"
-              className="item-avatar"
-            />
-          </div>
-          <div className="item-content">
-            <p className="eval-name">{details.evalFullname}</p>
-            <p className="notif-details">{details.comment}</p>
-          </div>
-          <div className="item-detail">
-            <p className="time">{createdAt}</p>
+      {details ? (
+        <div className="left-content">
+          <div className="item-wrapper">
+            <div className="img-wrapper">
+              <img
+                src={
+                  details.profilePic === null
+                    ? DefaultProfilePic
+                    : details.profilePic
+                }
+                alt="avatar"
+                className="item-avatar"
+              />
+            </div>
+            <div className="item-content">
+              <p className="eval-name">{details.evalFullname}</p>
+              <p className="notif-details">{details.comment}</p>
+            </div>
+            <div className="item-detail">
+              <p className="time">{createdAt}</p>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <span>No Replies Yet</span>
+      )}
     </>
   );
 };
