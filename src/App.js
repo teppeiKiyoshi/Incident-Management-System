@@ -36,7 +36,7 @@ function App() {
         <Routes>
           <Route path='/'>
             <Route index element={<MainPage />} />
-            <Route path='dashboard' element={<Home />} />
+            <Route path='dashboard' element={<StudentHome />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<Signup />} />
             <Route path='users'>
