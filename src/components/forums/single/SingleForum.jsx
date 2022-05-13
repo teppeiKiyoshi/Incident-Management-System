@@ -1,139 +1,360 @@
-import { React, useState } from 'react';
-import './singleF.scss';
-import AddComment from '../modal/AddComment';
-import ItemComments from '../comment-items/ItemComments';
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+import React from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import "./singleF.scss";
+import AddComment from "../modal/AddComment";
+import ItemComments from "../comment-items/ItemComments";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { LinearProgress, CircularProgress } from "@mui/material";
+// Axios
+import axios from "axios";
+
+// react-toastify IMPORTS
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SingleForum = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [isAssigned, setIsAssigned] = useState(false);
+  const [reportDetails, setReportDetails] = useState();
+  const [evaluatorName, setEvaluatorName] = useState();
+  const [assignedTo, setAssignedTo] = useState();
+  const { forumId } = useParams();
+  const [comments, setComments] = useState();
+  const [commentNumber, setCommentNumber] = useState(0);
+
+  const [loading, setLoading] = useState(true);
+  const [assignLoading, setAssignLoading] = useState(false);
+  const [unresLoading, setUnresLoading] = useState(false);
+
+  const userId = JSON.parse(localStorage.getItem("details")).id;
+
+  const getForumDetails = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/report/get-report",
+        { id: forumId }
+      );
+
+      setReportDetails(response.data);
+      setEvaluatorName(response.data.evaluator);
+      setAssignedTo(response.data.assignedTo);
+
+      if (response.data.assignedTo !== null) setIsAssigned(true);
+    } catch (err) {
+      toast.error(err);
+    }
+    setLoading(false);
+  };
+
+  const getComments = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/report/get-comments",
+        { id: forumId }
+      );
+
+      const commentsArr = response.data.comments;
+
+      setCommentNumber(commentsArr.length);
+      setComments(() => {
+        return commentsArr.map((comment) => {
+          return <ItemComments key={comment._id} details={comment} />;
+        });
+      });
+    } catch (err) {
+      toast.error(err);
+    }
+    setLoading(false);
+  };
+
+  //Effect - get report details
+  useEffect(() => {
+    getForumDetails();
+    getComments();
+  }, []);
+
+  const setEvaluator = async () => {
+    setAssignLoading(true);
+    const email = JSON.parse(localStorage.getItem("details")).email;
+    const reportId = forumId;
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/report/set-evaluator",
+        { reportId: reportId, email: email }
+      );
+
+      if (response.data.msg.status == "error") {
+        toast.error(response.data.msg);
+      } else {
+        setIsAssigned(true);
+        toast.success(response.data.msg);
+        setEvaluatorName(response.data.fullname);
+        setAssignedTo(response.data.assignedTo);
+      }
+
+      setAssignLoading(false);
+    } catch (err) {
+      toast.error(err);
+      setAssignLoading(false);
+    }
+
+    setAssignLoading(false);
+  };
+
+  const markAsUnres = async () => {
+    setUnresLoading(true);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/report/mark-as-unres",
+        { forumId: forumId }
+      );
+
+      if (response.data.status == "success") {
+        toast.success(response.data.msg);
+        setUnresLoading(false);
+      } else {
+        toast.error(response.data.msg);
+        setUnresLoading(false);
+      }
+
+      setReportDetails((prev) => {
+        return {
+          ...prev,
+          unresolvable: !prev.unresolvable,
+        };
+      });
+    } catch (err) {
+      toast.error(err);
+      setUnresLoading(false);
+    }
+  };
 
   const showComment = () => {
     setOpen(!open);
   };
+
+  const joinButton =
+    !isAssigned &&
+    JSON.parse(localStorage.getItem("details")).position !== "student" ? (
+      <button className="assign-btn" onClick={setEvaluator}>
+        + Join
+      </button>
+    ) : null;
+
+  const markAsHelpful = async () => {
+    // Status = completed
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/report/mark-as-helpful",
+        { id: reportDetails._id }
+      );
+      console.log(response.data);
+    } catch (err) {}
+  };
+
+  const formatDate = (dateStr) => {
+    let date = new Date(dateStr);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes + " " + ampm;
+
+    return monthNames[date.getMonth()] + " " + date.getDate() + " / " + strTime;
+  };
+
   return (
-    <div className='single-main'>
-      <div className='single-container'>
-        <div className='single-left'>
-          <div className='left-header'>
-            <img
-              src='https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80'
-              alt='avatar'
-              className='forum-avatar'
-            />
-            <div className='header-info'>
-              <h3 className='header-name'>Emanuelle Martin</h3>
-              <small className='sub-heading'>Article Author</small>
-            </div>
-            <div className='assign-content'>
-              {!isAssigned && (
-                <button
-                  className='assign-btn'
-                  onClick={() => setIsAssigned(true)}
-                >
-                  + Join
-                </button>
-              )}
-            </div>
-          </div>
-          <div className='left-body'>
-            <div className='body-wrapper'>
-              <div className='body-title'>
-                <h3 className='report-title'>
-                  I have problems the concerns the units required per semester
+    <div className="single-main">
+      {loading ? (
+        <LinearProgress color="secondary" />
+      ) : (
+        <div className="single-container">
+          <div className="single-left">
+            <div className="left-header">
+              <img
+                src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80"
+                alt="avatar"
+                className="forum-avatar"
+              />
+              <div className="header-info">
+                <h3 className="header-name">
+                  {reportDetails && reportDetails.author}
                 </h3>
+                <small className="sub-heading">Article Author</small>
               </div>
-              <div className='body-content'>
-                <p className='report-content'>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum.
-                  <br />
-                  <br />
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using 'Content
-                  here, content here', making it look like readable English.
-                  Many desktop publishing packages and web page editors now use
-                  Lorem Ipsum as their default model text, and a search for
-                  'lorem ipsum' will uncover many web sites still in their
-                  infancy. Various versions have evolved over the years,
-                  sometimes by accident, sometimes on purpose (injected humour
-                  and the like).
-                </p>
-              </div>
-              <div className='helpful-wrapper'>
-                <p className='help-title'>Was this helpful?</p>
-                <small className='help-yes'>Yes</small>
-                <small className='help-no'>No</small>
-              </div>
-              <div className='body-footer'>
-                <div className='footer-header'>
-                  <h3 className='comment-title'>
-                    Replies <span className='comment-count'>(10)</span>{' '}
-                  </h3>
-                  {!open ? (
-                    <MdKeyboardArrowDown
-                      className='btn-icon'
-                      onClick={showComment}
-                    />
-                  ) : (
-                    <MdKeyboardArrowUp
-                      className='btn-icon'
-                      onClick={showComment}
-                    />
-                  )}
-                </div>
-                {open && (
-                  <div className='footer-container'>
-                    <ItemComments />
-                    <ItemComments />
-                  </div>
+              <div className="assign-content">
+                {assignLoading ? (
+                  <CircularProgress color="secondary" />
+                ) : (
+                  joinButton
                 )}
-                <div className='btn-container'>
-                  <AddComment />
+              </div>
+            </div>
+            <div className="left-body">
+              <div className="body-wrapper">
+                <div className="body-title">
+                  <h3 className="report-title">
+                    {reportDetails && reportDetails.mainConcern}
+                  </h3>
+                </div>
+                <div className="body-content">
+                  <p className="report-content">
+                    {reportDetails && reportDetails.concernDescription}
+                  </p>
+                </div>
+                <span>Attachments</span>
+                <div className="images-container">
+                  <div className="image-container">
+                    {reportDetails &&
+                      reportDetails.file.map((image) => {
+                        return (
+                          <div className="image">
+                            <img src={image} />
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+
+                {reportDetails &&
+                JSON.parse(localStorage.getItem("details")).position ===
+                  "student" &&
+                reportDetails.reportedBy ===
+                  JSON.parse(localStorage.getItem("details")).id &&
+                comments &&
+                reportDetails.status !== "completed" ? (
+                  <div className="helpful-wrapper">
+                    <p className="help-title">
+                      Was this helpful? if you think so,
+                    </p>
+                    <small className="help-yes" onClick={markAsHelpful}>
+                      Close the discussion
+                    </small>
+                  </div>
+                ) : null}
+                <div className="body-footer">
+                  <div className="footer-header">
+                    <h3 className="comment-title">
+                      Replies{" "}
+                      <span className="comment-count">({commentNumber})</span>{" "}
+                    </h3>
+                    {!open ? (
+                      <MdKeyboardArrowDown
+                        className="btn-icon"
+                        onClick={showComment}
+                      />
+                    ) : (
+                      <MdKeyboardArrowUp
+                        className="btn-icon"
+                        onClick={showComment}
+                      />
+                    )}
+                  </div>
+                  {open && <div className="footer-container">{comments}</div>}
+                  <div className="btn-container">
+                    {reportDetails &&
+                    (assignedTo === userId ||
+                      reportDetails.reportedBy === userId) ? (
+                      <AddComment forumId={forumId} func={getComments} />
+                    ) : null}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className='single-right'>
-          <div className="right-header">
-          <h3 className='right-title'>Forum Article Info</h3>
-          <button className="print-btn">Export</button>
-          </div>
-          <div className='divider'></div>
-          <div className='right-info'>
-            <p className='evaluator'>
-              {isAssigned
-                ? `Evaluated by Dwain Magracia`
-                : 'No Evaluator Assigned Yet  '}
-            </p>
-            <p className='created-date'>Created on February 26, 2022</p>
-            <p className='update-date'>Last Updated: April 02, 2022</p>
-            <div className='info-tags'>
-              <div className='tag-header'>
-                <h5 className='tag-title'>Applies to:</h5>
-                <div className='tags'>
-                  <span className='tag-item'>Incomplete Grades</span>
+          <div className="single-right">
+            <div className="right-header">
+              <h3 className="right-title">Forum Article Info</h3>
+              <button className="print-btn">Export</button>
+            </div>
+            <div className="divider"></div>
+            <div className="right-info">
+              <p className="evaluator">
+                {evaluatorName
+                  ? `Assigned to ${evaluatorName}`
+                  : "No evaluator assigned yet"}
+              </p>
+              <p className="created-date">
+                Created on{" "}
+                {reportDetails && formatDate(reportDetails.createdAt)}
+              </p>
+              <p className="update-date">
+                Last Updated:{" "}
+                {reportDetails && formatDate(reportDetails.updatedAt)}
+              </p>
+              <div className="info-tags">
+                <div className="tag-header">
+                  <h5 className="tag-title">Applies to:</h5>
+                  <div className="tags">
+                    <span className="tag-item">
+                      {reportDetails && reportDetails.incident}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className='case-status'>
-              <h4 className='case-title'>Mark As:</h4>
-              <button className='unresolvable-btn'>Unresolvable</button>
+              <div className="case-status">
+                {JSON.parse(localStorage.getItem("details")).position !==
+                "student" ? (
+                  reportDetails && reportDetails.unresolvable ? (
+                    unresLoading ? (
+                      <CircularProgress color="secondary" />
+                    ) : (
+                      <button
+                        className="unresolvable-btn"
+                        onClick={markAsUnres}
+                      >
+                        Unmark as Unresolvable
+                      </button>
+                    )
+                  ) : unresLoading ? (
+                    <CircularProgress color="secondary" />
+                  ) : (
+                    <button className="unresolvable-btn" onClick={markAsUnres}>
+                      Mark as Unresolvable
+                    </button>
+                  )
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {/* REACT-TOASTIFY CONTAINER */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnFocusLoss
+        closeOnClick
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
