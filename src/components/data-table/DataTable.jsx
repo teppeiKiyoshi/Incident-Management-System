@@ -63,7 +63,10 @@ const DataTable = () => {
       renderCell: (params) => {
         return (
           <div className="action-cell">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link
+              to={"/users/" + params.row.id}
+              style={{ textDecoration: "none" }}
+            >
               <Tooltip title="View User's Profile" arrow>
                 <IconButton>
                   <RemoveRedEyeIcon

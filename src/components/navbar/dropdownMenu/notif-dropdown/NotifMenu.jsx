@@ -1,8 +1,11 @@
 import React from "react";
 import "./notifs.scss";
-import { ReactComponent as Password } from "../../../../icons/arrow.svg";
 
 const NotifMenu = ({ details }) => {
+  // const goToReport = (str) => {
+  //   window.location = "/forums/" + str;
+  // };
+
   const NotifItems = () => {
     const items = details.map((detail) => {
       return (

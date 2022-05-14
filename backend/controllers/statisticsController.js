@@ -131,10 +131,22 @@ const getStudDash = async (req, res) => {
   // Get all reports of user for table
   let allReports = await Report.find({
     reportedBy: req.body.userId,
-  }).lean();
+  })
+    .select("-file")
+    .lean();
 
   if (!allReports) {
     allReports = null;
+  } else {
+    for (let report of allReports) {
+      if (report.assignedTo !== null) {
+        const evaluator = await Staff.findById(report.assignedTo);
+
+        report["evalFullname"] = `${evaluator.firstName} ${evaluator.lastName}`;
+      } else {
+        report["evalFullname"] = null;
+      }
+    }
   }
 
   return res.json({ latestReport, allReports, latestReply });

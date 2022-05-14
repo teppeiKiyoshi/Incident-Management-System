@@ -22,6 +22,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Login = () => {
   // STATE VARIABLES
 
   const [values, setValues] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
 
   // IF REGISTRATION SUCCESSFUL, ALERT AND CONFETTI
@@ -74,6 +76,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const submittedValues = { ...values };
 
@@ -85,6 +88,7 @@ const Login = () => {
 
       if (response.data.msg) {
         toast.error(response.data.msg);
+        setLoading(false);
       } else {
         const token = response.data.token;
         const details = response.data.details;
@@ -92,11 +96,14 @@ const Login = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("details", JSON.stringify(details));
 
+        setLoading(false);
+
         if (details.position == "student") navigate("/student-dashboard");
         else navigate("/dashboard");
       }
     } catch (err) {
       toast.error(err);
+      setLoading(false);
     }
   };
 
@@ -151,7 +158,12 @@ const Login = () => {
             <p className="to-signup" onClick={routeChange}>
               Don't have an account yet?
             </p>
-            <button className="login-btn">Sign In</button>
+            <br />
+            {loading ? (
+              <CircularProgress color="secondary" />
+            ) : (
+              <button className="login-btn">Sign In</button>
+            )}
           </form>
         </div>
         <div className="img-wrapper">

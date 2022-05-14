@@ -30,14 +30,14 @@ const ListTable = (props) => {
               <TableCell className="tableCell">{row._id}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
-                  {row.assignedTo === null ? "None" : row.assignedTo}
+                  {row.assignedTo === null ? "None" : row.evalFullname}
                 </div>
               </TableCell>
               <TableCell className="tableCell">
                 {new Date(row.createdAt).toDateString()}
               </TableCell>
               <TableCell className="tableCell">{row.incident}</TableCell>
-              <TableCell className="tableCell">
+              <TableCell className={`tableCell ${row.status}`}>
                 <span className={`status ${row.status}`}>{row.status}</span>
               </TableCell>
             </TableRow>

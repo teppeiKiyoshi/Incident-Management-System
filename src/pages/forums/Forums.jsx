@@ -68,9 +68,16 @@ const Forums = () => {
   }, []);
 
   const getAllReports = async () => {
+    const details = JSON.parse(localStorage.getItem("details"));
+    let id;
+
+    if (details.position === "student") id = details.id;
+    else id = "";
+
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/report/get-reports"
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/report/get-reports",
+        { id: id }
       );
 
       setReports(
@@ -109,18 +116,21 @@ const Forums = () => {
   const dropdownChange = async (e) => {
     setReportsLoad(true);
     const value = e.target.value;
-
+    const position = JSON.parse(localStorage.getItem("details")).position;
+    const userId = JSON.parse(localStorage.getItem("details")).id;
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/report/get-filtered-reports",
-        { value }
+        { value, position, userId }
       );
 
-      setReports(
-        response.data.map((report) => {
-          return <ForumsTable key={report._id} details={report} />;
-        })
-      );
+      if (response.data) {
+        setReports(
+          response.data.map((report) => {
+            return <ForumsTable key={report._id} details={report} />;
+          })
+        );
+      }
       setReportsLoad(false);
     } catch (err) {
       toast.error(err);
@@ -211,10 +221,10 @@ const Forums = () => {
 
         {reportsLoad ? (
           <LinearProgress color="secondary" />
-        ) : reports ? (
+        ) : reports && reports.length !== 0 ? (
           reports
         ) : (
-          "No results"
+          <div className="no-results">No Results</div>
         )}
       </div>
 

@@ -1,12 +1,14 @@
 // TODO (FOR DWAIN)
 - Delete Students
 - Generate Report
-- Notify Evaluator if student replied
-- If student closed the report, hasReport = false
-- Sidebar, Remove "Evaluators and Students" for Evaluators
-- Generate Report
-- Fix Logo
 
+
+- View Student Profile
+- Notify Evaluator if student replied
+- Fix Logo
+- Close discussion loading
+- Sidebar, Remove "Evaluators and Students" for Evaluators
+- If student closed the report, hasReport = false
 
 // FRONT END TO FIX
 - Navbar: remove dropdown, redundant sa sidebar

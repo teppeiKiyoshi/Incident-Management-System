@@ -54,6 +54,17 @@
       }
     }
 
+    .no-results {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: rgba(129, 129, 129, 0.7);
+    }
+
     .grid-main {
       width: 90%;
       display: flex;

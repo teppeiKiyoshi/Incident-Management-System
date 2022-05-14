@@ -18,7 +18,7 @@ import {
 } from "../controllers/reportController.js";
 
 router.route("/add").post(add);
-router.route("/get-reports").get(getReports);
+router.route("/get-reports").post(getReports);
 router.route("/get-reports-keyword").post(getReportsByKeyword);
 router.route("/reports-autocomplete").post(getReportsByKeywordAutocomplete);
 router.route("/get-latest-reports").post(getLatestReports);

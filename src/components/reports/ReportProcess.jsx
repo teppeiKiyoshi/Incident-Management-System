@@ -407,7 +407,7 @@ const ReportProcess = () => {
           </Typography>
           <br />
           {submitLoading ? (
-            <CircularProgress />
+            <CircularProgress color="secondary" />
           ) : (
             <div>
               <Button

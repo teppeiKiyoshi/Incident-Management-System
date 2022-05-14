@@ -12,6 +12,7 @@ import PsychologyIcon from "@mui/icons-material/Psychology";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import sidebarLogo from "../../images/logos/logoTxt.png";
+import sidebarLogoDark from "../../images/logos/logoTxt-dark.png";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import defaultProfPic from "../../images/default-prof-pic.jpg";
 
@@ -73,7 +74,7 @@ const Sidebar = () => {
     <div className="sidebar-main">
       <div className="sidebar-top">
         <span className="sidebar-logo" onClick={route_toDashboard}>
-          <img src={sidebarLogo} alt="Filingo" className="img-logo" />
+          <img src={sidebarLogoDark} alt="Filingo" className="img-logo" />
         </span>
       </div>
       <div className="sidebar-header">
@@ -98,7 +99,7 @@ const Sidebar = () => {
             </div>
           </NavLink>
 
-          {position !== "student" ? (
+          {position !== "student" && position !== "evaluator" ? (
             <div>
               <p className="title">PEOPLE</p>
               <NavLink to="/users" style={navLinkStyles}>
