@@ -193,7 +193,7 @@ const getFilteredReports = async (req, res) => {
 const getReport = async (req, res) => {
   const id = req.body.id;
   const report = await Report.findOne({ _id: id }).lean();
-  const reportedBy = await User.finrsdOne({ reportedBy: report.reportedBy });
+  const reportedBy = await User.findOne({ reportedBy: report.reportedBy });
   const assignedTo =
     report.assignedTo === null
       ? null

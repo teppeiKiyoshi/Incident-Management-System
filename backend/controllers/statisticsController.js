@@ -99,6 +99,12 @@ const getStudDash = async (req, res) => {
 
   if (!latestReport) latestReport = null;
   else {
+    const evaluator = await Staff.findById(latestReport.assignedTo);
+
+    latestReport[
+      "evalFullname"
+    ] = `${evaluator.firstName} ${evaluator.lastName}`;
+
     latestReply = await Comment.findOne({
       commentedTo: latestReport._id,
     })

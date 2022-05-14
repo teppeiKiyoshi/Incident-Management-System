@@ -22,6 +22,7 @@ import Assigned from "./components/forums/assigned-reports/Assigned";
 import Signup from "./pages/register/Signup";
 import SingleView from "./pages/forums/singleView/SingleView";
 import Report from "./pages/addPost/Report";
+import PdfComponent from "./components/pdf-report/pdf.component";
 //for dark mode
 import "./mode/darkMode.scss";
 import { useContext } from "react";
@@ -69,6 +70,9 @@ function App() {
             </Route>
             <Route path="settings">
               <Route index element={<Settings />} />
+            </Route>
+            <Route path="report-pdf/:id">
+              <Route index element={<PdfComponent />} />
             </Route>
             <Route path="logout" />
           </Route>

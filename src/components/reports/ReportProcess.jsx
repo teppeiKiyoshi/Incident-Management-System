@@ -131,6 +131,27 @@ const ReportProcess = () => {
     }
   };
 
+  const formatIncident = (string) => {
+    switch (string) {
+      case "remainingBalance":
+        return "Remaining Balance";
+      case "failedSubj":
+        return "Failed Subject";
+      case "addSubj":
+        return "Adding Subject";
+      case "changeSubj":
+        return "Changing Subject";
+      case "incSubj":
+        return "Subjects with INC";
+      case "prevSem":
+        return "Unavailable Subjects from Previous Semester";
+      case "currSem":
+        return "Unavailable Subjects from Previous Semester";
+      case "others":
+        return "Others";
+    }
+  };
+
   const CssTextField = styled(TextField)({
     "& label.Mui-focused": {
       color: "#893dff",
@@ -397,7 +418,7 @@ const ReportProcess = () => {
             Please review your report before submitting:
             <br />
             <br />
-            Incident: {formValues.incident}
+            Incident: {formatIncident(formValues.incident)}
             <br />
             <br />
             Main Concern: {formValues.mainConcern}

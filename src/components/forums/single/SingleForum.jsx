@@ -193,6 +193,10 @@ const SingleForum = () => {
     return monthNames[date.getMonth()] + " " + date.getDate() + " / " + strTime;
   };
 
+  const exportReport = (str) => {
+    navigate("/report-pdf/" + str);
+  };
+
   return (
     <div className="single-main">
       {loading ? (
@@ -316,7 +320,12 @@ const SingleForum = () => {
           <div className="single-right">
             <div className="right-header">
               <h3 className="right-title">Forum Article Info</h3>
-              <button className="print-btn">Export</button>
+              <button
+                className="print-btn"
+                onClick={() => exportReport(forumId)}
+              >
+                Export
+              </button>
             </div>
             <div className="divider"></div>
             <div className="right-info">
