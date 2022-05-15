@@ -35,7 +35,7 @@ const ForumsTable = (props) => {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     var strTime = hours + ":" + minutes + " " + ampm;
 
-    return monthNames[date.getMonth()] + " " + date.getDate() + " / " + strTime;
+    return monthNames[date.getMonth()] + " " + date.getDate() + " - " + strTime;
   };
 
   const formatIncident = (string) => {

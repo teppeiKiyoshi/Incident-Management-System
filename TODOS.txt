@@ -1,8 +1,12 @@
 // TODO (FOR DWAIN)
-- Delete Students
 - Generate Report
+- Staff Dashboard Query Data
+- Six Month Sprint invert
+- Fix Latest Filed Reports staff dashboard
+- Deactivate account
 
-
+// DONE
+- Delete Students
 - View Student Profile
 - Notify Evaluator if student replied
 - Fix Logo
