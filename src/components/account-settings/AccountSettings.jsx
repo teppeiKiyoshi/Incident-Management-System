@@ -347,6 +347,7 @@ const AccountSettings = () => {
                   <p className="details-item__title">Academic Information</p>
                 </div>
                 <div className="accSettings-left__input-item-wrapper">
+                  
                   <TextField
                     variant="outlined"
                     label="Student Number"
@@ -409,14 +410,6 @@ const AccountSettings = () => {
                   onChange={handleChange}
                   sx={{ width: "210px" }}
                 />
-              </div>
-            </div>
-            <div className="accSettings-left__details-item">
-              <div className="accSettings-left__details-item-wrapper">
-                <p className="details-item__title">Deactivate Account</p>
-              </div>
-              <div className="accSettings-left__input-item-wrapper">
-                <button className="deact-btn">Deactivate</button>
               </div>
             </div>
           </div>

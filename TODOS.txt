@@ -9,7 +9,6 @@
 
 
 // FRONT END TO FIX
-- Navbar: remove dropdown, redundant sa sidebar
 - Settings page: input fields have fixed size, not responsive
 - Sidebar: remove dropdown for forums, redundant sa filter ng forum page
-- Forums Single Page: change font back to poppins
+- Forums Single Page: change font back to poppins 
