@@ -12,11 +12,9 @@ import PsychologyIcon from "@mui/icons-material/Psychology";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import sidebarLogo from "../../images/logos/logoTxt.png";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import defaultProfPic from "../../images/default-prof-pic.jpg";
 
 const Sidebar = () => {
-  const [subMenuOpen, setSubMenuOpen] = useState(false);
   const [position, setPosition] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [profilePic, setProfilePic] = useState();
@@ -65,8 +63,6 @@ const Sidebar = () => {
 
     route_Mainpage();
   };
-
-  const noPropagation = (e) => e.stopPropagation();
 
   return (
     <div className="sidebar-main">
@@ -125,43 +121,7 @@ const Sidebar = () => {
               <span className="sidebar-items collapsible">
                 <QuestionAnswerIcon className="sidebar-icons" />
                 <span className="sidebar-name">Forums</span>
-                <span
-                  className="close"
-                  onClick={() => setSubMenuOpen(!subMenuOpen)}
-                >
-                  {!subMenuOpen ? (
-                    <MdKeyboardArrowDown />
-                  ) : (
-                    <MdKeyboardArrowUp />
-                  )}
                 </span>
-
-                {subMenuOpen && (
-                  <ul className="collapse__menu">
-                    <NavLink
-                      to="/forums/completed-reports"
-                      style={navLinkStyles}
-                      onClick={noPropagation}
-                    >
-                      <li className="collapse__sublink">Completed</li>
-                    </NavLink>
-                    <NavLink
-                      to="/forums/assigned-reports"
-                      style={navLinkStyles}
-                      onClick={noPropagation}
-                    >
-                      <li className="collapse__sublink">Assigned</li>
-                    </NavLink>
-                    <NavLink
-                      to="/forums/unresolved-reports"
-                      style={navLinkStyles}
-                      onClick={noPropagation}
-                    >
-                      <li className="collapse__sublink">Unresolvable</li>
-                    </NavLink>
-                  </ul>
-                )}
-              </span>
             </div>
           </NavLink>
           <NavLink to="/faqs" style={navLinkStyles}>
