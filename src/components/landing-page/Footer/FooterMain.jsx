@@ -86,7 +86,7 @@ const FooterMain = () => {
                 <span>
                   4th Floor Pimentel Building,
                   <br />
-                  825 EDSA Quezon City,
+                  Guinhawa Malolos City,
                   <br />
                   Philippines 3000
                 </span>
@@ -96,9 +96,9 @@ const FooterMain = () => {
                   <FaPhoneAlt className='fa-brands' />
                 </span>
                 <p>
-                  <a>+63 912 345 6789</a>
+                  <a>(044) 919 7800</a>
                   <br />
-                  <a>+63.2.426.3140</a>
+                  <a>+63 123 456 7890</a>
                 </p>
               </li>
               <li>
@@ -106,7 +106,7 @@ const FooterMain = () => {
                   <FaEnvelope className='fa-brands' />
                 </span>
                 <p>
-                  <a>info@bayanacademy.edu.ph</a>
+                  <a>officeofthedean.cict@bulsu.edu.ph</a>
                 </p>
               </li>
             </ul>

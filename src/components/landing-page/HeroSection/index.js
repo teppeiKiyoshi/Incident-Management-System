@@ -21,8 +21,8 @@ import {
 const HeroSection = () => {
   const navigate = useNavigate();
 
-  const route_Homepage = () =>{ 
-    let path = '/dashboard'; 
+  const route_login = () =>{ 
+    let path = '/login'; 
     navigate(path);
   }
   const [hover, setHover] = useState(false);
@@ -52,7 +52,7 @@ const HeroSection = () => {
             spy={true}
             exact='true'
             offset={-80}
-            onClick={route_Homepage}
+            onClick={route_login}
           >
             Get Started {hover ? <ArrowForward /> : <ArrowRight />}
           </Button>
