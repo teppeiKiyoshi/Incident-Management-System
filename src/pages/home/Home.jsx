@@ -59,7 +59,7 @@ const Home = () => {
             </div>
             <div className="list-container">
               <div className="list-title">Latest Filed Reports</div>
-              <ListTable />
+              <ListTable id={null} />
             </div>
           </div>
         )}

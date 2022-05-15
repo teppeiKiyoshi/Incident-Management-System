@@ -34,7 +34,28 @@ const ForumsTable = (props) => {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     var strTime = hours + ":" + minutes + " " + ampm;
 
-    return monthNames[date.getMonth()] + " " + date.getDate() + " / " + strTime;
+    return monthNames[date.getMonth()] + " " + date.getDate() + " - " + strTime;
+  };
+
+  const formatIncident = (string) => {
+    switch (string) {
+      case "remainingBalance":
+        return "Remaining Balance";
+      case "failedSubj":
+        return "Failed Subject";
+      case "addSubj":
+        return "Adding Subject";
+      case "changeSubj":
+        return "Changing Subject";
+      case "incSubj":
+        return "Subjects with INC";
+      case "prevSem":
+        return "Unavailable Subjects from Previous Semester";
+      case "currSem":
+        return "Unavailable Subjects from Previous Semester";
+      case "others":
+        return "Others";
+    }
   };
 
   return (
@@ -43,9 +64,14 @@ const ForumsTable = (props) => {
         <div className="grid-items">
           <div className="tag-items">
             {/* add report type tags then query whether they exist to specific forum post see forums scss for styling and class name  */}
-            <span className="report-type inc">{props.details.incident}</span>
-            <span className="report-type completed">
-              {props.details.status}
+            <span className="report-type inc">
+              {formatIncident(props.details.incident)}
+            </span>
+            <span className={`report-type ${props.details.status}`}>
+              {props.details.status
+                .split(" ")
+                .map((w) => w[0].toUpperCase() + w.substring(1).toLowerCase())
+                .join(" ")}
             </span>
           </div>
           <h3 className="title" onClick={to_singlePage}>

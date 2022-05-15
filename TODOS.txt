@@ -1,12 +1,21 @@
 // TODO (FOR DWAIN)
-- Delete Students
-- Generate Report
-- Notify Evaluator if student replied
-- If student closed the report, hasReport = false
-- Sidebar, Remove "Evaluators and Students" for Evaluators
-- Generate Report
-- Fix Logo
+- Deactivate account
 
+
+
+
+// DONE
+- Staff Dashboard Query Data
+- Six Month Sprint invert
+- Fix Latest Filed Reports staff dashboard
+- Generate Report
+- Delete Students
+- View Student Profile
+- Notify Evaluator if student replied
+- Fix Logo
+- Close discussion loading
+- Sidebar, Remove "Evaluators and Students" for Evaluators
+- If student closed the report, hasReport = false
 
 // FRONT END TO FIX
 - Settings page: input fields have fixed size, not responsive

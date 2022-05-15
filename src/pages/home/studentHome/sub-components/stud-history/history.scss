@@ -27,15 +27,15 @@
     padding: 5px 14px;
     border-radius: 5px;
 
-    &.Approved {
+    &.completed {
       color: green;
       background-color: rgba(0, 128, 0, 0.151);
     }
-    &.Processing {
+    &.processing {
       color: #aa7af0;
       background-color: rgba(170, 122, 240, 0.151);
     }
-    &.Pending {
+    &.pending {
       color: goldenrod;
       background-color: rgba(189, 189, 3, 0.103);
     }

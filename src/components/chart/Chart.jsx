@@ -19,6 +19,8 @@ const Chart = ({ aspect, data }) => {
     for (const property in data) {
       dataArr.push({ name: property, Total: data[property] });
     }
+
+    setDataArr(dataArr.reverse());
   }, []);
 
   return (

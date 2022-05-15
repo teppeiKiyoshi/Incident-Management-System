@@ -13,7 +13,7 @@ const Widgets = ({ type, count }) => {
     case "user":
       data = {
         title: "Users",
-        link: "See All Users",
+        // link: "See All Users",
         counter: count.userCount,
         icon: (
           <PersonOutlineIcon
@@ -29,7 +29,7 @@ const Widgets = ({ type, count }) => {
     case "completed":
       data = {
         title: "Completed",
-        link: "View Completed Incidents",
+        // link: "View Completed Incidents",
         counter: count.completedReports,
         icon: (
           <CreditScoreIcon
@@ -45,7 +45,7 @@ const Widgets = ({ type, count }) => {
     case "pending":
       data = {
         title: "Pending",
-        link: "View Pending Incidents",
+        // link: "View Pending Incidents",
         counter: count.pendingReports,
         icon: (
           <PendingActionsIcon
@@ -61,7 +61,7 @@ const Widgets = ({ type, count }) => {
     case "total":
       data = {
         title: "Total",
-        link: "View All Incidents",
+        // link: "View All Incidents",
         counter: count.totalReports,
         icon: (
           <AllInboxIcon

@@ -68,10 +68,10 @@ export default function BasicModal(props) {
       ...values,
       commentedTo: props.forumId,
       commentedBy: staffId,
+      assignedTo: props.assignedTo,
     };
 
     try {
-      console.log(submittedValues);
       await axios.post(
         "http://localhost:5000/api/v1/report/add-comment",
         submittedValues

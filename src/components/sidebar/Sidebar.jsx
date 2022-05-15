@@ -68,7 +68,7 @@ const Sidebar = () => {
     <div className="sidebar-main">
       <div className="sidebar-top">
         <span className="sidebar-logo" onClick={route_toDashboard}>
-          <img src={sidebarLogo} alt="Filingo" className="img-logo" />
+          <img src={sidebarLogoDark} alt="Filingo" className="img-logo" />
         </span>
       </div>
       <div className="sidebar-header">
@@ -93,7 +93,7 @@ const Sidebar = () => {
             </div>
           </NavLink>
 
-          {position !== "student" ? (
+          {position !== "student" && position !== "evaluator" ? (
             <div>
               <p className="title">PEOPLE</p>
               <NavLink to="/users" style={navLinkStyles}>

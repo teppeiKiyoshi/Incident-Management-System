@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import Staff from "../models/Staff.js";
 import Comment from "../models/Comment.js";
 import Notications from "../models/Notifications.js";
+import { InfoRounded } from "@mui/icons-material";
 
 //------------ Add Report ------------//
 const add = async (req, res) => {
@@ -49,14 +50,32 @@ const add = async (req, res) => {
   });
 };
 
+//--------------------THIS----------------------/
 const getReports = async (req, res) => {
-  let reports = await Report.find({}).select("-file").lean();
+  let reports;
+  if (req.body.id === "") {
+    reports = await Report.find().select("-file").lean();
+  } else {
+    reports = await Report.find({ reportedBy: req.body.id })
+      .select("-file")
+      .lean();
+  }
 
   for (let report of reports) {
     const reportedBy = await User.findOne({ reportedBy: report.reportedBy });
     const name = `${reportedBy.firstName} ${reportedBy.lastName}`;
 
     report["reportedByName"] = name;
+
+    const evaluatedBy = await Staff.findById(report.assignedTo);
+    report["evaluatedBy"] = evaluatedBy ? evaluatedBy.id : null;
+    report["evaluatedByName"] = evaluatedBy
+      ? `${evaluatedBy.firstName} ${evaluatedBy.lastName}`
+      : "None";
+    const comments = await Comment.find({ commentedTo: report._id }).select(
+      "-file"
+    );
+    report["comments"] = comments;
   }
 
   return res.json(reports);
@@ -81,6 +100,7 @@ const getUserReports = async (req, res) => {
   return res.json({ reports });
 };
 
+//--------------------THIS----------------------/
 const getReportsByKeyword = async (req, res) => {
   // STOPPED HERE, DISPLAYING SEARCH RESULTS
   const request = req.body.keyword;
@@ -89,15 +109,27 @@ const getReportsByKeyword = async (req, res) => {
   try {
     let reports = await Report.find({
       $or: [{ mainConcern: keyword }, { incident: keyword }],
-    });
+    }).lean();
 
-    if (reports.length === 0) return res.json({ msg: "No Results" });
+    if (reports.length === 0) {
+      return res.json({ msg: "No Results" });
+    }
 
     for (let report of reports) {
       const reportedBy = await User.findOne({ reportedBy: report.reportedBy });
       const name = `${reportedBy.firstName} ${reportedBy.lastName}`;
 
       report["reportedByName"] = name;
+
+      const evaluatedBy = await Staff.findById(report.assignedTo);
+      report["evaluatedBy"] = evaluatedBy ? evaluatedBy.id : null;
+      report["evaluatedByName"] = evaluatedBy
+        ? `${evaluatedBy.firstName} ${evaluatedBy.lastName}`
+        : "None";
+      const comments = await Comment.find({ commentedTo: report._id }).select(
+        "-file"
+      );
+      report["comments"] = comments ? comments : [];
     }
     return res.json(reports);
   } catch (err) {
@@ -146,27 +178,47 @@ const getLatestReports = async (req, res) => {
     report["assignedToName"] = assignedToName;
   }
 
-  return res.json(reports);
+  return res.json({ reports });
 };
 
+//--------------------THIS----------------------/
 const getFilteredReports = async (req, res) => {
   const value = req.body.value;
+  const position = req.body.position;
   let reports;
 
-  if (value === "") reports = await Report.find({}).select("-file").lean();
-  else if (
-    value === "completed" ||
-    value === "pending" ||
-    value === "processing"
-  )
+  if (value === "") {
+    if (position === "student") {
+      const userId = req.body.userId;
+
+      reports = await Report.find({ reportedBy: userId })
+        .select("-file")
+        .lean();
+    } else {
+      reports = await Report.find({}).select("-file").lean();
+    }
+  } else if (value === "completed" || value === "pending")
     reports = await Report.find({ status: value }).select("-file").lean();
-  else reports = await Report.find({ incident: value }).select("-file").lean();
+  else if (value === "unresolvable") {
+    reports = await Report.find({ unresolvable: true }).select("-file").lean();
+  } else
+    reports = await Report.find({ incident: value }).select("-file").lean();
 
   for (let report of reports) {
     const reportedBy = await User.findOne({ reportedBy: report.reportedBy });
     const name = `${reportedBy.firstName} ${reportedBy.lastName}`;
 
     report["reportedByName"] = name;
+
+    const evaluatedBy = await Staff.findById(report.assignedTo);
+    report["evaluatedBy"] = evaluatedBy ? evaluatedBy.id : null;
+    report["evaluatedByName"] = evaluatedBy
+      ? `${evaluatedBy.firstName} ${evaluatedBy.lastName}`
+      : "None";
+    const comments = await Comment.find({ commentedTo: report._id }).select(
+      "-file"
+    );
+    report["comments"] = comments;
   }
 
   return res.json(reports);
@@ -188,6 +240,34 @@ const getReport = async (req, res) => {
 
   report["author"] = name;
   report["evaluator"] = evaluator;
+  report["profPic"] = reportedBy.profilePic;
+
+  switch (report.incident) {
+    case "remainingBalance":
+      report["incident"] = "Remaining Balance";
+      break;
+    case "failedSubj":
+      report["incident"] = "Failed Subject";
+      break;
+    case "addSubj":
+      report["incident"] = "Adding Subject";
+      break;
+    case "changeSubj":
+      report["incident"] = "Changing Subject";
+      break;
+    case "incSubj":
+      report["incident"] = "Subjects with INC";
+      break;
+    case "prevSem":
+      report["incident"] = "Unavailable Subjects from Previous Semester";
+      break;
+    case "currSem":
+      report["incident"] = "Unavailable Subjects from Previous Semester";
+      break;
+    case "others":
+      report["incident"] = "Others";
+      break;
+  }
 
   return res.json(report);
 };
@@ -230,12 +310,10 @@ const markAsUnres = async (req, res) => {
 
     await Report.findByIdAndUpdate(forumId, {
       unresolvable: !report.unresolvable,
+      assignedTo: null,
     });
 
-    if (report.unresolvable == false)
-      return res.json({ status: "success", msg: "Marked as Unresolvable" });
-    else
-      return res.json({ status: "success", msg: "Unmarked as Unresolvable" });
+    return res.json({ status: "success", msg: "Marked as Unresolvable" });
   } catch (err) {
     return res.json({ status: "error", msg: err });
   }
@@ -262,6 +340,7 @@ const getComments = async (req, res) => {
       const commentedBy = `${commenter.firstName} ${commenter.lastName}`;
 
       comment["commentedBy"] = commentedBy;
+      comment["commentedByPic"] = commenter.profilePic;
     }
 
     return res.json({ status: "success", comments });
@@ -272,7 +351,7 @@ const getComments = async (req, res) => {
 
 const addComment = async (req, res) => {
   // Insert to Database
-  const { comment, file, commentedTo, commentedBy } = req.body;
+  const { comment, file, commentedTo, commentedBy, assignedTo } = req.body;
   try {
     const commentCreate = await Comment.create({
       commentedBy: commentedBy,
@@ -281,16 +360,28 @@ const addComment = async (req, res) => {
       commentedTo: commentedTo,
     });
 
-    // Notify student
-    //Get Student's ID
-    const report = await Report.findById(commentedTo);
-    const commentTrimmed = comment.substring(0, 40);
+    const student = await User.findById(commentedBy);
 
-    const notificationCreate = await Notications.create({
-      notification: `An Evaluator replied to the latest report you filed. "${commentTrimmed}..."`,
-      notifiedTo: report.reportedBy,
-      notificationFrom: commentedBy,
-    });
+    if (student && assignedTo) {
+      const commentTrimmed = comment.substring(0, 40);
+
+      const notificationCreate = await Notications.create({
+        notification: `A Student replied to a report you were assigned in. "${commentTrimmed}..."`,
+        notifiedTo: assignedTo,
+        notificationFrom: commentedBy,
+      });
+    } else {
+      // Notify student
+      //Get Student's ID
+      const report = await Report.findById(commentedTo);
+      const commentTrimmed = comment.substring(0, 40);
+
+      const notificationCreate = await Notications.create({
+        notification: `An Evaluator replied to the latest report you filed. "${commentTrimmed}..."`,
+        notifiedTo: report.reportedBy,
+        notificationFrom: commentedBy,
+      });
+    }
 
     return res.json({ status: "success" });
   } catch (err) {
@@ -300,11 +391,17 @@ const addComment = async (req, res) => {
 
 const markAsHelpful = async (req, res) => {
   const id = req.body.id;
+  const userId = req.body.userId;
 
   const update = await Report.findOneAndUpdate(
     { _id: id },
     { status: "completed" },
     { new: true }
+  );
+
+  const updateUser = await User.findOneAndUpdate(
+    { _id: userId },
+    { hasReport: false }
   );
   return res.json({ update });
 };

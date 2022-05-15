@@ -65,6 +65,11 @@ const register = async (req, res) => {
   if (passwordsDontMatch)
     return res.json({ status: "error", msg: "Passwords don't match" });
 
+  //Capitalize
+  firstName = titleCase(firstName);
+  lastName = titleCase(lastName);
+  middleInitial = titleCase(middleInitial);
+
   //CREATE USER
   const user = await User.create({
     lastName,
@@ -170,13 +175,6 @@ const login = async (req, res) => {
     });
   }
 };
-
-function titleCase(str) {
-  return str
-    .split(" ")
-    .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
-    .join(" ");
-}
 
 //------------ UPDATE PROFILE CONTROLLER ------------//
 
@@ -397,7 +395,9 @@ const getEvaluators = async (req, res) => {
 
 const getNotifications = async (req, res) => {
   const notifiedTo = req.body.userId;
-  const notifications = await Notification.find({ notifiedTo });
+  const notifications = await Notification.find({ notifiedTo }).sort({
+    createdAt: -1,
+  });
   const unseen = await Notification.countDocuments({ notifiedTo, seen: false });
 
   return res.json({ notifications, unseen });
@@ -446,4 +446,11 @@ function validateEmail(emailAdress) {
   } else {
     return false;
   }
+}
+
+function titleCase(str) {
+  return str
+    .split(" ")
+    .map((word) => word[0].toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
 }

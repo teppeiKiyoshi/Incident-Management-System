@@ -7,6 +7,8 @@ import AddComment from "../modal/AddComment";
 import ItemComments from "../comment-items/ItemComments";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { LinearProgress, CircularProgress } from "@mui/material";
+import DefaultProfPic from "../../../images/default-prof-pic.jpg";
+
 // Axios
 import axios from "axios";
 
@@ -149,14 +151,18 @@ const SingleForum = () => {
     ) : null;
 
   const markAsHelpful = async () => {
-    // Status = completed
+    const userId = JSON.parse(localStorage.getItem("details")).id;
+
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/report/mark-as-helpful",
-        { id: reportDetails._id }
+        { id: reportDetails._id, userId }
       );
-      console.log(response.data);
-    } catch (err) {}
+
+      getForumDetails();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const formatDate = (dateStr) => {
@@ -184,7 +190,11 @@ const SingleForum = () => {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     var strTime = hours + ":" + minutes + " " + ampm;
 
-    return monthNames[date.getMonth()] + " " + date.getDate() + " / " + strTime;
+    return monthNames[date.getMonth()] + " " + date.getDate() + " - " + strTime;
+  };
+
+  const exportReport = (str) => {
+    navigate("/report-pdf/" + str);
   };
 
   return (
@@ -196,7 +206,12 @@ const SingleForum = () => {
           <div className="single-left">
             <div className="left-header">
               <img
-                src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=971&q=80"
+                src={
+                  reportDetails &&
+                  (reportDetails.profPic === null
+                    ? DefaultProfPic
+                    : reportDetails.profPic)
+                }
                 alt="avatar"
                 className="forum-avatar"
               />
@@ -226,25 +241,32 @@ const SingleForum = () => {
                     {reportDetails && reportDetails.concernDescription}
                   </p>
                 </div>
-                <span>Attachments</span>
-                <div className="images-container">
-                  <div className="image-container">
-                    {reportDetails &&
-                      reportDetails.file.map((image) => {
-                        return (
-                          <div className="image">
-                            <img src={image} />
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
+
+                {reportDetails &&
+                  (reportDetails.file.length !== 0 ? (
+                    <>
+                      <span>Attachments</span>
+                      <div className="images-container">
+                        <div className="image-container">
+                          {reportDetails &&
+                            reportDetails.file.map((image) => {
+                              return (
+                                <div className="image">
+                                  <img src={image} />
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    </>
+                  ) : null)}
 
                 {reportDetails &&
                 JSON.parse(localStorage.getItem("details")).position ===
                   "student" &&
                 reportDetails.reportedBy ===
                   JSON.parse(localStorage.getItem("details")).id &&
+                reportDetails.assignedTo &&
                 comments &&
                 reportDetails.status !== "completed" ? (
                   <div className="helpful-wrapper">
@@ -256,6 +278,15 @@ const SingleForum = () => {
                     </small>
                   </div>
                 ) : null}
+
+                {reportDetails && reportDetails.status === "completed" && (
+                  <span className="resolved">This case has been resolved</span>
+                )}
+                {reportDetails && reportDetails.unresolvable && (
+                  <span className="resolved">
+                    This case has been marked unresolvable
+                  </span>
+                )}
                 <div className="body-footer">
                   <div className="footer-header">
                     <h3 className="comment-title">
@@ -278,8 +309,13 @@ const SingleForum = () => {
                   <div className="btn-container">
                     {reportDetails &&
                     (assignedTo === userId ||
-                      reportDetails.reportedBy === userId) ? (
-                      <AddComment forumId={forumId} func={getComments} />
+                      reportDetails.reportedBy === userId) &&
+                    reportDetails.status !== "completed" ? (
+                      <AddComment
+                        forumId={forumId}
+                        assignedTo={reportDetails.assignedTo}
+                        func={getComments}
+                      />
                     ) : null}
                   </div>
                 </div>
@@ -289,7 +325,12 @@ const SingleForum = () => {
           <div className="single-right">
             <div className="right-header">
               <h3 className="right-title">Forum Article Info</h3>
-              <button className="print-btn">Export</button>
+              {/* <button
+                className="print-btn"
+                onClick={() => exportReport(forumId)}
+              >
+                Export
+              </button> */}
             </div>
             <div className="divider"></div>
             <div className="right-info">
@@ -317,7 +358,7 @@ const SingleForum = () => {
                 </div>
               </div>
               <div className="case-status">
-                {JSON.parse(localStorage.getItem("details")).position !==
+                {/* {JSON.parse(localStorage.getItem("details")).position !==
                 "student" ? (
                   reportDetails && reportDetails.unresolvable ? (
                     unresLoading ? (
@@ -327,10 +368,16 @@ const SingleForum = () => {
                         className="unresolvable-btn"
                         onClick={markAsUnres}
                       >
-                        Unmark as Unresolvable
+                        Mark as Unresolvable
                       </button>
                     )
-                  ) : unresLoading ? (
+                  ) : null
+                ) : null} */}
+
+                {JSON.parse(localStorage.getItem("details")).position !==
+                "student" ? (
+                  reportDetails &&
+                  reportDetails.unresolvable ? null : unresLoading ? (
                     <CircularProgress color="secondary" />
                   ) : (
                     <button className="unresolvable-btn" onClick={markAsUnres}>

@@ -23,11 +23,17 @@ const ListTable = ({ id }) => {
 
   const getLatestReports = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/report/get-user-reports",
-        { id }
-      );
-
+      let response;
+      if (id) {
+        response = await axios.post(
+          "http://localhost:5000/api/v1/report/get-user-reports",
+          { id }
+        );
+      } else {
+        response = await axios.post(
+          "http://localhost:5000/api/v1/report/get-latest-reports"
+        );
+      }
       setData(response.data.reports);
     } catch (err) {
       toast.error(err);
@@ -37,6 +43,55 @@ const ListTable = ({ id }) => {
   useEffect(() => {
     getLatestReports();
   }, []);
+
+  const formatDate = (dateStr) => {
+    let date = new Date(dateStr);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes + " " + ampm;
+
+    return monthNames[date.getMonth()] + " " + date.getDate() + " - " + strTime;
+  };
+
+  const formatIncident = (string) => {
+    switch (string) {
+      case "remainingBalance":
+        return "Remaining Balance";
+      case "failedSubj":
+        return "Failed Subject";
+      case "addSubj":
+        return "Adding Subject";
+      case "changeSubj":
+        return "Changing Subject";
+      case "incSubj":
+        return "Subjects with INC";
+      case "prevSem":
+        return "Unavailable Subjects from Previous Semester";
+      case "currSem":
+        return "Unavailable Subjects from Previous Semester";
+      case "others":
+        return "Others";
+    }
+  };
 
   return (
     <TableContainer component={Paper} className="table-main">
@@ -55,8 +110,12 @@ const ListTable = ({ id }) => {
             data.map((item) => (
               <TableRow key={item._id}>
                 <TableCell className="table-cell">{item._id}</TableCell>
-                <TableCell className="table-cell">{item.createdAt}</TableCell>
-                <TableCell className="table-cell">{item.incident}</TableCell>
+                <TableCell className="table-cell">
+                  {formatDate(item.createdAt)}
+                </TableCell>
+                <TableCell className="table-cell">
+                  {formatIncident(item.incident)}
+                </TableCell>
                 <TableCell className="table-cell">
                   {item.assignedToName}
                 </TableCell>

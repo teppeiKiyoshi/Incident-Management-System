@@ -17,19 +17,19 @@ const Featured = ({ details }) => {
       </div>
       <div className="ft-bottom">
         <div className="featured-chart">
-          <CircularProgressbar value={70} text="70%" strokeWidth={4} />
+          <CircularProgressbar
+            value={(details.totalToday / 20) * 100}
+            text={`${(details.totalToday / 20) * 100}%`}
+            strokeWidth={4}
+          />
         </div>
-        <p className="cpb-title">Total Queries Answered Today</p>
+        <p className="cpb-title">Total Cases Answered Today</p>
         <p className="cpb-amount">{details.totalToday}</p>
-        <p className="cpb-desc">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum,
-          labore?
-        </p>
+        <p className="cpb-desc">Aim to answer at least 20 reports a day</p>
         <div className="summary">
           <div className="summary-item">
             <div className="item-title">Target</div>
-            <div className="item-result negative">
-              <KeyboardArrowDownIcon fontSize="small" />
+            <div className="item-result positive">
               <div className="result-amount">20 Queries</div>
             </div>
           </div>
