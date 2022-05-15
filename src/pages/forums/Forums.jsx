@@ -17,12 +17,14 @@ import "react-toastify/dist/ReactToastify.css";
 //MUI
 import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
 import Button from "@mui/material/Button";
+import { LocalSeeOutlined } from "@mui/icons-material";
 
 const Forums = () => {
   const { keyword } = useParams();
   const [hasReport, setHasReport] = useState();
   const [createReportLoad, setCreateReportLoad] = useState(false);
   const [reports, setReports] = useState();
+  const [reportsArr, setReportsArr] = useState();
   const [reportsLoad, setReportsLoad] = useState();
   const position = JSON.parse(localStorage.getItem("details")).position;
   const navigate = useNavigate();
@@ -85,6 +87,7 @@ const Forums = () => {
           return <ForumsTable key={report._id} details={report} />;
         })
       );
+      setReportsArr(response.data);
       setReportsLoad(false);
     } catch (err) {
       toast.error(err);
@@ -105,6 +108,8 @@ const Forums = () => {
             return <ForumsTable key={report._id} details={report} />;
           })
         );
+        console.log(response.data);
+        setReportsArr(response.data);
       }
       setReportsLoad(false);
     } catch (err) {
@@ -130,12 +135,19 @@ const Forums = () => {
             return <ForumsTable key={report._id} details={report} />;
           })
         );
+        setReportsArr(response.data);
       }
       setReportsLoad(false);
     } catch (err) {
       toast.error(err);
       setReportsLoad(false);
     }
+  };
+
+  // console.log(reportsArr);
+  const exportReports = () => {
+    navigate("/report-pdf", { state: { reports: reportsArr } });
+    // HOW TO EMPTY STATE navigate(location.pathname, {});
   };
 
   const routeChange = () => {
@@ -170,6 +182,13 @@ const Forums = () => {
         <div className="search-wrapper">
           {/* <SearchForums /> */}
           <div className="filter-forum">
+            {JSON.parse(localStorage.getItem("details")).position ===
+            "student" ? null : (
+              <Button color="secondary" onClick={exportReports}>
+                Export
+              </Button>
+            )}
+
             <select
               name="report"
               id="report"
@@ -185,11 +204,11 @@ const Forums = () => {
               <option value="completed" className="filter-option">
                 Completed
               </option>
-              <option value="assigned" className="filter-option">
+              <option value="pending" className="filter-option">
                 Pending
               </option>
-              <option value="processing" className="filter-option">
-                Processing
+              <option value="unresolvable" className="filter-option">
+                Unresolvable
               </option>
               <option value="remainingBalance" className="filter-option">
                 Remaining Balance

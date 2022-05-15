@@ -23,11 +23,17 @@ const ListTable = ({ id }) => {
 
   const getLatestReports = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/report/get-user-reports",
-        { id }
-      );
-
+      let response;
+      if (id) {
+        response = await axios.post(
+          "http://localhost:5000/api/v1/report/get-user-reports",
+          { id }
+        );
+      } else {
+        response = await axios.post(
+          "http://localhost:5000/api/v1/report/get-latest-reports"
+        );
+      }
       setData(response.data.reports);
     } catch (err) {
       toast.error(err);

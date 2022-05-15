@@ -50,6 +50,7 @@ const add = async (req, res) => {
   });
 };
 
+//--------------------THIS----------------------/
 const getReports = async (req, res) => {
   let reports;
   if (req.body.id === "") {
@@ -65,6 +66,16 @@ const getReports = async (req, res) => {
     const name = `${reportedBy.firstName} ${reportedBy.lastName}`;
 
     report["reportedByName"] = name;
+
+    const evaluatedBy = await Staff.findById(report.assignedTo);
+    report["evaluatedBy"] = evaluatedBy ? evaluatedBy.id : null;
+    report["evaluatedByName"] = evaluatedBy
+      ? `${evaluatedBy.firstName} ${evaluatedBy.lastName}`
+      : "None";
+    const comments = await Comment.find({ commentedTo: report._id }).select(
+      "-file"
+    );
+    report["comments"] = comments;
   }
 
   return res.json(reports);
@@ -89,6 +100,7 @@ const getUserReports = async (req, res) => {
   return res.json({ reports });
 };
 
+//--------------------THIS----------------------/
 const getReportsByKeyword = async (req, res) => {
   // STOPPED HERE, DISPLAYING SEARCH RESULTS
   const request = req.body.keyword;
@@ -97,15 +109,27 @@ const getReportsByKeyword = async (req, res) => {
   try {
     let reports = await Report.find({
       $or: [{ mainConcern: keyword }, { incident: keyword }],
-    });
+    }).lean();
 
-    if (reports.length === 0) return res.json({ msg: "No Results" });
+    if (reports.length === 0) {
+      return res.json({ msg: "No Results" });
+    }
 
     for (let report of reports) {
       const reportedBy = await User.findOne({ reportedBy: report.reportedBy });
       const name = `${reportedBy.firstName} ${reportedBy.lastName}`;
 
       report["reportedByName"] = name;
+
+      const evaluatedBy = await Staff.findById(report.assignedTo);
+      report["evaluatedBy"] = evaluatedBy ? evaluatedBy.id : null;
+      report["evaluatedByName"] = evaluatedBy
+        ? `${evaluatedBy.firstName} ${evaluatedBy.lastName}`
+        : "None";
+      const comments = await Comment.find({ commentedTo: report._id }).select(
+        "-file"
+      );
+      report["comments"] = comments ? comments : [];
     }
     return res.json(reports);
   } catch (err) {
@@ -154,9 +178,10 @@ const getLatestReports = async (req, res) => {
     report["assignedToName"] = assignedToName;
   }
 
-  return res.json(reports);
+  return res.json({ reports });
 };
 
+//--------------------THIS----------------------/
 const getFilteredReports = async (req, res) => {
   const value = req.body.value;
   const position = req.body.position;
@@ -172,19 +197,28 @@ const getFilteredReports = async (req, res) => {
     } else {
       reports = await Report.find({}).select("-file").lean();
     }
-  } else if (
-    value === "completed" ||
-    value === "pending" ||
-    value === "processing"
-  )
+  } else if (value === "completed" || value === "pending")
     reports = await Report.find({ status: value }).select("-file").lean();
-  else reports = await Report.find({ incident: value }).select("-file").lean();
+  else if (value === "unresolvable") {
+    reports = await Report.find({ unresolvable: true }).select("-file").lean();
+  } else
+    reports = await Report.find({ incident: value }).select("-file").lean();
 
   for (let report of reports) {
     const reportedBy = await User.findOne({ reportedBy: report.reportedBy });
     const name = `${reportedBy.firstName} ${reportedBy.lastName}`;
 
     report["reportedByName"] = name;
+
+    const evaluatedBy = await Staff.findById(report.assignedTo);
+    report["evaluatedBy"] = evaluatedBy ? evaluatedBy.id : null;
+    report["evaluatedByName"] = evaluatedBy
+      ? `${evaluatedBy.firstName} ${evaluatedBy.lastName}`
+      : "None";
+    const comments = await Comment.find({ commentedTo: report._id }).select(
+      "-file"
+    );
+    report["comments"] = comments;
   }
 
   return res.json(reports);
@@ -276,12 +310,10 @@ const markAsUnres = async (req, res) => {
 
     await Report.findByIdAndUpdate(forumId, {
       unresolvable: !report.unresolvable,
+      assignedTo: null,
     });
 
-    if (report.unresolvable == false)
-      return res.json({ status: "success", msg: "Marked as Unresolvable" });
-    else
-      return res.json({ status: "success", msg: "Unmarked as Unresolvable" });
+    return res.json({ status: "success", msg: "Marked as Unresolvable" });
   } catch (err) {
     return res.json({ status: "error", msg: err });
   }

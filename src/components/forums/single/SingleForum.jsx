@@ -282,6 +282,11 @@ const SingleForum = () => {
                 {reportDetails && reportDetails.status === "completed" && (
                   <span className="resolved">This case has been resolved</span>
                 )}
+                {reportDetails && reportDetails.unresolvable && (
+                  <span className="resolved">
+                    This case has been marked unresolvable
+                  </span>
+                )}
                 <div className="body-footer">
                   <div className="footer-header">
                     <h3 className="comment-title">
@@ -320,12 +325,12 @@ const SingleForum = () => {
           <div className="single-right">
             <div className="right-header">
               <h3 className="right-title">Forum Article Info</h3>
-              <button
+              {/* <button
                 className="print-btn"
                 onClick={() => exportReport(forumId)}
               >
                 Export
-              </button>
+              </button> */}
             </div>
             <div className="divider"></div>
             <div className="right-info">
@@ -353,7 +358,7 @@ const SingleForum = () => {
                 </div>
               </div>
               <div className="case-status">
-                {JSON.parse(localStorage.getItem("details")).position !==
+                {/* {JSON.parse(localStorage.getItem("details")).position !==
                 "student" ? (
                   reportDetails && reportDetails.unresolvable ? (
                     unresLoading ? (
@@ -363,10 +368,16 @@ const SingleForum = () => {
                         className="unresolvable-btn"
                         onClick={markAsUnres}
                       >
-                        Unmark as Unresolvable
+                        Mark as Unresolvable
                       </button>
                     )
-                  ) : unresLoading ? (
+                  ) : null
+                ) : null} */}
+
+                {JSON.parse(localStorage.getItem("details")).position !==
+                "student" ? (
+                  reportDetails &&
+                  reportDetails.unresolvable ? null : unresLoading ? (
                     <CircularProgress color="secondary" />
                   ) : (
                     <button className="unresolvable-btn" onClick={markAsUnres}>

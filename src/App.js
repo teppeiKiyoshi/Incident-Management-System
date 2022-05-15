@@ -71,7 +71,7 @@ function App() {
             <Route path="settings">
               <Route index element={<Settings />} />
             </Route>
-            <Route path="report-pdf/:id">
+            <Route path="report-pdf">
               <Route index element={<PdfComponent />} />
             </Route>
             <Route path="logout" />

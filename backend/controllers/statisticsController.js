@@ -72,7 +72,6 @@ const getStats = async (req, res) => {
 
     if (!data[monthName]) data[monthName] = 0;
   }
-
   const stats = {
     userCount,
     completedReports,

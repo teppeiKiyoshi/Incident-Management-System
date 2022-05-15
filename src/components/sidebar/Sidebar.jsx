@@ -127,7 +127,7 @@ const Sidebar = () => {
               <span className="sidebar-items collapsible">
                 <QuestionAnswerIcon className="sidebar-icons" />
                 <span className="sidebar-name">Forums</span>
-                <span
+                {/* <span
                   className="close"
                   onClick={() => setSubMenuOpen(!subMenuOpen)}
                 >
@@ -136,7 +136,7 @@ const Sidebar = () => {
                   ) : (
                     <MdKeyboardArrowUp />
                   )}
-                </span>
+                </span> */}
 
                 {subMenuOpen && (
                   <ul className="collapse__menu">
