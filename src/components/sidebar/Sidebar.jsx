@@ -18,7 +18,7 @@ import defaultProfPic from "../../images/default-prof-pic.jpg";
 const Sidebar = () => {
   const [subMenuOpen, setSubMenuOpen] = useState(false);
   const [position, setPosition] = useState("");
-  const [fullname, setFullname] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [profilePic, setProfilePic] = useState();
   const [dashboardLink, setDashboardLink] = useState("");
   const navigate = useNavigate();
@@ -26,12 +26,11 @@ const Sidebar = () => {
   useEffect(() => {
     const position = JSON.parse(localStorage.getItem("details")).position;
     const firstname = JSON.parse(localStorage.getItem("details")).firstName;
-    const lastname = JSON.parse(localStorage.getItem("details")).lastName;
     const profilePic = JSON.parse(localStorage.getItem("details")).profilePic;
-    const fullname = firstname + " " + lastname;
+    const displayName = firstname;
 
     setPosition(position);
-    setFullname(fullname);
+    setDisplayName(displayName);
     setProfilePic(profilePic);
 
     switch (position) {
@@ -83,7 +82,7 @@ const Sidebar = () => {
             alt="avatar"
             className="sidebar-avatar"
           />
-          <span className="header-name">{fullname}</span>
+          <span className="header-name">{displayName}</span>
         </div>
       </div>
       <div className="sidebar-center">

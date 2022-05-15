@@ -1,17 +1,5 @@
 import "./dropdown.scss";
-//SVG ICONS;
-import { ReactComponent as ChevronIcon } from "../../../../icons/chevron.svg";
-import { ReactComponent as ArrowIcon } from "../../../../icons/arrow.svg";
-import { ReactComponent as Email } from "../../../../icons/email.svg";
-import { ReactComponent as Password } from "../../../../icons/password.svg";
-import { ReactComponent as Deactivate } from "../../../../icons/deactivate.svg";
-import { ReactComponent as Logout } from "../../../../icons/logout.svg";
-import { ReactComponent as Profile } from "../../../../icons/profile.svg";
-import { ReactComponent as AccSettings } from "../../../../icons/acc-settings.svg";
-
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
+import React, { useState, useEffect } from "react";
 
 import defaultProfPic from "../../../../images/default-prof-pic.jpg";
 
@@ -33,111 +21,17 @@ function DropDown() {
         />
       }
     >
-      <DropdownMenu></DropdownMenu>
     </NavItem>
   );
 }
 
 function NavItem(props) {
-  const [open, setOpen] = useState(false);
-
   return (
     <li className="nav-item">
-      <a className="icon-button" onClick={() => setOpen(!open)}>
+      <a className="icon-button">
         {props.icon}
       </a>
-
-      {open && props.children}
     </li>
-  );
-}
-
-function DropdownMenu() {
-  const [activeMenu, setActiveMenu] = useState("main");
-  const [menuHeight, setMenuHeight] = useState(null);
-  const dropdownRef = useRef(null);
-  const navigate = useNavigate();
-
-  const changeRoute = () => {
-    let path = "/settings";
-    navigate(path);
-  };
-
-  useEffect(() => {
-    setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
-  }, []);
-
-  function calcHeight(el) {
-    const height = el.offsetHeight;
-    setMenuHeight(height);
-  }
-
-  function DropdownItem(props) {
-    return (
-      <a
-        className="dropdown-item"
-        onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
-      >
-        <span className="icon-button">{props.leftIcon}</span>
-        {props.children}
-        <span className="icon-right">{props.rightIcon}</span>
-      </a>
-    );
-  }
-
-  return (
-    <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
-      <CSSTransition
-        in={activeMenu === "main"}
-        timeout={500}
-        classNames="menu-primary"
-        unmountOnExit
-        onEnter={calcHeight}
-      >
-        <div className="menu">
-          <DropdownItem leftIcon={<Profile />} rightIcon={<ChevronIcon />}>
-            My Profile
-          </DropdownItem>
-          <DropdownItem
-            leftIcon={<AccSettings />}
-            rightIcon={<ChevronIcon />}
-            goToMenu="settings"
-          >
-            Settings
-          </DropdownItem>
-          <DropdownItem leftIcon={<Logout />} rightIcon={<ChevronIcon />}>
-            Logout
-          </DropdownItem>
-        </div>
-      </CSSTransition>
-
-      <CSSTransition
-        in={activeMenu === "settings"}
-        timeout={500}
-        classNames="menu-secondary"
-        unmountOnExit
-        onEnter={calcHeight}
-      >
-        <div className="menu">
-          <DropdownItem
-            goToMenu="main"
-            leftIcon={<ArrowIcon style={{ color: "#893dff" }} />}
-          >
-            {" "}
-            <h3 style={{ fontWeight: "600" }}>Account Settings</h3>{" "}
-          </DropdownItem>
-          <DropdownItem onClick={changeRoute} leftIcon={<Email />}>
-            Change Email
-          </DropdownItem>
-          <DropdownItem onClick={changeRoute} leftIcon={<Password />}>
-            Change Password
-          </DropdownItem>
-          <DropdownItem onClick={changeRoute} leftIcon={<Deactivate />}>
-            Deactivate Account
-          </DropdownItem>
-        </div>
-      </CSSTransition>
-    </div>
   );
 }
 
