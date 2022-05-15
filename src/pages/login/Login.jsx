@@ -118,12 +118,12 @@ const Login = () => {
           <form className="login-form" onSubmit={handleSubmit}>
             {/* EMAIL */}
             <TextField
+            sx={{width: "32ch" }}
               required
               id="login_email"
               label="Email"
               name="email"
               onChange={handleChange}
-              fullWidth
             />
 
             {/* PASSWORD*/}

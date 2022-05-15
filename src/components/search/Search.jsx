@@ -253,7 +253,7 @@ const Search = (props) => {
             {!isLoading && noShow && (
               <LoadingWrapper>
                 <WarningMessage>
-                  No student matches your search...
+                  No post matches your search...
                 </WarningMessage>
               </LoadingWrapper>
             )}

@@ -11,7 +11,7 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import sidebarLogo from "../../images/logos/logoTxt.png";
+import sidebarLogoDark from "../../images/logos/logoTxt-dark.png";
 import defaultProfPic from "../../images/default-prof-pic.jpg";
 
 const Sidebar = () => {

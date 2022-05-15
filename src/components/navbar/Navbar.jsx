@@ -2,14 +2,13 @@ import "./navbar.scss";
 import { React, useEffect, useState } from "react";
 import Search from "../search/Search";
 import DropDown from "./dropdownMenu/acc-dropdown//DropdownMenu";
+import NotifMenu from "./dropdownMenu/notif-dropdown/NotifMenu";
 //MUI Icons
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 //for dark mode
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
-import NotifMenu from "./dropdownMenu/notif-dropdown/NotifMenu";
 
 // Axios
 import axios from "axios";

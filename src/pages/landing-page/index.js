@@ -5,7 +5,6 @@ import HeroSection from '../../components/landing-page/HeroSection/index';
 import InfoSection from '../../components/landing-page/InfoSection/index';
 import { homeObjOne, homeObjTwo, homeObjThree } from '../../components/landing-page/InfoSection/Data';
 import Services from '../../components/landing-page/Services/index';
-import Footer from '../../components/landing-page/Footer/index';
 import FooterMain from '../../components/landing-page/Footer/FooterMain';
 
 const MainPage = () => {
