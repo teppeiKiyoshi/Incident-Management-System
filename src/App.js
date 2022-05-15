@@ -16,9 +16,6 @@ import Settings from "./pages/settings/Settings";
 // main forum page
 import Forums from "./pages/forums/Forums";
 // subpages for forum section - eval and registrar
-import CompletedReps from "./components/forums/completed-reports/CompletedReps";
-import UnresolvedReps from "./components/forums/unresolved-reports/UnresolvedReps";
-import Assigned from "./components/forums/assigned-reports/Assigned";
 import Signup from "./pages/register/Signup";
 import SingleView from "./pages/forums/singleView/SingleView";
 import Report from "./pages/addPost/Report";
@@ -60,9 +57,6 @@ function App() {
               <Route path="keyword/:keyword" element={<Forums />} />
               <Route path=":forumId" element={<SingleView />} />
               <Route path="add-post" element={<Report />} />
-              <Route path="assigned-reports" element={<Assigned />} />
-              <Route path="completed-reports" element={<CompletedReps />} />
-              <Route path="unresolved-reports" element={<UnresolvedReps />} />
             </Route>
             <Route path="faqs">
               <Route index element={<Faqs />} />
