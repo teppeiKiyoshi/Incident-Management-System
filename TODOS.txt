@@ -1,8 +1,7 @@
 // TODO (FOR DWAIN)
 - Deactivate account
-
-
-
+- Server error on student side - front end to wait for this fix
+- dashboard tab (on sidebar) always active, on click / if active, shall change highlighted tab 
 
 // DONE
 - Staff Dashboard Query Data
@@ -18,6 +17,4 @@
 - If student closed the report, hasReport = false
 
 // FRONT END TO FIX
-- Settings page: input fields have fixed size, not responsive
-- Sidebar: remove dropdown for forums, redundant sa filter ng forum page
 - Forums Single Page: change font back to poppins 

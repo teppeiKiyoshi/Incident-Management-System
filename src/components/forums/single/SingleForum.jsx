@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import "./singleF.scss";
 import AddComment from "../modal/AddComment";
 import ItemComments from "../comment-items/ItemComments";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
@@ -15,6 +14,8 @@ import axios from "axios";
 // react-toastify IMPORTS
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import "./singleF.scss";
 
 const SingleForum = () => {
   const navigate = useNavigate();

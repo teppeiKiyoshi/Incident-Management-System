@@ -16,7 +16,7 @@ const SearchBarContainer = styled(motion.div)`
   left: 30px;
   display: darkMode ? 'none' : 'flex';
   flex-direction: column;
-  width: 34em;
+  width: 32em;
   height: 2.5em;
   background-color: white;
   border-radius: 6px;
@@ -68,7 +68,7 @@ const SearchIcon = styled.span`
 const CloseIcon = styled(motion.span)`
   color: #bebebe;
   font-size: 12px;
-  margin-right: 30px;
+  margin-right: 10px;
   vertical-align: middle;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
@@ -87,7 +87,7 @@ const LineSeparator = styled.span`
 const SearchContent = styled.div`
   height: 100%;
   width: 100%;
-  max-width: 448px;
+  max-width: 475px;
   display: flex;
   flex-direction: column;
   padding: 1em;
