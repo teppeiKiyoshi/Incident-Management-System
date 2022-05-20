@@ -13,7 +13,7 @@ import { CatchingPokemonSharp } from "@mui/icons-material";
 const SearchBarContainer = styled(motion.div)`
   position: absolute;
   top: 22px;
-  left: 30px;
+  left: 35px;
   display: darkMode ? 'none' : 'flex';
   flex-direction: column;
   width: 32em;
@@ -68,7 +68,7 @@ const SearchIcon = styled.span`
 const CloseIcon = styled(motion.span)`
   color: #bebebe;
   font-size: 12px;
-  margin-right: 10px;
+  margin-right: 30px;
   vertical-align: middle;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
@@ -87,7 +87,7 @@ const LineSeparator = styled.span`
 const SearchContent = styled.div`
   height: 100%;
   width: 100%;
-  max-width: 475px;
+  max-width: 417px;
   display: flex;
   flex-direction: column;
   padding: 1em;
@@ -115,7 +115,7 @@ const LoadingWrapper = styled.div`
 
 const containerVariants = {
   expanded: {
-    height: "20em",
+    height: "fit-content",
   },
   collapsed: {
     height: "2.8em",

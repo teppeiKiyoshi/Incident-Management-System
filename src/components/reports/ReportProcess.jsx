@@ -178,7 +178,7 @@ const ReportProcess = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 550,
     bgcolor: "background.paper",
     borderRadius: 2,
     boxShadow: 24,
@@ -406,19 +406,19 @@ const ReportProcess = () => {
       </div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h5" component="h2">
+          <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ fontWeight: 'bold', mb: 0}}>
             Review your Report
           </Typography>
           <Typography
             id="modal-modal-description"
             variant="p"
             component="p"
-            sx={{ mt: 1 }}
+            sx={{ mt: 1}}
           >
             Please review your report before submitting:
             <br />
             <br />
-            <b>Incident:</b> {formatIncident(formValues.incident)}
+            <b>Type of Incident :</b> {formatIncident(formValues.incident)}
             <br />
             <br />
             <b>Main Concern:</b> {formValues.mainConcern}

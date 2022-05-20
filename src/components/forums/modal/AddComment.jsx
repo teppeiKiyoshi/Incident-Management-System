@@ -31,14 +31,7 @@ const modalTitle = {
   textTransform: "uppercase",
   fontWeight: "bold",
   color: "#893dff",
-};
-
-const modalSubheading = {
-  fontSize: "1rem",
-  fontWeight: 600,
-  color: "#999",
-  marginBottom: 1,
-  marginLeft: 1,
+  marginBottom: "1rem",
 };
 
 const submit_btn = {
@@ -137,9 +130,6 @@ export default function BasicModal(props) {
         <Box sx={style}>
           <Typography variant="h5" sx={modalTitle}>
             Post a reply
-          </Typography>
-          <Typography variant="h6" sx={modalSubheading}>
-            What's on your mind?
           </Typography>
           <TextField
             label="Add Comment"
