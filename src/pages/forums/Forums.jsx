@@ -26,6 +26,7 @@ const Forums = () => {
   const [reports, setReports] = useState();
   const [reportsArr, setReportsArr] = useState();
   const [reportsLoad, setReportsLoad] = useState();
+  const [filterState, setFilter] = useState();
   const position = JSON.parse(localStorage.getItem("details")).position;
   const navigate = useNavigate();
 
@@ -81,6 +82,7 @@ const Forums = () => {
         "http://localhost:5000/api/v1/report/get-reports",
         { id: id }
       );
+      console.log(response.data);
 
       setReports(
         response.data.map((report) => {
@@ -136,6 +138,7 @@ const Forums = () => {
           })
         );
         setReportsArr(response.data);
+        setFilter(value);
       }
       setReportsLoad(false);
     } catch (err) {
@@ -144,15 +147,54 @@ const Forums = () => {
     }
   };
 
-  // console.log(reportsArr);
   const exportReports = () => {
-    navigate("/report-pdf", { state: { reports: reportsArr } });
+    const firstName = JSON.parse(localStorage.getItem("details")).firstName;
+    const lastName = JSON.parse(localStorage.getItem("details")).lastName;
+    const fullname = `${firstName} ${lastName}`;
+    let filter = filterState
+      ? 'filtered by "' + formatIncident(filterState) + '"'
+      : "";
+
+    if (keyword) {
+      filter += ' by keyword "' + keyword + '"';
+    }
+
+    navigate("/report-pdf", {
+      state: { reports: reportsArr, filter: filter, by: fullname },
+    });
     // HOW TO EMPTY STATE navigate(location.pathname, {});
   };
 
   const routeChange = () => {
     let path = "/forums/add-post";
     navigate(path);
+  };
+
+  const formatIncident = (string) => {
+    switch (string) {
+      case "all":
+        return;
+      case "completed":
+        return "Completed";
+      case "pending":
+        return "Pending";
+      case "remainingBalance":
+        return "Remaining Balance";
+      case "failedSubj":
+        return "Failed Subject";
+      case "addSubj":
+        return "Adding Subject";
+      case "changeSubj":
+        return "Changing Subject";
+      case "incSubj":
+        return "Subjects with INC";
+      case "prevSem":
+        return "Unavailable Subjects from Previous Semester";
+      case "currSem":
+        return "Unavailable Subjects from Previous Semester";
+      case "others":
+        return "Others";
+    }
   };
 
   return (
@@ -183,7 +225,7 @@ const Forums = () => {
           {/* <SearchForums /> */}
           <div className="filter-forum">
             {JSON.parse(localStorage.getItem("details")).position ===
-            "student" ? null : (
+              "student" || reportsLoad ? null : (
               <Button color="secondary" onClick={exportReports}>
                 Export
               </Button>
@@ -197,9 +239,6 @@ const Forums = () => {
             >
               <option value="" selected disabled>
                 -Select to Filter your Search-
-              </option>
-              <option value="" className="filter-option">
-                All
               </option>
               <option value="completed" className="filter-option">
                 Completed
@@ -239,7 +278,10 @@ const Forums = () => {
         </div>
 
         {reportsLoad ? (
-          <LinearProgress color="secondary" />
+          <div>
+            <br />
+            <LinearProgress color="secondary" />
+          </div>
         ) : reports && reports.length !== 0 ? (
           reports
         ) : (

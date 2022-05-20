@@ -268,7 +268,7 @@ const SingleForum = () => {
                 reportDetails.reportedBy ===
                   JSON.parse(localStorage.getItem("details")).id &&
                 reportDetails.assignedTo &&
-                comments &&
+                comments.length !== 0 &&
                 reportDetails.status !== "completed" ? (
                   <div className="helpful-wrapper">
                     <p className="help-title">
@@ -378,7 +378,8 @@ const SingleForum = () => {
                 {JSON.parse(localStorage.getItem("details")).position !==
                 "student" ? (
                   reportDetails &&
-                  reportDetails.unresolvable ? null : unresLoading ? (
+                  reportDetails.unresolvable &&
+                  reportDetails.status !== "completed" ? null : unresLoading ? (
                     <CircularProgress color="secondary" />
                   ) : (
                     <button className="unresolvable-btn" onClick={markAsUnres}>

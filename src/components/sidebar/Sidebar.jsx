@@ -35,9 +35,8 @@ const Sidebar = () => {
       case "student":
         setDashboardLink("/student-dashboard");
         break;
-      case "evaluator":
+      default:
         setDashboardLink("/dashboard");
-        break;
     }
   }, []);
 
@@ -121,7 +120,7 @@ const Sidebar = () => {
               <span className="sidebar-items collapsible">
                 <QuestionAnswerIcon className="sidebar-icons" />
                 <span className="sidebar-name">Forums</span>
-                </span>
+              </span>
             </div>
           </NavLink>
           <NavLink to="/faqs" style={navLinkStyles}>

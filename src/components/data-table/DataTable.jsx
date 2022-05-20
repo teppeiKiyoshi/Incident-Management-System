@@ -76,14 +76,14 @@ const DataTable = () => {
                 </IconButton>
               </Tooltip>
             </Link>
-            <Tooltip title="Delete User" arrow>
+            {/* <Tooltip title="Delete User" arrow>
               <IconButton onClick={() => handleDelete(params.row.id)}>
                 <DeleteIcon
                   style={{ textTransform: "capitalize" }}
                   className="list-btn"
                 />
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
           </div>
         );
       },

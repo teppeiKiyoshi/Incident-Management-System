@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 //------------ REGISTER USER CONTROLLER ------------//
 const register = async (req, res) => {
   console.log(req.body);
-  const {
+  let {
     lastName,
     firstName,
     middleInitial,

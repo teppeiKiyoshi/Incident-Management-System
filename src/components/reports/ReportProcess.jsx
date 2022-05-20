@@ -418,13 +418,13 @@ const ReportProcess = () => {
             Please review your report before submitting:
             <br />
             <br />
-            Incident: {formatIncident(formValues.incident)}
+            <b>Incident:</b> {formatIncident(formValues.incident)}
             <br />
             <br />
-            Main Concern: {formValues.mainConcern}
+            <b>Main Concern:</b> {formValues.mainConcern}
             <br />
             <br />
-            Description: {formValues.concernDescription}
+            <b>Description:</b> {formValues.concernDescription}
           </Typography>
           <br />
           {submitLoading ? (

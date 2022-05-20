@@ -151,7 +151,10 @@ export default function BasicModal(props) {
             rows={10}
           />
           {submitLoading ? (
-            <CircularProgress color="secondary" />
+            <div>
+              <br />
+              <CircularProgress color="secondary" />
+            </div>
           ) : (
             <div>
               <Button

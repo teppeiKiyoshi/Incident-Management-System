@@ -18,3 +18,161 @@
 
 // FRONT END TO FIX
 - Forums Single Page: change font back to poppins 
+
+
+
+samplestudent@gmail.com
+samplestudent
+
+samplestaff@gmail.com
+samplestaff
+
+// NEEDED FOR PRESENTATION
+Student Account
+
+
+
+// Good Day Sir,
+This is our system named "Filingo" which is a web based incident report system for local registrar.
+
+To start with, this is our landing page which is what all of the users will see once they enter our website.
+
+First off, you need to sign up to be able to use the system, just click the sign up button above, and click start now.
+
+This is our registration system which is built with error validation. It prevents you from inputting invalid characters.
+
+First, lets register.
+
+*REGISTER*
+
+Once the account is created, you can now log in. For demonstration purposes, for now, we will log in with a pre-registered account.
+
+*Login as samplestudent@gmail.com*
+
+Every after log in, this is what the students will see. A dashboard containing important information about what their recent interactions are with the system.
+
+In here, we can see the latest reported incident made by this student.
+
+Above this section you can click on this button to view the detailed version of this report.
+
+On the right side, we can see the latest reply to the student made by the evaluators.
+
+and below is a table of the history of reports by the student.
+
+On the left side is the sidebar containing the different navigations.
+
+Going to forums, this is where the student will see his or her own reports.
+
+You can filter them out with different criteria selecting a filter from the dropdown menu on the right side.
+
+For now, the student can't file a report since one of his or her incident report is pending and waiting to be evaluated.
+
+Before that, lets go into one of the forums *Click on pending*
+
+This is where the detailed part of the report is. Above we can see what the main concern is, and below it, is its detailed explanation.
+
+On the right side you can see who assigned themselves as the evaluator of this report, when the report was created and updated, and the incident type of the report.
+
+Below you can reply to your own report as well the evaluator who assigned himself/herself to this report.
+
+*Reply "Thankyou" to the forum*
+
+You will also receive notifications once an evaluator replied to your reports.
+
+Just click on the button on the navbar to review your notifications.
+
+To add, we have also implemented dark mode to our web system.
+
+As a student, once you think the evaluator has helped you resolve your case, click the button below the forum.
+
+As mentioned a while ago, the student can't file a report whenever he/she has a pending report waiting to be resolved.
+
+Now, clicking this button will enable the student to file another report.
+
+As you can see, the button above is now available.
+
+Just click on it and it will redirect you to the report filing page.
+
+First off, you will need to choose what type of incident your case is.
+
+The second field will ask for an input as the main concern. This will serve as the title of your report. 
+
+The text area below is where the student can enter the details of the report, they are free to type in anything as long as the evaluator will understand the case of the report.
+
+The last field is optional. They are free to choose whether they will upload an image or not.
+
+Here, you can upload any image that will help resolve your case and support your concern.
+
+Once done, click on the button below.
+
+A window will ask you to review your inputs to ensure your report is free from mistakes.
+
+Just click on submit so that your report will be ready to be resolved by the evaluators.
+
+Before moving on to logging in as a registrar, every user using the web system can update their information.
+
+Just click on the settings on the sidebar
+
+You can freely edit whichever information you want to.
+
+All fields are not required.
+
+For demonstration, I will edit the name of the user.
+
+*Change name to Marc Dwain Magracia*
+
+The other information such as the password or profile picture, can also be edited only if you wish to.
+
+*Change profile picture*
+
+Moving on to the account of the registrar
+
+*Logout and Login as a registrar*
+
+As the staff, once logged in, you will see the dashboard containing different important information about how the web system is going.
+
+Above, are different statistics such as the user count and the number of reports completed or waiting to be evaluated. 
+
+Below are information about the cases resolved, such as how much the evaluator or registrar has answered this day, and their target number of evaluations.
+
+On the right side, is the number of reports made by the students within months
+
+And on the downmost part is the latest reports made by students.
+
+To start off, registrars and evaluators have the same features, the only difference lies within the management of the users.
+
+on the sidebar as the registrar, you will see the additional options such as managing students or evaluators.
+
+On students, you have the ability to go to their profile and check for their information or their history of incident reports.
+
+on the evaluators section, you have the ability to see all the evaluators currently registered.
+
+You can also register an evaluator just click on the button above. Fill up their required information and its ready to go.
+
+Lastly on the forums, you will see all the reports made by the students. You can view or answer them.
+
+But before that, we also implemented the filtering system. and beside it is a button to generate summary of reports as pdf.
+
+the summary will depend on whatever is displayed in this section.
+
+You can filter the forums first before generating the pdf report,
+
+or you can also use the search button above if you wish to generate a report based on your keywords.
+
+Lastly, on the detailed version of the report
+
+you can assign yourself as the evaluator by clicking the button above.
+
+Once you are assigned, you will have the ability to reply to the report. The comment section will be your way of communicating to the student.
+
+You can also upload images to the comment to further support your reply.
+
+The forum can also be marked as unresolvable
+
+just click on the button on the right side.
+
+Once marked, The evaluator of this forum will be cleared out and the other evaluators can now again assign themselves with this report.
+
+Lastly, the settings will also allow the user to edit their information.
+
+That's all sir thankyou
