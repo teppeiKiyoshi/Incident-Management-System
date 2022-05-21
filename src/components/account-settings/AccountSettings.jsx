@@ -227,15 +227,15 @@ const AccountSettings = () => {
 
   return (
     <div className="accSettings-wrapper">
-      <div className="accSettings-header">
-        <h1 className="accSettings-title">Account Settings</h1>
-      </div>
       <form
         className="accSettings-content__wrapper"
         onSubmit={
           details.position !== "student" ? handleSubmitStaff : handleSubmit
         }
       >
+        <div className="header-wrapper">
+          <h3 className="setting-title">Account</h3>
+        </div>
         <div className="accSettings-content__left">
           <div className="accSettings-left__displayPic">
             <img
@@ -410,6 +410,14 @@ const AccountSettings = () => {
                   onChange={handleChange}
                   sx={{ width: "210px" }}
                 />
+              </div>
+            </div>
+            <div className='accSettings-left__details-item pass'>
+              <div className='accSettings-left__details-item-wrapper'>
+                <p className='details-item__title'>Deactivate Account</p>
+              </div>
+              <div className='accSettings-left__input-item-wrapper'>
+                <button className="deact-btn">Deactivate</button>
               </div>
             </div>
           </div>
