@@ -6,8 +6,8 @@
   .accSettings-content__wrapper {
     width: 85%;
     height: fit-content;
-    margin: 45px auto 0;
-    margin-bottom: 50px;
+    margin: 25px auto 0;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 10px 2px #999;
@@ -15,6 +15,8 @@
     
   .header-wrapper {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: fit-content;
     background-color: #aa7af0;
@@ -25,6 +27,14 @@
       font-size: 20px;
       text-transform: uppercase;
       color: white;
+    }
+
+    .arrow-btn{
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      color: white;
+      margin-right: 30px;
     }
   }
 
