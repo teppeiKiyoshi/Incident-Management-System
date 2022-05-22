@@ -13,12 +13,14 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import sidebarLogoDark from "../../images/logos/logoTxt-dark.png";
 import defaultProfPic from "../../images/default-prof-pic.jpg";
+import axios from "axios";
 
 const Sidebar = () => {
   const [position, setPosition] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [profilePic, setProfilePic] = useState();
   const [dashboardLink, setDashboardLink] = useState("");
+  const [logoState, setLogoState] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +40,21 @@ const Sidebar = () => {
       default:
         setDashboardLink("/dashboard");
     }
+
+    getLogo();
   }, []);
+
+  const getLogo = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/stats/get-logo"
+      );
+
+      setLogoState(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const route_Mainpage = () => {
     let path = "/";
@@ -67,7 +83,11 @@ const Sidebar = () => {
     <div className="sidebar-main">
       <div className="sidebar-top">
         <span className="sidebar-logo" onClick={route_toDashboard}>
-          <img src={sidebarLogoDark} alt="Filingo" className="img-logo" />
+          <img
+            src={logoState ? logoState : sidebarLogoDark}
+            alt="Filingo"
+            className="img-logo"
+          />
         </span>
       </div>
       <div className="sidebar-header">

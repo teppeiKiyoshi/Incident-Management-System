@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../images/logos/logoTxt-dark.png";
 import reportHeader from "../../images/report-header.png";
 
@@ -99,7 +99,7 @@ const DataComponent = React.forwardRef((props, ref) => (
           alignItems: "center",
         }}
       >
-        <img src={logo} style={{ width: "100%" }} />
+        <img src={props.logo ? props.logo : logo} style={{ width: "100%" }} />
       </div>
       <span>Reports {props.filter}</span>
       <span>Date: {props.date}</span>

@@ -2,6 +2,8 @@ import User from "../models/User.js";
 import Report from "../models/Report.js";
 import Comment from "../models/Comment.js";
 import Staff from "../models/Staff.js";
+import Cms from "../models/Cms.js";
+import Logo from "../models/Logo.js";
 import Notifications from "../models/Notifications.js";
 import mongoose from "mongoose";
 
@@ -157,4 +159,66 @@ const getStudDash = async (req, res) => {
   return res.json({ latestReport, allReports, latestReply });
 };
 
-export { getStats, getStudDash };
+const getFaqs = async (req, res) => {
+  const faqs = await Cms.find({}).lean();
+
+  return res.json(faqs);
+};
+
+const updateFaqs = async (req, res) => {
+  const faqs = req.body;
+
+  for (let faq of faqs) {
+    if (faq._id !== "") {
+      const update = await Cms.findByIdAndUpdate(faq._id, {
+        question: faq.question,
+        answer: faq.answer,
+      });
+    }
+  }
+
+  return res.json(req.body);
+};
+
+const addFaq = async (req, res) => {
+  await Cms.create({ question: "", answer: "" });
+
+  return res.json({ status: "ok" });
+};
+
+const removeFaq = async (req, res) => {
+  const id = req.body.id;
+  await Cms.findByIdAndDelete(id);
+  return res.json({ status: "ok" });
+};
+
+const getLogo = async (req, res) => {
+  const logo = await Logo.findOne({});
+
+  return res.json(logo.base64);
+};
+
+const uploadLogo = async (req, res) => {
+  const logo = req.body.logoState;
+  let update;
+
+  const logoFind = await Logo.findOne({});
+  if (logoFind) {
+    update = await Logo.findOneAndUpdate({}, { base64: logo });
+  } else {
+    update = await Logo.create({ base64: logo });
+  }
+
+  return res.json({ update });
+};
+
+export {
+  getStats,
+  getStudDash,
+  getFaqs,
+  updateFaqs,
+  addFaq,
+  removeFaq,
+  getLogo,
+  uploadLogo,
+};

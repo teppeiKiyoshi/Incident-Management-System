@@ -1,7 +1,8 @@
 import React from "react";
 import ReactToPrint from "react-to-print";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import axios from "axios";
 import "./table.scss";
 
 import DataComponent from "./data.component";
@@ -16,6 +17,23 @@ const PdfComponent = () => {
   var today = new Date();
   var date =
     today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
+  const [logoState, setLogoState] = useState();
+
+  const getLogo = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/stats/get-logo"
+      );
+
+      setLogoState(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getLogo();
+  }, []);
 
   return (
     <div className="container">
@@ -29,6 +47,7 @@ const PdfComponent = () => {
           fullname={fullname}
           filter={filter}
           date={date}
+          logo={logoState}
           ref={componentRef}
         />
       </div>

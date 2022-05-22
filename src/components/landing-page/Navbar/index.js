@@ -1,7 +1,7 @@
-import { React, useEffect, useState } from 'react';
-import { animateScroll as scroll } from 'react-scroll';
-import { FaBars } from 'react-icons/fa';
-import { IconContext } from 'react-icons/lib';
+import { React, useEffect, useState } from "react";
+import { animateScroll as scroll } from "react-scroll";
+import { FaBars } from "react-icons/fa";
+import { IconContext } from "react-icons/lib";
 import {
   Nav,
   NavbarContainer,
@@ -13,11 +13,14 @@ import {
   NavBtn,
   NavBtnLink,
   LogoBg,
-} from './NavbarElements';
-import heroLogo from '../../../images/logos/txt-logo.png'
+} from "./NavbarElements";
+import heroLogo from "../../../images/logos/txt-logo.png";
+
+import axios from "axios";
 
 const Navbar = ({ toggle }) => {
   const [scrollNav, setScrollNav] = useState(false);
+  const [logoState, setLogoState] = useState();
 
   const changeNav = () => {
     if (window.scrollY >= 80) {
@@ -28,20 +31,36 @@ const Navbar = ({ toggle }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', changeNav);
+    window.addEventListener("scroll", changeNav);
   }, []);
 
   const toggleHome = () => {
     scroll.scrollToTop();
   };
 
+  const getLogo = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/stats/get-logo"
+      );
+
+      setLogoState(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getLogo();
+  }, []);
+
   return (
     <>
-      <IconContext.Provider value={{ color: '#fff' }}>
+      <IconContext.Provider value={{ color: "#fff" }}>
         <Nav scrollNav={scrollNav}>
           <NavbarContainer>
-            <NavLogo to='/' onClick={toggleHome}>
-              <LogoBg src={heroLogo}/>
+            <NavLogo to="/" onClick={toggleHome}>
+              <LogoBg src={logoState ? logoState : heroLogo} />
             </NavLogo>
             <MobileIcon onClick={toggle}>
               <FaBars />
@@ -49,11 +68,11 @@ const Navbar = ({ toggle }) => {
             <NavMenu>
               <NavItem>
                 <NavLinks
-                  to='about'
+                  to="about"
                   smooth={true}
                   duration={500}
                   spy={true}
-                  exact='true'
+                  exact="true"
                   offset={-80}
                 >
                   About
@@ -61,11 +80,11 @@ const Navbar = ({ toggle }) => {
               </NavItem>
               <NavItem>
                 <NavLinks
-                  to='discover'
+                  to="discover"
                   smooth={true}
                   duration={500}
                   spy={true}
-                  exact='true'
+                  exact="true"
                   offset={-80}
                 >
                   Discover
@@ -73,11 +92,11 @@ const Navbar = ({ toggle }) => {
               </NavItem>
               <NavItem>
                 <NavLinks
-                  to='services'
+                  to="services"
                   smooth={true}
                   duration={500}
                   spy={true}
-                  exact='true'
+                  exact="true"
                   offset={-80}
                 >
                   Services
@@ -85,11 +104,11 @@ const Navbar = ({ toggle }) => {
               </NavItem>
               <NavItem>
                 <NavLinks
-                  to='signup'
+                  to="signup"
                   smooth={true}
                   duration={500}
                   spy={true}
-                  exact='true'
+                  exact="true"
                   offset={-80}
                 >
                   Sign Up
@@ -97,7 +116,7 @@ const Navbar = ({ toggle }) => {
               </NavItem>
             </NavMenu>
             <NavBtn>
-              <NavBtnLink to='/login'>Sign In</NavBtnLink>
+              <NavBtnLink to="/login">Sign In</NavBtnLink>
             </NavBtn>
           </NavbarContainer>
         </Nav>
