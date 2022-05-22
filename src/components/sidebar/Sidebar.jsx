@@ -139,7 +139,7 @@ const Sidebar = () => {
             <div className="sidebar-forum">
               <span className="sidebar-items collapsible">
                 <QuestionAnswerIcon className="sidebar-icons" />
-                <span className="sidebar-name">Forums</span>
+                <span className="sidebar-name">Tickets</span>
               </span>
             </div>
           </NavLink>

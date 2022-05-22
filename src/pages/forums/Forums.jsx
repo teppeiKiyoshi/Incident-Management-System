@@ -204,7 +204,7 @@ const Forums = () => {
         <Navbar />
         <div className="forums-header">
           <div className="forums-title">
-            <h2 className="main-title">Forums</h2>
+            <h2 className="main-title">Tickets</h2>
             {position === "student" ? (
               createReportLoad ? (
                 <CircularProgress color="secondary" />

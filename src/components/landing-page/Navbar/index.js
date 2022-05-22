@@ -14,7 +14,8 @@ import {
   NavBtnLink,
   LogoBg,
 } from "./NavbarElements";
-import heroLogo from "../../../images/logos/txt-logo.png";
+
+import heroLogo from "../../../images/logos/logoTxt.png";
 
 import axios from "axios";
 
