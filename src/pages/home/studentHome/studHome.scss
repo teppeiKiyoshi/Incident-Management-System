@@ -1,6 +1,6 @@
 .student-main {
   display: flex;
-  width: 100vw;
+  width: 100%;
 
   .student-container {
     margin-left: 230px;
@@ -13,7 +13,6 @@
     .student-content {
       width: 90%;
       margin: 30px auto 0;
-      padding: 0px 30px;
 
       .content-header {
         width: 100%;
@@ -255,8 +254,8 @@
 
     .content-footer {
       width: 90%;
-      padding: 0px 20px;
-      margin: 30px auto 0;
+      padding: 20px;
+      margin: 30px auto;
       box-shadow: rgb(153 153 153 / 34%) 0px 8px 16px 0px;
     }
   }
